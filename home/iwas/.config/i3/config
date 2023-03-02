@@ -1,0 +1,176 @@
+set $mod Mod1
+
+font pango:JetbrainsMono Nerd Font Mono 10px
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+floating_modifier $mod
+
+bindsym $mod+Shift+w kill
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+set $ws1  "[1] DEV"
+set $ws2  "[2] WWW"
+set $ws3  "[3] SYS"
+set $ws4  "[4] DOC"
+set $ws5  "[5] VBOX"
+set $ws6  "[6] CHAT"
+set $ws7  "[7] MUS"
+set $ws8  "[8] GAME"
+set $ws9  "[9] VID"
+set $ws10 "[10] GFX"
+
+workspace $ws1 output DP-0
+workspace $ws3 output DP-0
+workspace $ws5 output DP-0
+workspace $ws7 output DP-0
+workspace $ws9 output DP-0
+
+workspace $ws2  output HDMI-0
+workspace $ws4  output HDMI-0
+workspace $ws6  output HDMI-0
+workspace $ws8  output HDMI-0
+workspace $ws10 output HDMI-0
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym Left resize shrink width 3 px or 3 ppt
+        bindsym Down resize grow height 3 px or 3 ppt
+        bindsym Up resize shrink height 3 px or 3 ppt
+        bindsym Right resize grow width 3 px or 3 ppt
+
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+
+###############
+# === BAR === #
+###############
+# Primary monitor's bar
+bar {
+	output DP-0
+	i3bar_command i3bar --transparency
+	position top
+	workspace_min_width 25
+        status_command /home/iwas/.config/bumblebee-status/bumblebee-status   \
+		            -t iceberg-rainbow                                            \
+		            -m kernel load memory sensors2 nvidiagpu nic weather datetime \
+		            -p nic.exclude="lo,dummy0,sit0,veth*,br-*"                    \
+                   weather.showminmax=true weather.location="Barcelona"       \
+                   datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"               \
+                   sensors2.chip_include="k10temp-pci-00c3"
+
+	colors {
+		background #222222CC
+		focused_workspace #a151d3 #a151d3 #ffffff
+		active_workspace  #a151d3 #222222 #ffffff
+		urgent_workspace  #a151d3 #e37171 #ffffff
+	}
+}
+# Secondary monitor's bar
+bar {
+  output HDMI-0
+	i3bar_command i3bar --transparency
+  position top
+  workspace_min_width 25
+  status_command /home/iwas/.config/bumblebee-status/bumblebee-status \
+          -t iceberg-rainbow                                          \
+          -m kernel load memory sensors2 datetime                     \
+          -p datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"             \
+             sensors2.chip_include="k10temp-pci-00c3"
+
+  colors {
+    background #222222CC
+    focused_workspace #a151d3 #a151d3 #ffffff
+    active_workspace  #a151d3 #222222 #ffffff
+    urgent_workspace  #a151d3 #e37171 #ffffff
+  }
+}
+
+for_window [class="^.*"] border pixel 3
+client.focused #a151d3 #a151d3 #a151d3 #a151d3
+focus_follows_mouse no
+
+
+################
+# === APPS === #
+################
+# Terminal
+bindsym $mod+Return exec i3-sensible-terminal
+# Dmenu
+bindsym $mod+m exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -p "apps" -sb "#a151d3"'
+# Clipboard History
+bindsym Mod4+v exec --no-startup-id clipmenu -i -p "clipboard" -sb "#a151d3"
+# Chromium
+set $chromium_flags $(cat /home/iwas/.config/chromium-flags.conf | xargs)
+bindsym $mod+b exec chromium $chromium_flags
+bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
+# Flameshot
+bindsym Mod4+Shift+s exec flameshot gui
+

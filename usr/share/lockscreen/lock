@@ -1,0 +1,27 @@
+#!/bin/bash
+
+DIR="/usr/share/lockscreen"
+ASSETS="$DIR/assets"
+CACHE="$ASSETS/cache"
+
+# === Taking screenshot === #
+scrot $CACHE/base.png
+
+# === Processing the image === #
+# Blurring
+convert $CACHE/base.png -blur 0x8 $CACHE/blurred.png
+# Linux overlay (main monitor)
+composite -gravity center -geometry +550+535 $ASSETS/linux.png $CACHE/blurred.png $CACHE/overlayed_1.png
+# GNU Savannah overlay (second monitor)
+composite -gravity southwest -geometry -5 $ASSETS/gnu.png $CACHE/overlayed_1.png $CACHE/overlayed_2.png
+# Locked indicator (main monitor)
+composite -gravity north -geometry +535+330 $ASSETS/lock.png $CACHE/overlayed_2.png $CACHE/overlayed_3.png
+# Locked indicator (second monitor)
+composite -gravity northwest -geometry +450+11 $ASSETS/lock.png $CACHE/overlayed_3.png $DIR/lockscreen.png
+
+# === Locking the screen with i3lock === #
+i3lock -e -i $DIR/lockscreen.png
+
+# === When unlocked, remove all image files used === #
+rm $CACHE/*
+rm $DIR/lockscreen.png
