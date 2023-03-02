@@ -87,6 +87,8 @@ alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o 
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
 alias pingu-push='ggtoken && pingu push'
+alias pingu-list='pingu ls-tree --full-tree --name-only -r HEAD'
+alias pingu-update='pingu add -v -u'
 # Git Custom
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; git status'
