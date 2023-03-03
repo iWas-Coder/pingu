@@ -65,5 +65,9 @@
   "extensions.autoUpdate": "onlyEnabledExtensions",
   "workbench.tree.renderIndentGuides": "always",
   "git.suggestSmartCommit": false,
-  "terminal.integrated.fontSize": 15
+  "terminal.integrated.fontSize": 15,
+  "files.associations": {
+    "*.tex": "texinfo"
+  },
+  "files.enableTrash": false
 }

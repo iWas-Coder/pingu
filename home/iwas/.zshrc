@@ -79,6 +79,7 @@ alias mpv='mpv --hwdec=nvdec'
 alias cpu-x='sudo cpu-x -N'
 alias cal='cal -m'
 alias idiff='kitty +kitten diff'
+alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 # Custom
 alias logoff='pkill X'
 alias lock='/usr/share/lockscreen/lock'
@@ -148,6 +149,17 @@ ggbrnch () {
   # Switch to given branch
   elif [ ! -z "$1" ] && [ -z "$2" ]; then
     git switch "$1"
+  else
+    echo "[-] Incorrect syntax :("
+  fi
+}
+# Git undo certain actions or things that happen
+ggundo () {
+  if [ "$1" = "-h" ] && [ -z "$2" ]; then
+    echo "usage:"
+    echo -e "\tlocalcommit <N> -> Moves the HEAD <N> positions backwards in the local tree. All changes made in these commits are moved to the stage area (index)."
+  elif [ "$1" = "localcommit" ] && [[ $2 =~ '^[0-9]+$' ]] && [ -z "$3" ]; then
+    echo "git reset --soft HEAD~$2"
   else
     echo "[-] Incorrect syntax :("
   fi

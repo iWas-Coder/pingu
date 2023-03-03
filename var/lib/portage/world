@@ -60,6 +60,7 @@ media-tv/v4l-utils
 media-video/ffmpeg
 media-video/mkvtoolnix
 media-video/mpv
+net-analyzer/arp-scan
 net-analyzer/netcat
 net-fs/samba
 net-misc/chrony
