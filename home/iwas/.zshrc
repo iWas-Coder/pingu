@@ -81,7 +81,7 @@ alias cal='cal -m'
 alias idiff='kitty +kitten diff'
 alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 # Custom
-alias logoff='pkill X'
+alias stopx='pkill X'
 alias lock='/usr/share/lockscreen/lock'
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,gid=1000,sec=ntlmv2i,rw'
 # Pingu

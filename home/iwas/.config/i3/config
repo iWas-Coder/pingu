@@ -31,17 +31,11 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# toggle tiling / floating
+# toggle floating
 bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 set $ws1  "[1] DEV"
@@ -174,3 +168,8 @@ bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
 
+# === Floating window resizing === #
+# Chromium
+for_window [class="chromium-browser-chromium"] resize set 600px 600px
+# Chatterino
+for_window [class="Chatterino"] resize set 750px 1200px

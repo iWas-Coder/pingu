@@ -113,6 +113,7 @@ x11-libs/libXinerama
 x11-libs/libXrandr
 x11-libs/libXrender
 x11-libs/libXxf86vm
+x11-libs/vte
 x11-misc/clipnotify
 x11-misc/dmenu
 x11-misc/i3lock
