@@ -32,7 +32,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # toggle floating
-bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+f floating toggle resize set 1280px 900px
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -168,8 +168,3 @@ bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
 
-# === Floating window resizing === #
-# Chromium
-for_window [class="chromium-browser-chromium"] resize set 600px 600px
-# Chatterino
-for_window [class="Chatterino"] resize set 750px 1200px

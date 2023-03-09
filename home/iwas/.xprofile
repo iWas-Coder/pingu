@@ -8,13 +8,21 @@ export XDG_DOWNLOAD_DIR="/home/iwas/downloads"
 # Web Browser
 export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags.conf | xargs)"
 
+#######################
+# === GL Settings === #
+#######################
+export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
+export __GL_SYNC_TO_VBLANK=1
+export __GL_VRR_ALLOWED=1
+export __GL_SYNC_DISPLAY_DEVICE=DP-0
+
 ########################
 # === Startup Apps === #
 ########################
 # Audio
 gentoo-pipewire-launcher &
 # Compositor
-picom --experimental-backends --animations --animation-window-mass 0.5 --animation-stiffness 350 --animation-dampening 30 --animation-for-open-window zoom --animation-for-transient-window zoom &
+picom --experimental-backends --animations --animation-window-mass 0.5 --animation-stiffness 350 --animation-dampening 27 --animation-for-open-window zoom --animation-for-transient-window zoom &
 # Wallpaper
 feh --bg-fill /usr/share/wallpapers/wallpaper_1.jpg --bg-fill /usr/share/wallpapers/wallpaper_2.jpg &
 # Clipboard History
