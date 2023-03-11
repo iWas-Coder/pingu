@@ -1,0 +1,2 @@
+media-video/ffmpeg amr amrenc appkit bluray chromium cuda libaom libdrm nvenc openal opencl openh264 openssl oss v4l vdpau vpx vulkan webp
+media-video/mpv archive bluray dvb nvenc openal pipewire vdpau vulkan

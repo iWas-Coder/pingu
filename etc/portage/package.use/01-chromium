@@ -1,0 +1,3 @@
+sys-libs/zlib minizip
+net-libs/nodejs inspector
+www-client/chromium gtk4

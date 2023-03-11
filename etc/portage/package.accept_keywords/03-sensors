@@ -1,0 +1,2 @@
+sys-apps/cpu-x ~amd64
+dev-libs/libcpuid ~amd64

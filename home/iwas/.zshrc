@@ -199,6 +199,10 @@ ffmpeg.plex_transcoding () {
     echo "[-] Incorrect syntax :("
   fi
 }
+# Evince PDF Viewer
+evince () { /usr/bin/evince "$*" &>/dev/null & disown; }
+# Libreoffice Suite
+# libreoffice () { /usr/local/appimages/libreoffice "$*" &>/dev/null & disown; }
 
 
 # === PATH === #

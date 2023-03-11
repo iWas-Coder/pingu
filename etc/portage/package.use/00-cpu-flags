@@ -1,0 +1,7 @@
+*/* CPU_FLAGS_X86: aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3
+# required by www-client/chromium-108.0.5359.124::gentoo
+# required by www-client/chromium (argument)
+>=sys-libs/zlib-1.2.13-r1 minizip
+# required by www-client/chromium-108.0.5359.124::gentoo
+# required by www-client/chromium (argument)
+>=net-libs/nodejs-18.12.1 inspector

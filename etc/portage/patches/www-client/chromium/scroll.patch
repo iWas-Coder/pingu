@@ -1,0 +1,12 @@
+diff --git a/ui/events/event.cc b/ui/events/event.cc
+--- a/ui/events/event.cc
++++ b/ui/events/event.cc
+@@ -674,7 +674,7 @@
+   return std::make_unique<MouseWheelEvent>(*this);
+ }
+ 
+-#if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_FUCHSIA) || BUILDFLAG(IS_LINUX)
++#if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_FUCHSIA)
+ // This value matches Windows, Fuchsia WHEEL_DELTA, and (roughly) Firefox on
+ // Linux.
+ // static

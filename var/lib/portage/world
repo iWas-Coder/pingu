@@ -31,6 +31,7 @@ dev-python/vkbasalt-cli
 dev-python/xcffib
 dev-qt/qtsvg
 dev-util/nvidia-cuda-toolkit
+dev-util/strace
 dev-util/vulkan-tools
 dev-vcs/git
 games-emulation/dosbox
@@ -63,6 +64,7 @@ media-video/mpv
 net-analyzer/arp-scan
 net-analyzer/netcat
 net-fs/samba
+net-ftp/ftp
 net-misc/chrony
 net-misc/dhcpcd
 net-misc/proxychains

@@ -1,0 +1,21 @@
+diff --git a/ui/gl/sync_control_vsync_provider.cc b/ui/gl/sync_control_vsync_provider.cc
+--- a/ui/gl/sync_control_vsync_provider.cc
++++ b/ui/gl/sync_control_vsync_provider.cc
+@@ -30,7 +30,7 @@
+   // On platforms where we can't get an accurate reading on the refresh
+   // rate we fall back to the assumption that we're displaying 60 frames
+   // per second.
+-  last_good_interval_ = base::Seconds(1) / 60;
++  last_good_interval_ = base::Seconds(1) / 144;
+ #endif
+ }
+ 
+@@ -143,7 +143,7 @@
+             << ", last_media_stream_counter_=" << last_media_stream_counter_
+             << ", media_stream_counter=" << media_stream_counter;
+       } else {
+-        last_good_interval_ = new_interval;
++        last_good_interval_ = base::Seconds(1) / 144;
+       }
+     }
+   }
