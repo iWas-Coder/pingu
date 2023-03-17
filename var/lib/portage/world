@@ -9,6 +9,7 @@ app-containers/docker-cli
 app-containers/nvidia-container-toolkit
 app-editors/neovim
 app-eselect/eselect-repository
+app-misc/jq
 app-misc/neofetch
 app-misc/scrub
 app-portage/cpuid2cpuflags
@@ -89,6 +90,7 @@ sys-fs/cryptsetup
 sys-fs/dosfstools
 sys-fs/fuse:0
 sys-fs/mdadm
+sys-fs/squashfs-tools
 sys-kernel/dracut
 sys-kernel/gentoo-sources
 sys-kernel/gentoo-sources:5.15.80

@@ -23,6 +23,8 @@
     dir
     # Git Status
     vcs
+    # Terraform context
+    terraform
     # Command Duration
     command_execution_time
     # Context
@@ -462,7 +464,7 @@
   typeset -g POWERLEVEL9K_HASKELL_STACK_ALWAYS_SHOW=true
 
   ################[ terraform: terraform workspace (https://www.terraform.io) ]#################
-  typeset -g POWERLEVEL9K_TERRAFORM_SHOW_DEFAULT=false
+  typeset -g POWERLEVEL9K_TERRAFORM_SHOW_DEFAULT=true
   typeset -g POWERLEVEL9K_TERRAFORM_CLASSES=(
       # '*prod*'  PROD
       # '*test*'  TEST

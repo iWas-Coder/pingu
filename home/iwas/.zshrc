@@ -84,6 +84,7 @@ alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 alias stopx='pkill X'
 alias lock='/usr/share/lockscreen/lock'
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,gid=1000,sec=ntlmv2i,rw'
+alias picom.restart="pidof picom | xargs kill -9 &>/dev/null; cat /home/iwas/.xprofile | grep -i picom | bash"
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
@@ -159,7 +160,7 @@ ggundo () {
     echo "usage:"
     echo -e "\tlocalcommit <N> -> Moves the HEAD <N> positions backwards in the local tree. All changes made in these commits are moved to the stage area (index)."
   elif [ "$1" = "localcommit" ] && [[ $2 =~ '^[0-9]+$' ]] && [ -z "$3" ]; then
-    echo "git reset --soft HEAD~$2"
+    git reset --soft HEAD~$2
   else
     echo "[-] Incorrect syntax :("
   fi
@@ -221,6 +222,8 @@ export PATH=$PATH:/home/iwas/.local/bin
 # === OTHER === #
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
+# Add GPG key to tty
+export GPG_TTY=$(tty)
 
 
 # === END === #
