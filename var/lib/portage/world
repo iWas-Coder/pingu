@@ -35,6 +35,7 @@ dev-util/nvidia-cuda-toolkit
 dev-util/strace
 dev-util/vulkan-tools
 dev-vcs/git
+dev-vcs/repo
 games-emulation/dosbox
 gui-libs/gtk
 gui-libs/gtksourceview

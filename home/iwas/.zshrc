@@ -64,9 +64,9 @@ bindkey "^[[1;5D" backward-word
 # === ALIASES === #
 # Basic
 alias sudo='sudo '
-alias ls='lsd --group-dirs=first'
-alias l='lsd -lh --group-dirs=first'
-alias ll='lsd -lha --group-dirs=first'
+alias ls='lsd -v --group-dirs=first'
+alias l='lsd -vlh --group-dirs=first'
+alias ll='lsd -vlha --group-dirs=first'
 alias cat='bat'
 alias icat='kitty +kitten icat'
 alias vi='nvim'

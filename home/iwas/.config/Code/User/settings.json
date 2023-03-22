@@ -62,12 +62,16 @@
   "update.showReleaseNotes": false,
   "update.mode": "manual",
   "markdown.updateLinksOnFileMove.enabled": "prompt",
-  "extensions.autoUpdate": "onlyEnabledExtensions",
+  "extensions.autoUpdate": false,
   "workbench.tree.renderIndentGuides": "always",
   "git.suggestSmartCommit": false,
   "terminal.integrated.fontSize": 15,
   "files.associations": {
     "*.tex": "texinfo"
   },
-  "files.enableTrash": false
+  "files.enableTrash": false,
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.configurationWarnings": "disabled",
+  "C_Cpp.default.cStandard": "gnu23",
+  "C_Cpp.default.cppStandard": "gnu++23"
 }
