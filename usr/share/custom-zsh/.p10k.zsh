@@ -25,6 +25,8 @@
     vcs
     # Terraform context
     terraform
+    # Kubernetes context
+    kubecontext
     # Command Duration
     command_execution_time
     # Context

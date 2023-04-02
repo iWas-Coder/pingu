@@ -7,6 +7,8 @@ export XDG_CURRENT_DESKTOP=Pingu
 export XDG_DOWNLOAD_DIR="/home/iwas/downloads"
 # Web Browser
 export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags.conf | xargs)"
+# Text Editor
+export EDITOR=nvim
 
 #######################
 # === GL Settings === #

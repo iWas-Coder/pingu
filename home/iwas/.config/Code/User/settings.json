@@ -67,11 +67,20 @@
   "git.suggestSmartCommit": false,
   "terminal.integrated.fontSize": 15,
   "files.associations": {
-    "*.tex": "texinfo"
+    "*.tex": "texinfo",
+    "*.h": "c"
   },
   "files.enableTrash": false,
   "C_Cpp.autocompleteAddParentheses": true,
   "C_Cpp.configurationWarnings": "disabled",
   "C_Cpp.default.cStandard": "gnu23",
-  "C_Cpp.default.cppStandard": "gnu++23"
+  "C_Cpp.default.cppStandard": "gnu++23",
+  "git.enableCommitSigning": true,
+  "git-graph.repository.commits.showSignatureStatus": true,
+  "git-graph.repository.sign.commits": true,
+  "git-graph.repository.sign.tags": true,
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/**"
+  ],
+  "git.inputValidationSubjectLength": 70
 }

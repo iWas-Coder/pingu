@@ -1,7 +1,9 @@
 # === ZSH Configuration by iWas <3 === #
 
 
+#########################
 # === POWERLEVEL10K === #
+#########################
 # Instant Prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -18,7 +20,9 @@ source /usr/share/custom-zsh/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f /usr/share/custom-zsh/.fzf.zsh ]] && source /usr/share/custom-zsh/.fzf.zsh
 
 
+###############
 # === ZSH === #
+###############
 # History
 HISTSIZE=5000
 SAVEHIST=5000
@@ -48,7 +52,9 @@ source /usr/share/custom-zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/custom-zsh/zsh-sudo/sudo.plugin.zsh
 
 
+#######################
 # === KEYBINDINGS === #
+#######################
 bindkey -e
 # Home Key
 bindkey "^[[H" beginning-of-line
@@ -61,7 +67,9 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 
+###################
 # === ALIASES === #
+###################
 # Basic
 alias sudo='sudo '
 alias ls='lsd -v --group-dirs=first'
@@ -84,6 +92,7 @@ alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 alias stopx='pkill X'
 alias lock='/usr/share/lockscreen/lock'
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,gid=1000,sec=ntlmv2i,rw'
+alias umount.vault='sudo umount /home/iwas/vault'
 alias picom.restart="pidof picom | xargs kill -9 &>/dev/null; cat /home/iwas/.xprofile | grep -i picom | bash"
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
@@ -172,10 +181,10 @@ games () {
   if [ -z "$1" ]; then
     ls /usr/local/games
   elif [ "$1" = "-v" ] && [ -z "$2" ]; then
-    ls -l /usr/local/games
+    ls -1 /usr/local/games
   elif [ "$1" = "-vv" ] && [ -z "$2" ]; then
     for game in $(ls /usr/local/games); do
-      ls -l /usr/local/games/$game
+      ls -1 /usr/local/games/$game
       realpath /usr/local/games/$game &>/dev/null \
         && du -sh $(dirname $(realpath /usr/local/games/$game))
     done
@@ -224,6 +233,14 @@ export PATH=$PATH:/home/iwas/.local/bin
 export _JAVA_AWT_WM_NONREPARENTING=1
 # Add GPG key to tty
 export GPG_TTY=$(tty)
+# Set Kubernetes contexts (in .kube directory)
+for context in $(ls /home/iwas/.kube | grep .yaml); do
+  if [ -z "$KUBECONFIG" ]; then
+    export KUBECONFIG=/home/iwas/.kube/"$context"
+  else
+    export KUBECONFIG=$KUBECONFIG:/home/iwas/.kube/"$context"
+  fi
+done
 
 
 # === END === #

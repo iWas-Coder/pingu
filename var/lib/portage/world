@@ -3,6 +3,7 @@ app-admin/sysklogd
 app-arch/cabextract
 app-arch/lrzip
 app-arch/p7zip
+app-arch/pigz
 app-benchmarks/geekbench
 app-containers/docker
 app-containers/docker-cli
@@ -76,7 +77,9 @@ net-print/cnijfilter2
 sys-apps/bat
 sys-apps/cpu-x
 sys-apps/cpuid
+sys-apps/dmidecode
 sys-apps/ethtool
+sys-apps/i2c-tools
 sys-apps/keyutils
 sys-apps/lm-sensors
 sys-apps/lsd
@@ -87,6 +90,7 @@ sys-apps/pv
 sys-apps/ripgrep
 sys-apps/usbutils
 sys-boot/grub
+sys-cluster/kubectl
 sys-fs/cryptsetup
 sys-fs/dosfstools
 sys-fs/fuse:0
@@ -94,8 +98,8 @@ sys-fs/mdadm
 sys-fs/squashfs-tools
 sys-kernel/dracut
 sys-kernel/gentoo-sources
-sys-kernel/gentoo-sources:5.15.80
 sys-kernel/linux-firmware
+sys-power/upower
 sys-process/htop
 sys-process/iotop
 sys-process/lsof
