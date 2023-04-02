@@ -1,0 +1,4 @@
+[safe]
+	directory = /var/db/repos/vowstar
+	directory = /var/db/repos/zugaina
+	directory = /var/db/repos/src_prepare-overlay
