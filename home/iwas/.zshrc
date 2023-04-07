@@ -91,9 +91,12 @@ alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 # Custom
 alias stopx='pkill X'
 alias lock='/usr/share/lockscreen/lock'
-alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,gid=1000,sec=ntlmv2i,rw'
+alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,forceuid,gid=1000,forcegid,file_mode=0664,dir_mode=0775,sec=ntlmv2i,rw'
 alias umount.vault='sudo umount /home/iwas/vault'
 alias picom.restart="pidof picom | xargs kill -9 &>/dev/null; cat /home/iwas/.xprofile | grep -i picom | bash"
+alias perms='stat -c "%n -> %a (%A)"'
+alias pdfview='evince'
+alias reload="source $HOME/.zshrc && reset"
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
@@ -136,7 +139,9 @@ extractPorts () {
 # Delete file securely, avoiding its recovery using forensic procedures.
 rmk () { scrub -p dod $1; shred -zun 10 -v $1; }
 # Open Evince PDF Viewer in the background and detach from shell session
-pdfview () { evince "$1" &>/dev/null & disown }
+evince () { /usr/bin/evince "$*" &>/dev/null & disown; }
+# Libreoffice Suite
+# libreoffice () { libreoffice "$*" &>/dev/null & disown; }
 # Start working in a Git repository (ggfetch && open VSCode)
 ggcode () { ggfetch && code $(git rev-parse --show-toplevel) }
 # Git branch management (wrapper for git switch && git branch)
@@ -209,10 +214,8 @@ ffmpeg.plex_transcoding () {
     echo "[-] Incorrect syntax :("
   fi
 }
-# Evince PDF Viewer
-evince () { /usr/bin/evince "$*" &>/dev/null & disown; }
-# Libreoffice Suite
-# libreoffice () { /usr/local/appimages/libreoffice "$*" &>/dev/null & disown; }
+# 7z list archive's content without additional information (clean format)
+list () { 7z l -ba "$1" | grep -oP '\S+$'; }
 
 
 # === PATH === #

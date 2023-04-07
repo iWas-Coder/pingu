@@ -1,0 +1,10 @@
+[init]
+	defaultBranch = master
+[core]
+	pager = less -FiJM~ -j3 --tabs=3
+[user]
+  signingkey = EEC6769A97A7BA41
+[commit]
+  gpgsign = true
+[tag]
+  forceSignAnnotated = true

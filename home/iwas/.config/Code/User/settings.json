@@ -82,5 +82,6 @@
   "C_Cpp.default.includePath": [
     "${workspaceFolder}/**"
   ],
-  "git.inputValidationSubjectLength": 70
+  "git.inputValidationSubjectLength": 70,
+  "security.workspace.trust.untrustedFiles": "open"
 }

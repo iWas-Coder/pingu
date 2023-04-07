@@ -1,3 +1,4 @@
+app-admin/helm
 app-admin/sudo
 app-admin/sysklogd
 app-arch/cabextract
@@ -8,6 +9,7 @@ app-benchmarks/geekbench
 app-containers/docker
 app-containers/docker-cli
 app-containers/nvidia-container-toolkit
+app-crypt/gcr
 app-editors/neovim
 app-eselect/eselect-repository
 app-misc/jq
@@ -66,11 +68,13 @@ media-video/mkvtoolnix
 media-video/mpv
 net-analyzer/arp-scan
 net-analyzer/netcat
+net-analyzer/traceroute
 net-fs/samba
 net-ftp/ftp
 net-misc/chrony
 net-misc/dhcpcd
 net-misc/proxychains
+net-misc/rdesktop
 net-misc/yt-dlp
 net-p2p/qbittorrent
 net-print/cnijfilter2
@@ -91,6 +95,7 @@ sys-apps/ripgrep
 sys-apps/usbutils
 sys-boot/grub
 sys-cluster/kubectl
+sys-firmware/edk2-ovmf-bin
 sys-fs/cryptsetup
 sys-fs/dosfstools
 sys-fs/fuse:0

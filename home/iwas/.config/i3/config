@@ -168,3 +168,10 @@ bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
 
+
+# === Floating Windows (by default) === #
+# Evince
+for_window [class="(?i)evince"] floating enable
+# Rdesktop
+for_window [class="(?i)rdesktop"] floating enable
+
