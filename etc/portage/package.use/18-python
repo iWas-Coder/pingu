@@ -1,0 +1,108 @@
+*/* PYTHON_TARGETS: python3_11
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/setuptools-67.6.1 python_targets_python3_11
+# required by dev-python/packaging-23.0-r1::gentoo
+# required by dev-python/nspektr-0.4.0::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/gpep517-13 python_targets_python3_11
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/cython-0.29.33::gentoo
+# required by dev-python/pydantic-1.10.6::gentoo[native-extensions]
+# required by dev-python/inflect-6.0.2::gentoo
+>=dev-python/wheel-0.38.4 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/packaging-23.0-r1 python_targets_python3_11
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/flit_core-3.8.0 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/tomli-2.0.1-r1 python_targets_python3_11
+# required by dev-python/packaging-23.0-r1::gentoo
+# required by dev-python/nspektr-0.4.0::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/pyparsing-3.0.9 python_targets_python3_11
+# required by dev-python/gpep517-13::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/cython-0.29.33::gentoo
+# required by dev-python/pydantic-1.10.6::gentoo[native-extensions]
+# required by dev-python/inflect-6.0.2::gentoo
+>=dev-python/installer-0.6.0 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/jaraco-text-3.11.1 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/more-itertools-9.1.0 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/nspektr-0.4.0 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/ordered-set-4.1.0 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/platformdirs-3.1.1 python_targets_python3_11
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/certifi-3021.3.16-r3 python_targets_python3_11
+# required by dev-python/inflect-6.0.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/setuptools-scm-7.1.0 python_targets_python3_11
+# required by dev-python/pydantic-1.10.6::gentoo
+# required by dev-python/inflect-6.0.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/typing-extensions-4.5.0 python_targets_python3_11
+# required by dev-python/nspektr-0.4.0::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/jaraco-context-4.3.0 python_targets_python3_11
+# required by dev-python/nspektr-0.4.0::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+>=dev-python/jaraco-functools-3.6.0 python_targets_python3_11
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/cython-0.29.33::gentoo
+# required by dev-python/pydantic-1.10.6::gentoo[native-extensions]
+# required by dev-python/inflect-6.0.2::gentoo
+>=dev-python/autocommand-2.2.2 python_targets_python3_11
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/inflect-6.0.2 python_targets_python3_11
+# required by dev-python/inflect-6.0.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/pydantic-1.10.6 python_targets_python3_11
+# required by dev-python/pydantic-1.10.6::gentoo[native-extensions]
+# required by dev-python/inflect-6.0.2::gentoo
+# required by dev-python/jaraco-text-3.11.1::gentoo
+# required by dev-python/setuptools-67.6.1::gentoo
+# required by dev-python/autocommand-2.2.2::gentoo
+>=dev-python/cython-0.29.33 python_targets_python3_11

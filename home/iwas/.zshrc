@@ -88,6 +88,7 @@ alias cpu-x='sudo cpu-x -N'
 alias cal='cal -m'
 alias idiff='kitty +kitten diff'
 alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
+alias upx='upx --color --best'
 # Custom
 alias stopx='pkill X'
 alias lock='/usr/share/lockscreen/lock'
@@ -96,7 +97,9 @@ alias umount.vault='sudo umount /home/iwas/vault'
 alias picom.restart="pidof picom | xargs kill -9 &>/dev/null; cat /home/iwas/.xprofile | grep -i picom | bash"
 alias perms='stat -c "%n -> %a (%A)"'
 alias pdfview='evince'
-alias reload="source $HOME/.zshrc && reset"
+alias reset.shell="source $HOME/.zshrc && reset"
+alias mksquashfs.backup="sudo mksquashfs / sheldon-$(date +'%Y%m%d').bak -processors 10 -e /boot /dev /lost+found /media /mnt /proc /run /sys /tmp /var /home/iwas/data /home/iwas/vault /home/iwas/.config/chromium"
+alias rsync.mv='rsync -aP --remove-source-files'
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
@@ -108,6 +111,7 @@ alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[
 alias ggfetch='git fetch --all -p -P && echo; git status'
 alias ggpush='ggtoken && git push'
 alias ggadd='git add -A; git status'
+alias gglog='git log --all --graph --decorate --abbrev-commit'
 
 
 # === FUNCTIONS === #
@@ -232,8 +236,6 @@ export PATH=$PATH:/home/iwas/.local/bin
 
 
 # === OTHER === #
-# Fix the Java Problem
-export _JAVA_AWT_WM_NONREPARENTING=1
 # Add GPG key to tty
 export GPG_TTY=$(tty)
 # Set Kubernetes contexts (in .kube directory)

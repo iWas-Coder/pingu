@@ -17,10 +17,23 @@ export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
 export __GL_SYNC_TO_VBLANK=1
 export __GL_VRR_ALLOWED=1
 export __GL_SYNC_DISPLAY_DEVICE=DP-0
+export __GL_THREADED_OPTIMIZATIONS=1
+# Mesa threaded shader compilation
+export multithread_glsl_compiler=1
 
-########################
-# === Startup Apps === #
-########################
+##########################
+# === Other settings === #
+##########################
+# Fix the Java Problem
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+#########################
+# === Startup Tasks === #
+#########################
+# Set maximum open file descriptors
+ulimit -n 2048
+# NVIDIA GPU Tweaks: Power Limit (175W -> 200W)
+sudo nvidia-smi -pl 200
 # Audio
 gentoo-pipewire-launcher &
 # Compositor
