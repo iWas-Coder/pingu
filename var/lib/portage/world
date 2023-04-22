@@ -6,6 +6,7 @@ app-arch/lrzip
 app-arch/p7zip
 app-arch/pigz
 app-benchmarks/geekbench
+app-benchmarks/sysbench
 app-containers/docker
 app-containers/docker-cli
 app-containers/nvidia-container-toolkit

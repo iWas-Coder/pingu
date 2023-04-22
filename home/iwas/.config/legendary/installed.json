@@ -1,0 +1,29 @@
+{
+  "Sugar": {
+    "app_name": "Sugar",
+    "base_urls": [
+      "https://epicgames-download1.akamaized.net/Builds/Org/o-98larctxyhn55kqjq5xjb9wzjl9hf9/e6bcca5b37d0457ca881aec508205542/default",
+      "https://download.epicgames.com/Builds/Org/o-98larctxyhn55kqjq5xjb9wzjl9hf9/e6bcca5b37d0457ca881aec508205542/default",
+      "https://download2.epicgames.com/Builds/Org/o-98larctxyhn55kqjq5xjb9wzjl9hf9/e6bcca5b37d0457ca881aec508205542/default",
+      "https://download3.epicgames.com/Builds/Org/o-98larctxyhn55kqjq5xjb9wzjl9hf9/e6bcca5b37d0457ca881aec508205542/default",
+      "https://download4.epicgames.com/Builds/Org/o-98larctxyhn55kqjq5xjb9wzjl9hf9/e6bcca5b37d0457ca881aec508205542/default",
+      "https://fastly-download.epicgames.com/Builds/Org/o-98larctxyhn55kqjq5xjb9wzjl9hf9/e6bcca5b37d0457ca881aec508205542/default"
+    ],
+    "can_run_offline": true,
+    "egl_guid": "",
+    "executable": "Binaries/Win64/RocketLeague.exe",
+    "install_path": "/home/iwas/data/emulation/windows/Rocket-League/game",
+    "install_size": 25216546409,
+    "install_tags": [],
+    "is_dlc": false,
+    "launch_parameters": "",
+    "manifest_path": null,
+    "needs_verification": false,
+    "platform": "Windows",
+    "prereq_info": null,
+    "requires_ot": false,
+    "save_path": null,
+    "title": "Rocket League\u00ae",
+    "version": "BC2_Update41+415510"
+  }
+}

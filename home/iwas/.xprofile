@@ -4,7 +4,7 @@
 # DE Name
 export XDG_CURRENT_DESKTOP=Pingu
 # Downloads folder
-export XDG_DOWNLOAD_DIR="/home/iwas/downloads"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
 # Web Browser
 export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags.conf | xargs)"
 # Text Editor
@@ -31,7 +31,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # === Startup Tasks === #
 #########################
 # Set maximum open file descriptors
-ulimit -n 2048
+ulimit -n 8192
 # NVIDIA GPU Tweaks: Power Limit (175W -> 200W)
 sudo nvidia-smi -pl 200
 # Audio
