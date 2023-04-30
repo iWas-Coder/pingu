@@ -103,21 +103,21 @@ mode "resize" {
 }
 
 
-###############
-# === BAR === #
-###############
-# Primary monitor's bar
+#######################
+# === PRIMARY BAR === #
+#######################
 bar {
 	output DP-0
 	i3bar_command i3bar --transparency
 	position top
 	workspace_min_width 25
-        status_command /home/iwas/.config/bumblebee-status/bumblebee-status   \
-		            -t iceberg-rainbow                                            \
-		            -m kernel load memory sensors2 nvidiagpu nic weather datetime \
-		            -p nic.exclude="lo,dummy0,sit0,veth*,br-*"                    \
-                   weather.showminmax=true weather.location="Barcelona"       \
-                   datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"               \
+        status_command /home/iwas/.config/bumblebee-status/bumblebee-status                       \
+		            -t iceberg-rainbow                                                                \
+		            -m kernel load cpu memory sensors2 disk nvidiagpu nic datetime                    \
+		            -p cpu.format="{:05.1f}%"                                                         \
+                   nic.exclude="lo,dummy0,sit0,veth*,br-*"                                        \
+                   disk.path="/home/iwas/data" disk.format="DATA: {used}/{size} ({percent:.1f}%)" \
+                   datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                                   \
                    sensors2.chip_include="k10temp-pci-00c3"
 
 	colors {
@@ -127,7 +127,10 @@ bar {
 		urgent_workspace  #a151d3 #e37171 #ffffff
 	}
 }
-# Secondary monitor's bar
+
+#########################
+# === SECONDARY BAR === #
+#########################
 bar {
   output HDMI-0
 	i3bar_command i3bar --transparency
@@ -156,7 +159,7 @@ focus_follows_mouse no
 # === APPS === #
 ################
 # Terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 # Dmenu
 bindsym $mod+m exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -p "apps" -sb "#a151d3"'
 # Clipboard History
@@ -174,4 +177,7 @@ bindsym Mod4+Shift+s exec flameshot gui
 for_window [class="(?i)evince"] floating enable
 # Rdesktop
 for_window [class="(?i)rdesktop"] floating enable
-
+# QEMU
+for_window [class="(?i)qemu"] floating enable
+# MPV
+for_window [class="(?i)mpv"] floating enable

@@ -36,12 +36,14 @@ dev-python/cairocffi
 dev-python/cffi
 dev-python/netifaces
 dev-python/pip
+dev-python/psutil
 dev-python/pytest
 dev-python/requests
 dev-python/vkbasalt-cli
 dev-python/xcffib
 dev-qt/qtsvg
 dev-util/blueprint-compiler
+dev-util/gef
 dev-util/google-perftools
 dev-util/nvidia-cuda-toolkit
 dev-util/strace
@@ -50,6 +52,7 @@ dev-vcs/git
 dev-vcs/repo
 games-emulation/dosbox
 games-util/gamemode
+gui-libs/display-manager-init
 gui-libs/gtk
 gui-libs/gtksourceview
 gui-libs/libadwaita
@@ -80,7 +83,10 @@ media-video/ffmpeg
 media-video/mkvtoolnix
 media-video/mpv
 net-analyzer/arp-scan
+net-analyzer/hydra
 net-analyzer/netcat
+net-analyzer/nmap
+net-analyzer/shodan
 net-analyzer/traceroute
 net-dns/bind-tools
 net-fs/samba
@@ -89,6 +95,7 @@ net-misc/chrony
 net-misc/dhcpcd
 net-misc/proxychains
 net-misc/rdesktop
+net-misc/sshpass
 net-misc/whois
 net-misc/yt-dlp
 net-p2p/qbittorrent
@@ -111,6 +118,9 @@ sys-apps/ripgrep
 sys-apps/usbutils
 sys-boot/grub
 sys-cluster/kubectl
+sys-devel/automake-wrapper
+sys-devel/clang
+sys-devel/clang-runtime
 sys-firmware/edk2-ovmf-bin
 sys-fs/cryptsetup
 sys-fs/dosfstools
@@ -124,6 +134,8 @@ sys-power/upower
 sys-process/htop
 sys-process/iotop
 sys-process/lsof
+virtual/editor
+virtual/opencl
 www-client/chromium
 x11-apps/mesa-progs
 x11-apps/xdpyinfo

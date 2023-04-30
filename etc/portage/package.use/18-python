@@ -106,3 +106,12 @@
 # required by dev-python/setuptools-67.6.1::gentoo
 # required by dev-python/autocommand-2.2.2::gentoo
 >=dev-python/cython-0.29.33 python_targets_python3_11
+# required by dev-util/gef-2022.06-r1::gentoo[python_single_target_python3_10]
+# required by gef (argument)
+>=dev-libs/capstone-5.0_rc2-r3 python
+# required by dev-util/gef-2022.06-r1::gentoo[python_single_target_python3_10]
+# required by gef (argument)
+>=dev-libs/keystone-0.9.2-r1 python
+# required by dev-util/gef-2022.06-r1::gentoo[python_single_target_python3_10]
+# required by gef (argument)
+>=dev-util/unicorn-2.0.1 python

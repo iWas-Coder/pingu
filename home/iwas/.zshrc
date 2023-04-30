@@ -83,12 +83,14 @@ alias gdb='LC_ALL=en.US.UTF-8 gdb'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
 alias ffplay='ffplay -hide_banner'
-alias mpv='mpv --hwdec=nvdec'
+alias mpv='mpv --hwdec=nvdec-copy --vo=gpu'
 alias cpu-x='sudo cpu-x -N'
 alias cal='cal -m'
 alias idiff='kitty +kitten diff'
 alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 alias upx='upx --color --best'
+alias gdb='gdb-gef'
+alias grep='grep --color=auto'
 # Custom
 alias stopx='pkill X'
 alias lock='/usr/share/lockscreen/lock'
@@ -106,12 +108,14 @@ alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
 alias pingu-push='ggtoken && pingu push'
 alias pingu-list='pingu ls-tree --full-tree --name-only -r HEAD'
 alias pingu-update='pingu add -v -u'
+alias pingu-log='pingu log --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 # Git Custom
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; git status'
 alias ggpush='ggtoken && git push'
 alias ggadd='git add -A; git status'
-alias gglog='git log --all --graph --decorate --abbrev-commit'
+alias gglog='git log --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
+alias ggundo='git reset --soft HEAD@{1}'
 
 
 # === FUNCTIONS === #
@@ -168,17 +172,6 @@ ggbrnch () {
   # Switch to given branch
   elif [ ! -z "$1" ] && [ -z "$2" ]; then
     git switch "$1"
-  else
-    echo "[-] Incorrect syntax :("
-  fi
-}
-# Git undo certain actions or things that happen
-ggundo () {
-  if [ "$1" = "-h" ] && [ -z "$2" ]; then
-    echo "usage:"
-    echo -e "\tlocalcommit <N> -> Moves the HEAD <N> positions backwards in the local tree. All changes made in these commits are moved to the stage area (index)."
-  elif [ "$1" = "localcommit" ] && [[ $2 =~ '^[0-9]+$' ]] && [ -z "$3" ]; then
-    git reset --soft HEAD~$2
   else
     echo "[-] Incorrect syntax :("
   fi

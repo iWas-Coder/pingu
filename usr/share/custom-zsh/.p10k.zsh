@@ -27,6 +27,8 @@
     terraform
     # Kubernetes context
     kubecontext
+    # npm package info
+    package
     # Command Duration
     command_execution_time
     # Context
