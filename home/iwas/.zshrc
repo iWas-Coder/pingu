@@ -181,12 +181,12 @@ precmd () { print -Pn "\e]0;%~\a" }
 # Games
 games () {
   if [ -z "$1" ]; then
-    ls /usr/local/games
+    ls /usr/local/games -I '*.*'
   elif [ "$1" = "-v" ] && [ -z "$2" ]; then
-    ls -1 /usr/local/games
+    ls -1 /usr/local/games -I '*.*'
   elif [ "$1" = "-vv" ] && [ -z "$2" ]; then
-    for game in $(ls /usr/local/games); do
-      ls -1 /usr/local/games/$game
+    for game in $(ls /usr/local/games -I '*.*'); do
+      ls -1 /usr/local/games/$game 
       realpath /usr/local/games/$game &>/dev/null \
         && du -sh $(dirname $(realpath /usr/local/games/$game))
     done

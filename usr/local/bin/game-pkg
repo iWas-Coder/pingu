@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+arg_usage () { echo -ne "\n$1 => $2."; }
+
+usage () {
+  echo "Usage:"
+  arg_usage "-h/--help" "Show this help panel and exit"
+  arg_usage "-a/--archive" "(...)"
+  arg_usage "-x/--extract" "(...)"
+  echo
+}
+
+is_mounted () { mountpoint -q "$1"; }
+
+
+trap "echo; exit" INT
+
+if [ $# -ne 2 ]; then
+  usage; exit 1
+elif [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  usage; exit 0
+elif ! is_mounted /home/iwas/vault; then
+  echo "Vault is not mounted :("; exit 2
+fi
+
+cd /home/iwas
+
+MODE="$1"
+GAME="$2"
+GAMES="/usr/local/games"
+LOGFILE="/home/iwas/.game-pkg.log"
+MOUNTPOINT="/home/iwas/vault"
+ARCHIVE_DIR="$MOUNTPOINT/games-lrz"
+LRZTAR="lrztar -vv -z -p 10 -H"
+LRZUNTAR="lrztar -vv -z -p 10 -H -d"
+
+for game in $(ls "$GAMES"); do
+  if [ "$game" = "$GAME" ]; then
+    # === Archive mode === #
+    if [ "$MODE" = "-a" ] || [ "$MODE" = "--archive" ]; then
+      # Compute game paths
+      GAME_DIR=$(dirname "$(realpath "$GAMES/$GAME")")
+      PARENT_GAME_DIR=$(dirname "$GAME_DIR")
+      NAME_GAME_DIR=$(basename "$GAME_DIR")
+      pushd "$PARENT_GAME_DIR" &>/dev/null
+      # Compress
+      $LRZTAR "$NAME_GAME_DIR"
+      # Copy to vault
+      pv "$NAME_GAME_DIR".tar.lrz > "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz
+      # Delete archive (local copy)
+      rm -vf "$NAME_GAME_DIR".tar.lrz
+      # Delete
+      sudo rm -rvf "$GAME_DIR"
+      # Log local game directory (~/.game-pkg.log)
+      echo "$GAME $GAME_DIR" >> "$LOGFILE"
+      popd &>/dev/null
+    # === Extract mode === #
+    elif [ "$MODE" = "-x" ] || [ "$MODE" = "--extract" ]; then
+      # Compute game paths (with logfile)
+      GAME_DIR=$(cat "$LOGFILE" | grep "$GAME" | awk '{print $2}')
+      PARENT_GAME_DIR=$(dirname "$GAME_DIR")
+      NAME_GAME_DIR=$(basename "$GAME_DIR") 
+      pushd "$PARENT_GAME_DIR" &>/dev/null
+      # Copy from vault
+      pv "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz > "$NAME_GAME_DIR".tar.lrz
+      # Decompress
+      $LRZUNTAR "$NAME_GAME_DIR".tar.lrz
+      # Delete archive (local copy)
+      rm -vf "$NAME_GAME_DIR".tar.lrz
+      # Delete
+      rm -vf "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz
+      # Remove line from log
+      sed -i "/$GAME/d" "$LOGFILE"
+      popd &>/dev/null
+    else
+      usage; exit 1
+    fi
+  fi
+done
+
