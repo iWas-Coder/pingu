@@ -537,3 +537,17 @@ app-arch/zstd abi_x86_32
 =media-libs/harfbuzz-5.3.1-r1 abi_x86_32
 
 >=net-fs/samba-4.15.12-r4 winbind
+
+# required by app-emulation/wine-proton-7.0.5::gentoo
+# required by wine-proton (argument)
+>=dev-libs/libgcrypt-1.10.1-r3 abi_x86_32
+# required by dev-libs/libgcrypt-1.10.1-r3::gentoo
+# required by app-emulation/wine-proton-7.0.5::gentoo
+# required by wine-proton (argument)
+>=dev-libs/libgpg-error-1.46-r1 abi_x86_32
+
+# required by media-libs/sdl2-ttf-2.20.0::gentoo
+# required by sdl2-ttf (argument)
+>=media-libs/freetype-2.13.0 harfbuzz
+
+app-emulation/wine-proton -sdl
