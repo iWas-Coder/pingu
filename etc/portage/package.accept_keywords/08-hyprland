@@ -1,0 +1,8 @@
+media-libs/libdisplay-info ~amd64
+dev-libs/libliftoff ~amd64
+x11-libs/xcb-util-errors ~amd64
+gui-wm/hyprland ~amd64
+dev-libs/hyprland-protocols ~amd64
+gui-apps/hyprpaper ~amd64
+gui-apps/waybar ~amd64
+dev-libs/date ~amd64

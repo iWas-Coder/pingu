@@ -1,3 +1,5 @@
+#!/bin/sh
+
 ####################
 # === Pingu DE === #
 ####################
@@ -6,7 +8,7 @@ export XDG_CURRENT_DESKTOP=Pingu
 # Downloads folder
 export XDG_DOWNLOAD_DIR="$HOME/downloads"
 # Web Browser
-export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags.conf | xargs)"
+export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags-wl.conf | xargs)"
 # Text Editor
 export EDITOR=nvim
 
@@ -21,24 +23,20 @@ export __GL_THREADED_OPTIMIZATIONS=1
 # Mesa threaded shader compilation
 export multithread_glsl_compiler=1
 
+############################
+# === Wayland Settings === #
+############################
+export XCURSOR_SIZE=16
+export WLR_NO_HARDWARE_CURSORS=1
+
 ##########################
 # === Other settings === #
 ##########################
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-#########################
-# === Startup Tasks === #
-#########################
-# Set maximum open file descriptors
-ulimit -n 8192
-# NVIDIA GPU Tweaks: Power Limit (175W -> 200W)
-sudo nvidia-smi -pl 200
-# Audio
-gentoo-pipewire-launcher &
-# Compositor
-picom --experimental-backends &
-# Wallpaper
-feh --bg-fill /usr/share/wallpapers/wallpaper_1.jpg --bg-fill /usr/share/wallpapers/wallpaper_2.jpg &
-# Clipboard History
-clipmenud &
+#############################################
+# === Start Hyprland (new dbus session) === #
+#############################################
+cd ~
+exec dbus-run-session Hyprland

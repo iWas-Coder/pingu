@@ -91,8 +91,10 @@ alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 alias upx='upx --color --best'
 alias gdb='gdb-gef'
 alias grep='grep --color=auto'
+alias startx='echo "[*] Preparing X environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting X...\n" && sleep 1 && /bin/startx'
+alias startw='echo "[*] Preparing Wayland environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting Wayland...\n" && sleep 1 && /home/iwas/.wprofile'
 # Custom
-alias stopx='pkill X'
+alias stopx='killall kitty && killall X'
 alias lock='/usr/share/lockscreen/lock'
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,forceuid,gid=1000,forcegid,file_mode=0664,dir_mode=0775,sec=ntlmv2i,rw'
 alias umount.vault='sudo umount /home/iwas/vault'
@@ -102,19 +104,21 @@ alias pdfview='evince'
 alias reset.shell="source $HOME/.zshrc && reset"
 alias mksquashfs.backup="sudo mksquashfs / sheldon-$(date +'%Y%m%d').bak -processors 10 -e /boot /dev /lost+found /media /mnt /proc /run /sys /tmp /var /home/iwas/data /home/iwas/vault /home/iwas/.config/chromium"
 alias rsync.mv='rsync -aP --remove-source-files'
+alias rsync.cp='rsync -aP'
+alias eclean-all='sudo eclean-pkg -d && sudo eclean-dist -d'
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
 alias pingu-push='ggtoken && pingu push'
 alias pingu-list='pingu ls-tree --full-tree --name-only -r HEAD'
 alias pingu-update='pingu add -v -u'
-alias pingu-log='pingu log --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
+alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 # Git Custom
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; git status'
 alias ggpush='ggtoken && git push'
 alias ggadd='git add -A; git status'
-alias gglog='git log --all --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
+alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 alias ggundo='git reset --soft HEAD@{1}'
 
 
@@ -149,7 +153,7 @@ rmk () { scrub -p dod $1; shred -zun 10 -v $1; }
 # Open Evince PDF Viewer in the background and detach from shell session
 evince () { /usr/bin/evince "$*" &>/dev/null & disown; }
 # Libreoffice Suite
-# libreoffice () { libreoffice "$*" &>/dev/null & disown; }
+libreoffice () { /usr/bin/libreoffice "$*" &>/dev/null & disown; }
 # Start working in a Git repository (ggfetch && open VSCode)
 ggcode () { ggfetch && code $(git rev-parse --show-toplevel) }
 # Git branch management (wrapper for git switch && git branch)

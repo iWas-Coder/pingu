@@ -1,0 +1,17 @@
+sys-auth/seatd builtin server
+# required by gui-wm/hyprland-0.24.1-r1::guru
+# required by hyprland (argument)
+>=media-libs/mesa-22.3.7-r1 wayland
+# required by gui-wm/hyprland-0.24.1-r1::guru[X]
+# required by hyprland (argument)
+>=gui-libs/wlroots-0.16.2 x11-backend
+# required by media-libs/mesa-22.3.7-r1::gentoo[wayland]
+# required by x11-libs/gtk+-3.24.37::gentoo[wayland]
+# required by gui-libs/gtk-layer-shell-0.8.0::gentoo
+# required by gui-wm/hyprland-0.24.1-r1::guru
+# required by hyprland (argument)
+>=dev-libs/wayland-1.21.0-r1 abi_x86_32
+# required by gui-libs/gtk-layer-shell-0.8.0::gentoo
+# required by gui-wm/hyprland-0.24.1-r1::guru
+# required by hyprland (argument)
+>=x11-libs/gtk+-3.24.37 wayland

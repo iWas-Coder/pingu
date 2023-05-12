@@ -21,6 +21,7 @@ app-eselect/eselect-repository
 app-misc/jq
 app-misc/neofetch
 app-misc/scrub
+app-office/libreoffice
 app-portage/cpuid2cpuflags
 app-portage/gentoolkit
 app-shells/zsh
@@ -31,10 +32,13 @@ app-text/poppler
 app-text/texlive
 app-text/tree
 app-text/wdiff
+dev-db/libdbi
 dev-lang/python
 dev-libs/libaio
 dev-libs/libevent
+dev-libs/libliftoff
 dev-libs/libthai
+dev-libs/libxdg-basedir
 dev-libs/log4cplus
 dev-libs/wayland
 dev-python/cairocffi
@@ -68,11 +72,13 @@ dev-util/vulkan-tools
 dev-vcs/git
 dev-vcs/repo
 games-emulation/dosbox
-games-util/gamemode
+gui-apps/hyprpaper
+gui-apps/waybar
 gui-libs/display-manager-init
 gui-libs/gtk
 gui-libs/gtksourceview
 gui-libs/libadwaita
+gui-wm/hyprland
 media-fonts/fontawesome
 media-fonts/noto
 media-fonts/noto-cjk
@@ -83,8 +89,10 @@ media-gfx/flameshot
 media-gfx/gimp
 media-gfx/imagemagick
 media-gfx/scrot
+media-libs/alsa-lib
 media-libs/exiftool
 media-libs/fontconfig
+media-libs/libdisplay-info
 media-libs/libpulse
 media-libs/libsdl
 media-libs/libsdl2
@@ -93,6 +101,11 @@ media-libs/openal
 media-libs/openimageio
 media-libs/osl
 media-libs/portaudio
+media-libs/sdl-gfx
+media-libs/sdl-image
+media-libs/sdl-mixer
+media-libs/sdl-pango
+media-libs/sdl-ttf
 media-libs/sdl2-gfx
 media-libs/sdl2-image
 media-libs/sdl2-mixer
@@ -102,6 +115,7 @@ media-libs/vkBasalt
 media-libs/vulkan-loader
 media-sound/alsa-utils
 media-sound/audacity
+media-sound/cava
 media-sound/jack2
 media-sound/pulsemixer
 media-sound/spotify
@@ -110,6 +124,7 @@ media-video/ffmpeg
 media-video/mkvtoolnix
 media-video/mpv
 net-analyzer/arp-scan
+net-analyzer/bmon
 net-analyzer/hydra
 net-analyzer/netcat
 net-analyzer/nmap
@@ -119,6 +134,8 @@ net-analyzer/wireshark
 net-dns/bind-tools
 net-fs/samba
 net-ftp/ftp
+net-libs/miniupnpc
+net-libs/zeromq
 net-misc/chrony
 net-misc/dhcpcd
 net-misc/proxychains
@@ -134,6 +151,7 @@ sys-apps/cpuid
 sys-apps/dmidecode
 sys-apps/ethtool
 sys-apps/i2c-tools
+sys-apps/kexec-tools
 sys-apps/keyutils
 sys-apps/lm-sensors
 sys-apps/lsd
@@ -144,6 +162,7 @@ sys-apps/pcsc-lite
 sys-apps/pv
 sys-apps/ripgrep
 sys-apps/usbutils
+sys-auth/seatd
 sys-boot/grub
 sys-cluster/kubectl
 sys-devel/automake-wrapper
@@ -158,6 +177,7 @@ sys-fs/squashfs-tools
 sys-kernel/dracut
 sys-kernel/gentoo-sources
 sys-kernel/linux-firmware
+sys-libs/db
 sys-power/upower
 sys-process/htop
 sys-process/iotop
@@ -184,6 +204,7 @@ x11-libs/libXrandr
 x11-libs/libXrender
 x11-libs/libXxf86vm
 x11-libs/vte
+x11-libs/xcb-util-errors
 x11-misc/clipnotify
 x11-misc/dmenu
 x11-misc/i3lock

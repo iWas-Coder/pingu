@@ -124,7 +124,7 @@ bar {
 		background #222222CC
 		focused_workspace #a151d3 #a151d3 #ffffff
 		active_workspace  #a151d3 #222222 #ffffff
-		urgent_workspace  #a151d3 #e37171 #ffffff
+		urgent_workspace  #a151d3 #cd624e #ffffff
 	}
 }
 
@@ -146,14 +146,20 @@ bar {
     background #222222CC
     focused_workspace #a151d3 #a151d3 #ffffff
     active_workspace  #a151d3 #222222 #ffffff
-    urgent_workspace  #a151d3 #e37171 #ffffff
+    urgent_workspace  #a151d3 #cd624e #ffffff
   }
 }
 
 for_window [class="^.*"] border pixel 3
-client.focused #a151d3 #a151d3 #a151d3 #a151d3
-focus_follows_mouse no
 
+client.focused #a151d3 #a151d3 #a151d3 #a151d3
+client.focused_inactive #d67aab33 #d67aab33 #d67aab33 #d67aab33
+client.unfocused #d67aab33 #d67aab33 #d67aab33 #d67aab33
+client.urgent #cc3f3f #cc3f3f #cc3f3f #cc3f3f
+
+focus_follows_mouse no
+gaps outer 8
+gaps inner 8
 
 ################
 # === APPS === #
@@ -171,8 +177,9 @@ bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
 
-
+#########################################
 # === Floating Windows (by default) === #
+#########################################
 # Evince
 for_window [class="(?i)evince"] floating enable
 # Rdesktop
@@ -181,3 +188,4 @@ for_window [class="(?i)rdesktop"] floating enable
 for_window [class="(?i)qemu"] floating enable
 # MPV
 for_window [class="(?i)mpv"] floating enable
+
