@@ -93,6 +93,10 @@ alias gdb='gdb-gef'
 alias grep='grep --color=auto'
 alias startx='echo "[*] Preparing X environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting X...\n" && sleep 1 && /bin/startx'
 alias startw='echo "[*] Preparing Wayland environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting Wayland...\n" && sleep 1 && /home/iwas/.wprofile'
+alias html2text='pyhtml2text'
+alias venv='python3 -m venv'
+alias dmesg='dmesg --color=always'
+alias loc='cloc'
 # Custom
 alias stopx='killall kitty && killall X'
 alias lock='/usr/share/lockscreen/lock'
@@ -106,6 +110,8 @@ alias mksquashfs.backup="sudo mksquashfs / sheldon-$(date +'%Y%m%d').bak -proces
 alias rsync.mv='rsync -aP --remove-source-files'
 alias rsync.cp='rsync -aP'
 alias eclean-all='sudo eclean-pkg -d && sudo eclean-dist -d'
+alias libreoffice-cli='/usr/bin/libreoffice "-env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}" --headless'
+alias chromium.backup="tar -zcvf /home/iwas/vault/backups/chromium.bak/chromium-config.inc-$(date +'%Y%m%d').tar.gz -g /home/iwas/vault/backups/chromium.bak/incremental.diff /home/iwas/.config/chromium /home/iwas/.config/chromium-flags.conf"
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
@@ -152,6 +158,8 @@ extractPorts () {
 rmk () { scrub -p dod $1; shred -zun 10 -v $1; }
 # Open Evince PDF Viewer in the background and detach from shell session
 evince () { /usr/bin/evince "$*" &>/dev/null & disown; }
+# Open Foliate E-BOOK Reader in the background and detach from shell session
+foliate () { /bin/com.github.johnfactotum.Foliate "$*" &>/dev/null & disown; }
 # Libreoffice Suite
 libreoffice () { /usr/bin/libreoffice "$*" &>/dev/null & disown; }
 # Start working in a Git repository (ggfetch && open VSCode)
@@ -216,7 +224,7 @@ ffmpeg.plex_transcoding () {
   fi
 }
 # 7z list archive's content without additional information (clean format)
-list () { 7z l -ba "$1" | grep -oP '\S+$'; }
+7z.ls () { 7z l -ba "$1" | grep -oP '\S+$'; }
 
 
 # === PATH === #

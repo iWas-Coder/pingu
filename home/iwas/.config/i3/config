@@ -188,4 +188,6 @@ for_window [class="(?i)rdesktop"] floating enable
 for_window [class="(?i)qemu"] floating enable
 # MPV
 for_window [class="(?i)mpv"] floating enable
+# Chatterino
+for_window [class="(?i)chatterino"] floating enable
 

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -eEu -o pipefail
+shopt -s extdebug
+IFS=$'\n\t'
+
+
+# Awk wrapper function
+call_awk() { echo "$(awk 'BEGIN {print '"${1}"'}')"; }
+
+
+LATENCY=4
+LATENCY_FILE="/sys/kernel/debug/sched/latency_ns"
+MIN_GRANULARITY=0.4
+MIN_GRANULARITY_FILE="/sys/kernel/debug/sched/min_granularity_ns"
+WAKEUP_GRANULARITY=0.5
+WAKEUP_GRANULARITY_FILE="/sys/kernel/debug/sched/wakeup_granularity_ns"
+MIGRATION_COST=0.25
+MIGRATION_COST_FILE="/sys/kernel/debug/sched/migration_cost_ns"
+BANDWIDTH_SIZE=3
+BANDWIDTH_SIZE_FILE="/proc/sys/kernel/sched_cfs_bandwidth_slice_us"
+
+# Linux uses this algorithm to multiply miliseconds
+MODIFIER=$(call_awk "10 ** 6 * (1 + int(log($(nproc)) / log(2)))")
+
+
+echo "$(call_awk "int($LATENCY * $MODIFIER)")" > "$LATENCY_FILE"
+echo "$(call_awk "int($MIN_GRANULARITY * $MODIFIER)")" > "$MIN_GRANULARITY_FILE"
+echo "$(call_awk "int($WAKEUP_GRANULARITY * $MODIFIER)")" > "$WAKEUP_GRANULARITY_FILE"
+echo "$(call_awk "int($MIGRATION_COST * $MODIFIER)")" > "$MIGRATION_COST_FILE"
+echo "$(call_awk "int($BANDWIDTH_SIZE * 1000)")" > "$BANDWIDTH_SIZE_FILE"
+

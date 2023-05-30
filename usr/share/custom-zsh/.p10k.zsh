@@ -27,11 +27,13 @@
     terraform
     # Kubernetes context
     kubecontext
+    # Python virtual environment
+    virtualenv
     # npm package info
     package
     # Command Duration
     command_execution_time
-    # Context
+    # Context 
     context
   )
 
@@ -88,6 +90,7 @@
 
   # === os_icon (OS Identifier) === #
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=255
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=%B$'\uEBC6'
 
   # === prompt_char (Prompt Symbol) === #
   typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=

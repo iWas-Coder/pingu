@@ -13,6 +13,7 @@ app-containers/nvidia-container-toolkit
 app-crypt/gcr
 app-crypt/gpgme:1
 app-crypt/pinentry
+app-editors/emacs
 app-editors/neovim
 app-emulation/qemu
 app-emulation/wine-proton
@@ -27,6 +28,7 @@ app-portage/gentoolkit
 app-shells/zsh
 app-text/dos2unix
 app-text/evince
+app-text/foliate
 app-text/libspectre
 app-text/poppler
 app-text/texlive
@@ -43,6 +45,7 @@ dev-libs/log4cplus
 dev-libs/wayland
 dev-python/cairocffi
 dev-python/cffi
+dev-python/html2text
 dev-python/netifaces
 dev-python/pip
 dev-python/psutil
@@ -50,6 +53,7 @@ dev-python/pytest
 dev-python/requests
 dev-python/vkbasalt-cli
 dev-python/xcffib
+dev-python/xmltodict
 dev-qt/linguist-tools:5
 dev-qt/qtconcurrent:5
 dev-qt/qtdbus:5
@@ -64,6 +68,7 @@ dev-qt/qtwidgets:5
 dev-qt/qtx11extras
 dev-qt/qtxml:5
 dev-util/blueprint-compiler
+dev-util/cloc
 dev-util/gef
 dev-util/google-perftools
 dev-util/nvidia-cuda-toolkit
@@ -134,6 +139,7 @@ net-analyzer/wireshark
 net-dns/bind-tools
 net-fs/samba
 net-ftp/ftp
+net-libs/gnutls
 net-libs/miniupnpc
 net-libs/zeromq
 net-misc/chrony

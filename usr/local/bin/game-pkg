@@ -50,7 +50,8 @@ for game in $(ls "$GAMES"); do
       # Delete archive (local copy)
       rm -vf "$NAME_GAME_DIR".tar.lrz
       # Delete
-      sudo rm -rvf "$GAME_DIR"
+      rm -rvf "$GAME_DIR"
+        || echo "[-] Failed to delete completely the dir '$GAME_DIR'."
       # Log local game directory (~/.game-pkg.log)
       echo "$GAME $GAME_DIR" >> "$LOGFILE"
       popd &>/dev/null
