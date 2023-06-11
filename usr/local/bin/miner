@@ -33,15 +33,26 @@ usage () {
 # Profitability panel
 profit () {
   API="https://whattomine.com/coins.json"
-  algos="KAS FLUX IRON"
+  tokens="KAS FLUX IRON"
+  nh_algos="Ethash kHeavyHash ZelHash"
 
-  for algo in $algos; do
+  for token in $tokens; do
     profit_value=$(
-      curl -s "$API"                                  \
-        | jq ".coins[] | select(.tag == \""$algo"\")" \
+      curl -s "$API"                                   \
+        | jq ".coins[] | select(.tag == \""$token"\")" \
         | jq ".profitability"
     )
-    echo -e "  \033[1;35m$algo => $profit_value\033[0m"
+    echo -e "  \033[1;35m$token => $profit_value\033[0m"
+    unset $profit_value
+  done
+  for algo in $nh_algos; do
+    profit_value=$(
+      curl -s "$API"                                   \
+        | jq ".coins[] | select(.tag == \"NICEHASH\")" \
+        | jq "select(.algorithm == \""$algo"\")"       \
+        | jq ".profitability"
+    )
+    echo -e "  \033[1;33m$algo => $profit_value\033[0m"
     unset $profit_value
   done
 }

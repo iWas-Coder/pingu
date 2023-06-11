@@ -94,9 +94,11 @@ alias grep='grep --color=auto'
 alias startx='echo "[*] Preparing X environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting X...\n" && sleep 1 && /bin/startx'
 alias startw='echo "[*] Preparing Wayland environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting Wayland...\n" && sleep 1 && /home/iwas/.wprofile'
 alias html2text='pyhtml2text'
-alias venv='python3 -m venv'
+alias venv.create='python3 -m venv .venv'
+alias venv.activate='source .venv/bin/activate'
 alias dmesg='dmesg --color=always'
 alias loc='cloc'
+alias emacs='emacsclient -c'
 # Custom
 alias stopx='killall kitty && killall X'
 alias lock='/usr/share/lockscreen/lock'
@@ -126,6 +128,8 @@ alias ggpush='ggtoken && git push'
 alias ggadd='git add -A; git status'
 alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 alias ggundo='git reset --soft HEAD@{1}'
+alias ggst='git status'
+alias ggmod='git submodule update --init --recursive'
 
 
 # === FUNCTIONS === #
@@ -188,6 +192,13 @@ ggbrnch () {
     echo "[-] Incorrect syntax :("
   fi
 }
+ggtag () {
+  if [ ! -z "$1" ] && [ ! -z "$2" ] && [ $# -eq 2 ]; then
+    git tag -s -a "$1" -m "$2"
+  else
+    echo "[-] Incorrect syntax :("
+  fi
+}
 # Show CWD as shell's title instead of 'zsh'
 precmd () { print -Pn "\e]0;%~\a" }
 # Games
@@ -225,6 +236,20 @@ ffmpeg.plex_transcoding () {
 }
 # 7z list archive's content without additional information (clean format)
 7z.ls () { 7z l -ba "$1" | grep -oP '\S+$'; }
+# Docker build image from Dockerfile in CWD
+docker.build () {
+  sudo docker build -t "$1" . && sudo docker image prune -f
+}
+# Docker save repository (image with all tags) to tar.gz with progress (tqdm)
+docker.save () {
+  sudo docker save "$1" | tqdm --bytes --total $(
+    sudo docker inspect "$1" --format='{{.Size}}'
+  ) | gzip > "$1".tar.gz
+}
+# Docker load repository (image with all tags) from tar.gz with progress (tqdm)
+docker.load () {
+  pv "$1" | sudo docker load
+}
 
 
 # === PATH === #

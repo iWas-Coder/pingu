@@ -176,6 +176,8 @@ bindsym $mod+b exec chromium $chromium_flags
 bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
+# GNU Emacs
+bindsym $mod+e exec emacsclient -c
 
 #########################################
 # === Floating Windows (by default) === #

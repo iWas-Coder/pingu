@@ -22,7 +22,8 @@
 # required by dev-python/jaraco-text-3.11.1::gentoo
 # required by dev-python/setuptools-67.6.1::gentoo
 # required by dev-python/autocommand-2.2.2::gentoo
->=dev-python/flit_core-3.8.0 python_targets_python3_11
+# move dev-python/flit_core dev-python/flit-core
+>=dev-python/flit-core-3.8.0 python_targets_python3_11
 # required by dev-python/setuptools-67.6.1::gentoo
 # required by dev-python/autocommand-2.2.2::gentoo
 # required by dev-python/jaraco-text-3.11.1::gentoo

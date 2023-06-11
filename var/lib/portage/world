@@ -7,6 +7,7 @@ app-arch/p7zip
 app-arch/pigz
 app-benchmarks/geekbench
 app-benchmarks/sysbench
+app-containers/buildah
 app-containers/docker
 app-containers/docker-cli
 app-containers/nvidia-container-toolkit
@@ -51,6 +52,7 @@ dev-python/pip
 dev-python/psutil
 dev-python/pytest
 dev-python/requests
+dev-python/tqdm
 dev-python/vkbasalt-cli
 dev-python/xcffib
 dev-python/xmltodict

@@ -34,6 +34,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 ulimit -n 8192
 # NVIDIA GPU Tweaks: Power Limit (175W -> 200W)
 sudo nvidia-smi -pl 200
+# NVIDIA GPU Tweaks: PowerMizer Performance Mode
+nvidia-settings -a "GPUPowerMizerMode=1"
 # Audio
 gentoo-pipewire-launcher &
 # Compositor
@@ -42,3 +44,6 @@ picom --experimental-backends &
 feh --bg-fill /usr/share/wallpapers/wallpaper_1.jpg --bg-fill /usr/share/wallpapers/wallpaper_2.jpg &
 # Clipboard History
 clipmenud &
+# GNU Emacs daemon
+/usr/bin/emacs --daemon &
+
