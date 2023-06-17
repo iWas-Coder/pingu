@@ -6,7 +6,7 @@
 #########################
 # Instant Prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  . "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 # Prompt Init
 autoload -Uz promptinit
@@ -14,10 +14,10 @@ promptinit
 prompt adam1
 setopt histignorealldups sharehistory
 # Theme
-source /usr/share/custom-zsh/powerlevel10k/powerlevel10k.zsh-theme
+. /home/iwas/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 # Modules
-[[ -f /usr/share/custom-zsh/.p10k.zsh ]] && source /usr/share/custom-zsh/.p10k.zsh
-[[ -f /usr/share/custom-zsh/.fzf.zsh ]] && source /usr/share/custom-zsh/.fzf.zsh
+. /home/iwas/.zsh/.p10k.zsh
+. /home/iwas/.zsh/.fzf.zsh
 
 
 ###############
@@ -26,7 +26,7 @@ source /usr/share/custom-zsh/powerlevel10k/powerlevel10k.zsh-theme
 # History
 HISTSIZE=5000
 SAVEHIST=5000
-HISTFILE=/usr/share/custom-zsh/.zsh_history
+HISTFILE=/home/iwas/.zsh/.zsh_history
 # Completition System
 autoload -Uz compinit
 compinit
@@ -47,9 +47,9 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # Plugins
-source /usr/share/custom-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/custom-zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/custom-zsh/zsh-sudo/sudo.plugin.zsh
+. /home/iwas/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. /home/iwas/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+. /home/iwas/.zsh/zsh-sudo/sudo.plugin.zsh
 
 
 #######################
@@ -95,7 +95,7 @@ alias startx='echo "[*] Preparing X environment..." && for _ in $(seq 1000); do 
 alias startw='echo "[*] Preparing Wayland environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting Wayland...\n" && sleep 1 && /home/iwas/.wprofile'
 alias html2text='pyhtml2text'
 alias venv.create='python3 -m venv .venv'
-alias venv.activate='source .venv/bin/activate'
+alias venv.activate='. .venv/bin/activate'
 alias dmesg='dmesg --color=always'
 alias loc='cloc'
 alias emacs='emacsclient -c'
@@ -104,10 +104,12 @@ alias stopx='killall kitty && killall X'
 alias lock='/usr/share/lockscreen/lock'
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o credentials=/home/iwas/.smb/penny.key,uid=1000,forceuid,gid=1000,forcegid,file_mode=0664,dir_mode=0775,sec=ntlmv2i,rw'
 alias umount.vault='sudo umount /home/iwas/vault'
-alias picom.restart="pidof picom | xargs kill -9 &>/dev/null; cat /home/iwas/.xprofile | grep -i picom | bash"
+alias picom.start='cat /home/iwas/.xprofile | grep -i picom | bash'
+alias picom.stop='pidof picom | xargs kill -9 &>/dev/null'
+alias picom.restart='picom.stop; picom.start'
 alias perms='stat -c "%n -> %a (%A)"'
 alias pdfview='evince'
-alias reset.shell="source $HOME/.zshrc && reset"
+alias reset.shell=". $HOME/.zshrc && reset"
 alias mksquashfs.backup="sudo mksquashfs / sheldon-$(date +'%Y%m%d').bak -processors 10 -e /boot /dev /lost+found /media /mnt /proc /run /sys /tmp /var /home/iwas/data /home/iwas/vault /home/iwas/.config/chromium"
 alias rsync.mv='rsync -aP --remove-source-files'
 alias rsync.cp='rsync -aP'
@@ -116,20 +118,19 @@ alias libreoffice-cli='/usr/bin/libreoffice "-env:UserInstallation=file:///tmp/L
 alias chromium.backup="tar -zcvf /home/iwas/vault/backups/chromium.bak/chromium-config.inc-$(date +'%Y%m%d').tar.gz -g /home/iwas/vault/backups/chromium.bak/incremental.diff /home/iwas/.config/chromium /home/iwas/.config/chromium-flags.conf"
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
-alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status'
+alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status -sb'
 alias pingu-push='ggtoken && pingu push'
 alias pingu-list='pingu ls-tree --full-tree --name-only -r HEAD'
 alias pingu-update='pingu add -v -u'
 alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 # Git Custom
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
-alias ggfetch='git fetch --all -p -P && echo; git status'
+alias ggfetch='git fetch --all -p -P && echo; ggst'
 alias ggpush='ggtoken && git push'
 alias ggadd='git add -A; git status'
 alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 alias ggundo='git reset --soft HEAD@{1}'
-alias ggst='git status'
-alias ggmod='git submodule update --init --recursive'
+alias ggst='git status -sb'
 
 
 # === FUNCTIONS === #
@@ -192,9 +193,20 @@ ggbrnch () {
     echo "[-] Incorrect syntax :("
   fi
 }
+# Add an annotated tag to current commit pointed by local HEAD
 ggtag () {
   if [ ! -z "$1" ] && [ ! -z "$2" ] && [ $# -eq 2 ]; then
     git tag -s -a "$1" -m "$2"
+  else
+    echo "[-] Incorrect syntax :("
+  fi
+}
+# List or init/update registered submodules
+ggmod () {
+  if [ -z "$1" ]; then
+    git submodule status --recursive
+  elif [ "$1" = "update" ]; then
+    git submodule update --init --recursive
   else
     echo "[-] Incorrect syntax :("
   fi

@@ -4,9 +4,9 @@
 # DE Name
 export XDG_CURRENT_DESKTOP=Pingu
 # Downloads folder
-export XDG_DOWNLOAD_DIR="$HOME/downloads"
+export XDG_DOWNLOAD_DIR="/home/iwas/downloads"
 # Web Browser
-export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags.conf | xargs)"
+export BROWSER="chromium $(cat /home/iwas/.config/chromium-flags.conf | xargs)"
 # Text Editor
 export EDITOR=nvim
 
@@ -41,7 +41,7 @@ gentoo-pipewire-launcher &
 # Compositor
 picom --experimental-backends &
 # Wallpaper
-feh --bg-fill /usr/share/wallpapers/wallpaper_1.jpg --bg-fill /usr/share/wallpapers/wallpaper_2.jpg &
+feh --bg-fill /home/iwas/.wallpapers/wallpaper_1.jpg --bg-fill /home/iwas/.wallpapers/wallpaper_2.jpg &
 # Clipboard History
 clipmenud &
 # GNU Emacs daemon

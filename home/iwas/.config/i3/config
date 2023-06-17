@@ -192,4 +192,6 @@ for_window [class="(?i)qemu"] floating enable
 for_window [class="(?i)mpv"] floating enable
 # Chatterino
 for_window [class="(?i)chatterino"] floating enable
+# Minecraft
+for_window [class="(?i)minecraft"] floating enable
 
