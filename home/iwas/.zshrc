@@ -127,10 +127,10 @@ alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; ggst'
 alias ggpush='ggtoken && git push'
-alias ggadd='git add -A; git status'
 alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 alias ggundo='git reset --soft HEAD@{1}'
 alias ggst='git status -sb'
+alias ggadd='git add -vu; ggst'
 
 
 # === FUNCTIONS === #
@@ -205,8 +205,10 @@ ggtag () {
 ggmod () {
   if [ -z "$1" ]; then
     git submodule status --recursive
-  elif [ "$1" = "update" ]; then
+  elif [ "$1" = "fetch" ]; then
     git submodule update --init --recursive
+  elif [ "$1" = "pull" ]; then
+    git submodule update --init --recursive --remote --merge
   else
     echo "[-] Incorrect syntax :("
   fi

@@ -71,6 +71,6 @@ c6:2345:respawn:/sbin/agetty --noclear --nohostname 38400 tty6 linux
 ##############################################
 ca:12345:ctrlaltdel:/sbin/shutdown -r now
 
-# Launch DM services if /etc/init.d/display-manager is defined
+# Launch `startDM` script
 x:a:once:/usr/bin/startDM
 

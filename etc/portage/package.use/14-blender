@@ -3,5 +3,6 @@ media-libs/opencolorio -opengl
 >=media-libs/freetype-2.12.1-r1 brotli
 >=media-video/ffmpeg-4.4.3 opus theora
 >=app-arch/brotli-1.0.9-r5 abi_x86_32
+>=x11-libs/libxkbcommon-1.5.0 abi_x86_32
 
 media-gfx/blender alembic collada jemalloc openal cuda optix
