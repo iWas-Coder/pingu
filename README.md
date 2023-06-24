@@ -11,3 +11,12 @@
 [//]: # (README Body)
 
 (...)
+
+## Table of Contents
+
+- [Disks partitioning](#disks-partitioning)
+
+## Disks partitioning
+
+(...)
+

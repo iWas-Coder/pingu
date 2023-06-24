@@ -1,8 +1,5 @@
-NAME=Gentoo
-ID=gentoo
+NAME="GNU/Linux"
+ID=gnu-linux
 PRETTY_NAME="GNU/Linux"
-ANSI_COLOR="1;32"
-HOME_URL="https://www.gentoo.org/"
-SUPPORT_URL="https://www.gentoo.org/support/"
-BUG_REPORT_URL="https://bugs.gentoo.org/"
-VERSION_ID="2.9"
+HOME_URL="https://www.gnu.org"
+VERSION_ID="6.1.12-pingu"

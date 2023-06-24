@@ -1,0 +1,3 @@
+sys-devel/gcc jit
+net-libs/gnutls tools
+app-editors/emacs jit
