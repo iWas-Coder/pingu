@@ -15,8 +15,50 @@
 ## Table of Contents
 
 - [Disks partitioning](#disks-partitioning)
+- [Linux kernel building](#linux-kernel-building)
 
 ## Disks partitioning
+
+(...)
+
+```shell
+cfdisk /dev/$DISK1
+```
+
+(...)
+
+| LABEL | MOUNTPOINT | PARTITION TYPE   | FORMAT | SIZE |
+|-------|------------|------------------|--------|------|
+| EFI   | /boot/EFI  | EFI System       | fat32  | 128M |
+| BOOT  | /boot      | Linux filesystem | ext4   | 896M |
+| SYS   | /          | Linux filesystem | ext4   | REST |
+
+(...)
+
+```shell
+cfdisk /dev/$DISK2
+```
+
+(...)
+
+| LABEL | MOUNTPOINT       | PARTITION TYPE   | FORMAT | SIZE |
+|-------|------------------|------------------|--------|------|
+| DATA  | /home/$USER/data | Linux filesystem | ext4   | ALL  |
+
+(...)
+
+## Linux kernel building
+
+(...)
+
+```shell
+cd /usr/src/linux
+sudo make menuconfig
+sudo KCFLAGS="-march=<ARCH> -O2 -pipe" make -j<N>
+sudo make modules_install
+sudo make headers
+sudo make install
+```
 
 (...)
 

@@ -24,8 +24,8 @@ setopt histignorealldups sharehistory
 # === ZSH === #
 ###############
 # History
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=20000
+SAVEHIST=20000
 HISTFILE=/home/iwas/.zsh/.zsh_history
 # Completition System
 autoload -Uz compinit
@@ -131,6 +131,7 @@ alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold
 alias ggundo='git reset --soft HEAD@{1}'
 alias ggst='git status -sb'
 alias ggadd='git add -vu; ggst'
+alias ggclean='dialog --title "ggclean" --backtitle "git" --yesno "Are you sure?" 0 0 && git reset --hard && git clean -fxd'
 
 
 # === FUNCTIONS === #
@@ -250,19 +251,19 @@ ffmpeg.plex_transcoding () {
 }
 # 7z list archive's content without additional information (clean format)
 7z.ls () { 7z l -ba "$1" | grep -oP '\S+$'; }
-# Docker build image from Dockerfile in CWD
-docker.build () {
-  sudo docker build -t "$1" . && sudo docker image prune -f
+# Podman build image from Containerfile in CWD
+podman.build () {
+  podman build -t "$1" . && podman image prune -f
 }
-# Docker save repository (image with all tags) to tar.gz with progress (tqdm)
-docker.save () {
-  sudo docker save "$1" | tqdm --bytes --total $(
-    sudo docker inspect "$1" --format='{{.Size}}'
+# Podman save repository (image with all tags) to tar.gz with progress (tqdm)
+podman.save () {
+  podman save "$1" | tqdm --bytes --total $(
+    podman inspect "$1" --format='{{.Size}}'
   ) | gzip > "$1".tar.gz
 }
-# Docker load repository (image with all tags) from tar.gz with progress (tqdm)
-docker.load () {
-  pv "$1" | sudo docker load
+# Podman load repository (image with all tags) from tar.gz with progress (tqdm)
+podman.load () {
+  pv "$1" | podman load
 }
 
 

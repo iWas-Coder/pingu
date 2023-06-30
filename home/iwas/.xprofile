@@ -39,7 +39,7 @@ nvidia-settings -a "GPUPowerMizerMode=1"
 # Audio
 gentoo-pipewire-launcher &
 # Compositor
-picom --experimental-backends &
+/usr/local/bin/picom --experimental-backends &
 # Wallpaper
 feh --bg-fill /home/iwas/.wallpapers/wallpaper_1.jpg --bg-fill /home/iwas/.wallpapers/wallpaper_2.jpg &
 # Clipboard History

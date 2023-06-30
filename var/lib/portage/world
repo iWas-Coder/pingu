@@ -17,6 +17,7 @@ app-crypt/gpgme:1
 app-crypt/pinentry
 app-editors/emacs
 app-editors/neovim
+app-emulation/pcem
 app-emulation/qemu
 app-emulation/wine-proton
 app-eselect/eselect-python
@@ -73,6 +74,7 @@ dev-qt/qtx11extras
 dev-qt/qtxml:5
 dev-util/blueprint-compiler
 dev-util/cloc
+dev-util/dialog
 dev-util/gef
 dev-util/google-perftools
 dev-util/nvidia-cuda-toolkit

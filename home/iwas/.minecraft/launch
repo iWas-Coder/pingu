@@ -1,0 +1,6 @@
+#!/bin/sh
+
+DIR=/home/iwas/.minecraft
+
+cd "$DIR"/launcher
+mesa_glthread=true mangohud --dlsym java -jar minecraft.jar

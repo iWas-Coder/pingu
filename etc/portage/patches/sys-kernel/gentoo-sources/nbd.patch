@@ -1,0 +1,12 @@
+diff --git a/drivers/block/nbd.c b/drivers/block/nbd.c
+--- a/drivers/block/nbd.c
++++ b/drivers/block/nbd.c
+@@ -159,7 +159,7 @@
+ 
+ #define NBD_DEF_BLKSIZE_BITS 10
+ 
+-static unsigned int nbds_max = 16;
++static unsigned int nbds_max = 1;
+ static int max_part = 16;
+ static int part_shift;
+ 

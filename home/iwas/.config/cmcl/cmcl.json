@@ -1,0 +1,31 @@
+{
+  "jvmArgs": [
+    "-client",
+    "-Xmx4G",
+    "-Xms4G",
+    "-Xmn4G",
+    "-XX:+UnlockExperimentalVMOptions",
+    "-XX:+UseG1GC",
+    "-XX:G1NewSizePercent=20",
+    "-XX:G1ReservePercent=20",
+    "-XX:MaxGCPauseMillis=40",
+    "-XX:G1HeapRegionSize=32M"
+  ],
+  "exitWithMinecraft": true,
+  "selectedVersion": "1.20.1",
+  "javaPath": "/opt/openjdk-bin-17/bin/java",
+  "windowSizeWidth": 1920,
+  "windowSizeHeight": 1080,
+  "downloadSource": 0,
+  "language": "en",
+  "accounts": [{
+    "playerName": "iWas",
+    "loginMethod": 0,
+    "slim": true,
+    "offlineSkin": "/home/iwas/.minecraft/launcher/skin.png",
+    "selected": true
+  }],
+  "maxMemory": 4096,
+  "gameDir": "/home/iwas/.minecraft/game",
+  "isFullscreen": false
+}
