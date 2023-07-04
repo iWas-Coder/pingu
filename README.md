@@ -14,15 +14,26 @@
 
 ## Table of Contents
 
-- [Disks partitioning](#disks-partitioning)
-- [Linux kernel building](#linux-kernel-building)
+- [Installation](#installation)
+    - [Disks partitioning](#disks-partitioning)
+    - [Stage-3 (Bootstrap) Base System](#stage-3-base-system)
+    - [Building (Target) Base System](#building-target-base-system)
+    - [Building Kernel](#building-kernel)
+    - [Basic system configuration](#basic-system-configuration)
+- [Kernel maintenance](#kernel-maintenance)
 
-## Disks partitioning
+## Installation
+
+Installation guide of the GNU/Linux distribution offered by Gentoo.
+
+(...)
+
+### Disks partitioning
 
 (...)
 
 ```shell
-cfdisk /dev/$DISK1
+$  cfdisk /dev/$DISK1
 ```
 
 (...)
@@ -36,7 +47,7 @@ cfdisk /dev/$DISK1
 (...)
 
 ```shell
-cfdisk /dev/$DISK2
+$  cfdisk /dev/$DISK2
 ```
 
 (...)
@@ -47,17 +58,73 @@ cfdisk /dev/$DISK2
 
 (...)
 
-## Linux kernel building
+### Stage-3 Base System
 
 (...)
 
+### Building (Target) Base System
+
+(...)
+
+### Building Kernel
+
+(...)
+
+### Basic system configuration
+
+(...)
+
+## Kernel maintenance
+
+(...)
+
+Check current `/usr/src/linux` symlink:
 ```shell
-cd /usr/src/linux
-sudo make menuconfig
-sudo KCFLAGS="-march=<ARCH> -O2 -pipe" make -j<N>
-sudo make modules_install
-sudo make headers
-sudo make install
+$  eselect kernel list
+```
+
+Configure the kernel `.config` file with:
+```shell
+#  make menuconfig
+```
+
+Build the kernel (`vmlinux`), its selected modules (`*.ko`) and the kernel compressed image (`bzImage`).
+```shell
+#  KCFLAGS="-march=<ARCH> -O2 -pipe" make [-j<N>]
+```
+Add the `-j<N>` flag so that GNU Make can parallelize jobs, where `N` is the number of jobs to handle in parallel.
+
+Replace `<ARCH>` with the CPU's architecture name that GNU GCC handles (e.g. `znver2` for Zen2; `znver3` for Zen3). This can be searched online, or guessed by GCC itself doing:
+```shell
+$  gcc -Q -march=native --help=target | grep march | head -n 1
+```
+
+Install the built modules into `/lib/modules/<VERSION>`:
+```shell
+#  make modules_install
+```
+
+Export the API headers into `./usr`, in case needed later on:
+```shell
+#  make headers
+```
+
+Install the kernel's needed resources in `/boot`, using the following mapping:
+- `bzImage` -> `/boot/vmlinuz-<VERSION>`
+- `System.map` -> `/boot/System.map-<VERSION>`
+- `.config` -> `/boot/config-<VERSION>`
+If these files already existed in `/boot` prior to this step, then it renames them to `*.old`, in order to maintain a backup until the new version gets tested.
+```shell
+#  make install
+```
+
+Create a initial ramdisk FS (i.e. `initramfs` or `initrd`):
+```shell
+#  dracut --kver=<VERSION> --hostonly --early-microcode [--force]
+```
+The argument `--force` needs to be specified when it already exists an initramfs (`/boot/initramfs-<VERSION>.img`). Before doing so, though, it is best to make a backup:
+```shell
+#  cp -v /boot/initramfs-<VERSION>.img /boot/initramfs-<VERSION>.img.old
 ```
 
 (...)

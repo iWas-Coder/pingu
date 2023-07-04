@@ -72,6 +72,8 @@ dev-qt/qtsvg
 dev-qt/qtwidgets:5
 dev-qt/qtx11extras
 dev-qt/qtxml:5
+dev-scheme/fibers
+dev-scheme/guile
 dev-util/blueprint-compiler
 dev-util/cloc
 dev-util/dialog
@@ -147,6 +149,7 @@ net-fs/samba
 net-ftp/ftp
 net-libs/gnutls
 net-libs/miniupnpc
+net-libs/nodejs
 net-libs/zeromq
 net-misc/chrony
 net-misc/dhcpcd

@@ -91,8 +91,6 @@ alias arp-scan='sudo arp-scan -I enp5s0 --localnet -g'
 alias upx='upx --color --best'
 alias gdb='gdb-gef'
 alias grep='grep --color=auto'
-alias startx='echo "[*] Preparing X environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting X...\n" && sleep 1 && /bin/startx'
-alias startw='echo "[*] Preparing Wayland environment..." && for _ in $(seq 1000); do echo -n . && sleep 0.0078125; done && echo -e "\n[*] Starting Wayland...\n" && sleep 1 && /home/iwas/.wprofile'
 alias html2text='pyhtml2text'
 alias venv.create='python3 -m venv .venv'
 alias venv.activate='. .venv/bin/activate'
@@ -135,6 +133,26 @@ alias ggclean='dialog --title "ggclean" --backtitle "git" --yesno "Are you sure?
 
 
 # === FUNCTIONS === #
+startx () {
+  echo -n "Loading X"
+  for _ in $(seq 13); do
+    echo -n .
+    sleep 0.2
+  done
+  echo -e " ok\n"
+  sleep 1.25
+  /bin/startx
+}
+startw () {
+  echo -n "Loading Wayland"
+  for _ in $(seq 13); do
+    echo -n .
+    sleep 0.2
+  done
+  echo -e " ok\n"
+  sleep 1.25
+  /home/iwas/.wprofile
+}
 # Improved man command
 man () {
     env \
@@ -284,13 +302,17 @@ export PATH=$PATH:/home/iwas/.local/bin
 # Add GPG key to tty
 export GPG_TTY=$(tty)
 # Set Kubernetes contexts (in .kube directory)
-for context in $(ls /home/iwas/.kube | grep .yaml); do
-  if [ -z "$KUBECONFIG" ]; then
-    export KUBECONFIG=/home/iwas/.kube/"$context"
-  else
-    export KUBECONFIG=$KUBECONFIG:/home/iwas/.kube/"$context"
-  fi
-done
+if [ ! "$(ls -A /home/iwas/.kube)" ]; then
+  export KUBECONFIG=
+else
+  for context in $(ls /home/iwas/.kube | grep .yaml); do
+    if [ -z "$KUBECONFIG" ]; then
+      export KUBECONFIG=/home/iwas/.kube/"$context"
+    else
+      export KUBECONFIG=$KUBECONFIG:/home/iwas/.kube/"$context"
+    fi
+  done
+fi
 
 
 # === END === #
