@@ -88,6 +88,7 @@ Setting the dashboard as the default buffer.
   (scroll-bar-mode -1)
   (global-display-line-numbers-mode 1)
   (global-visual-line-mode t)
+  (setq ring-bell-function 'ignore)
 #+end_src
 
 * Which Key

@@ -75,6 +75,7 @@ dev-qt/qtxml:5
 dev-scheme/fibers
 dev-scheme/guile
 dev-util/blueprint-compiler
+dev-util/clinfo
 dev-util/cloc
 dev-util/dialog
 dev-util/gef
