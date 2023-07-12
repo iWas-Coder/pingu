@@ -74,6 +74,22 @@ $  cfdisk /dev/$DISK2
 
 (...)
 
+## Getting the Pingu environment
+
+(...)
+
+```shell
+$  git clone --bare https://github.com/iwas-coder/pingu /home/$USER/.pingu
+```
+
+(...)
+
+```shell
+#  git --git-dir=/home/$USER/.pingu --work-tree=/ checkout -f
+```
+
+(...)
+
 ## Kernel maintenance
 
 (...)
