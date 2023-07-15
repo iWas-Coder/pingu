@@ -104,6 +104,11 @@ Configure the kernel `.config` file with:
 #  make menuconfig
 ```
 
+Pass the unit test suite (pytest) to check for config errors:
+```shell
+#  make testconfig
+```
+
 Build the kernel (`vmlinux`), its selected modules (`*.ko`) and the kernel compressed image (`bzImage`).
 ```shell
 #  KCFLAGS="-march=<ARCH> -O2 -pipe" make [-j<N>]

@@ -86,6 +86,8 @@ dev-util/vulkan-tools
 dev-vcs/git
 dev-vcs/repo
 games-emulation/dosbox
+games-misc/cowsay
+games-misc/fortune-mod
 gui-apps/hyprpaper
 gui-apps/waybar
 gui-libs/display-manager-init

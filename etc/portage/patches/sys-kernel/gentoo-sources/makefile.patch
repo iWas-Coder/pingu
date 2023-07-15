@@ -1,0 +1,14 @@
+diff --git a/Makefile b/Makefile
+--- Makefile
++++ Makefile
+@@ -2,8 +2,8 @@
+ VERSION = 6
+ PATCHLEVEL = 1
+ SUBLEVEL = 31
+-EXTRAVERSION = -gentoo
+-NAME = Curry Ramen
++EXTRAVERSION =
++NAME = Pingu's first kiss
+ 
+ # *DOCUMENTATION*
+ # To see a list of typical targets execute "make help"
