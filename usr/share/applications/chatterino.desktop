@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Chatterino
+Exec=/usr/local/appimages/chatterino
+Terminal=false

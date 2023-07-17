@@ -39,5 +39,5 @@ fi
 
 # Spotify creates the $HOME/Downloads directory for no reason.
 # Given that I use $HOME/downloads instead, let's delete it.
-sleep .05 && rmdir -v "$HOME/Downloads"
+sleep .25 && rmdir -v "$HOME/Downloads"
 

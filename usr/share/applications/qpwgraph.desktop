@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=QPWGraph
+Exec=/usr/local/bin/qpwgraph
+Terminal=false

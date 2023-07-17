@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=GIMP
+Exec=/usr/bin/gimp
+Terminal=false

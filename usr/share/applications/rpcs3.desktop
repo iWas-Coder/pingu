@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=RPCS3
+Exec=/usr/local/appimages/rpcs3
+Terminal=false

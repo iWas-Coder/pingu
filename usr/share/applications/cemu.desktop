@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=CEMU
+Exec=/usr/local/appimages/cemu
+Terminal=false

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=PCSX2
+Exec=/usr/local/appimages/pcsx2
+Terminal=false

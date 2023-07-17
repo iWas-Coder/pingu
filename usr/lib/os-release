@@ -1,5 +1,5 @@
 NAME="GNU/Linux"
 ID=gnu-linux
 PRETTY_NAME="GNU/Linux"
-HOME_URL="https://www.gnu.org"
-VERSION_ID="6.1.31-pingu"
+HOME_URL="https://github.com/iwas-coder/pingu"
+VERSION_ID="6.1.38-pingu+git20230717"

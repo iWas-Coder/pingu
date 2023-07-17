@@ -166,8 +166,10 @@ gaps inner 8
 ################
 # Terminal
 bindsym $mod+Return exec kitty
-# Dmenu
+# Dmenu (App Launcher)
 bindsym $mod+m exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -p "apps" -sb "#a151d3"'
+# emacs-counsel-launcher (App Launcher)
+bindsym $mod+Shift+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
 # Clipboard History
 bindsym Mod4+v exec --no-startup-id clipmenu -i -p "clipboard" -sb "#a151d3"
 # Chromium
@@ -194,4 +196,6 @@ for_window [class="(?i)mpv"] floating enable
 for_window [class="(?i)chatterino"] floating enable
 # Minecraft
 for_window [class="(?i)minecraft"] floating enable
+# GNU Emacs run launcher (emacs-run-launcher)
+for_window [title="(?i)emacs-run-launcher"] floating enable
 

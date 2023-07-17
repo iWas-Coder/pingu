@@ -46,6 +46,7 @@ A library for Nerd Font icons.
 			    (bookmarks . 5)
 			    (projects . 5)
 			    (registers . 5)))
+    (global-display-line-numbers-mode 0)
     :config
     (dashboard-setup-startup-hook))
 #+end_src
@@ -70,15 +71,15 @@ Setting the dashboard as the default buffer.
 * Fonts
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
-    :font "JetbrainsMono Nerd Font 17"
+    :font "JetbrainsMono Nerd Font 15"
     :weight 'medium)
   (set-face-attribute 'variable-pitch nil
-    :font "JetbrainsMono Nerd Font 17"
+    :font "JetbrainsMono Nerd Font 15"
     :weight 'medium)
   (set-face-attribute 'fixed-pitch nil
-    :font "JetbrainsMono Nerd Font 17"
+    :font "JetbrainsMono Nerd Font 15"
     :weight 'medium)
-  (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 17"))
+  (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 15"))
 #+end_src
 
 * GUI Settings
@@ -89,6 +90,7 @@ Setting the dashboard as the default buffer.
   (global-display-line-numbers-mode 1)
   (global-visual-line-mode t)
   (setq ring-bell-function 'ignore)
+  (setq mouse-wheel-progressive-speed nil)
 #+end_src
 
 * Which Key
@@ -96,4 +98,66 @@ Setting the dashboard as the default buffer.
   (use-package which-key
     :ensure t)
   (which-key-mode)
+#+end_src
+
+* Ivy + Counsel
+Installing Counsel.
+#+begin_src emacs-lisp
+  (use-package counsel
+    :after ivy
+    :ensure t
+    :diminish
+    :config (counsel-mode))
+#+end_src
+Installing Ivy.
+#+begin_src emacs-lisp
+  (use-package ivy
+    :bind
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :diminish
+    :custom
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    (setq enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
+#+end_src
+Enable pretty icons for Ivy.
+#+begin_src emacs-lisp
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
+#+end_src
+Enable rich mode for Ivy.
+#+begin_src emacs-lisp
+  (use-package ivy-rich
+    :after ivy
+    :ensure t
+    :init (ivy-rich-mode 1)
+    :custom
+    (ivy-virtual-abbreviate 'full
+     ivy-rich-switch-buffer-align-virtual-buffer t
+     ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+				 'ivy-rich-switch-buffer-transformer))
+#+end_src
+
+* App Launcher
+#+begin_src emacs-lisp
+    (defun emacs-counsel-launcher ()
+      (interactive)
+      (with-selected-frame
+	  (make-frame '((name . "emacs-run-launcher")
+			(minibuffer . only)
+			(fullscreen 0)
+			(undecorated . t)
+			(auto-raise . t)
+			(internal-border-width . 10)
+			(width . 80)
+			(height . 11)))
+	  (unwind-protect
+	      (counsel-linux-app)
+	      (delete-frame))))
 #+end_src

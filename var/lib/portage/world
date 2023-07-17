@@ -1,3 +1,4 @@
+=sys-kernel/gentoo-sources-6.1.31
 app-admin/helm
 app-admin/sudo
 app-admin/sysklogd
@@ -99,7 +100,6 @@ media-fonts/fontawesome
 media-fonts/noto
 media-fonts/noto-cjk
 media-fonts/noto-emoji
-media-gfx/blender
 media-gfx/feh
 media-gfx/flameshot
 media-gfx/gimp
@@ -138,7 +138,6 @@ media-sound/spotify
 media-tv/v4l-utils
 media-video/ffmpeg
 media-video/mkvtoolnix
-media-video/mpv
 net-analyzer/arp-scan
 net-analyzer/bmon
 net-analyzer/hydra
