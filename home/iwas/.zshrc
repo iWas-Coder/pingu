@@ -75,7 +75,7 @@ alias sudo='sudo '
 alias ls='lsd -v --group-dirs=first'
 alias l='lsd -vlh --group-dirs=first'
 alias ll='lsd -vlha --group-dirs=first'
-alias cat='bat'
+alias cat='bat -f'
 alias icat='kitty +kitten icat'
 alias vi='nvim'
 alias vim='nvim'
@@ -279,6 +279,14 @@ podman.save () {
 # Podman load repository (image with all tags) from tar.gz with progress (tqdm)
 podman.load () {
   pv "$1" | podman load
+}
+# i3-layout-viewer
+i3-layout-viewer () {
+  dir="/usr/local/share/i3-layout-viewer"
+  if [ ! -d "$dir/node-modules" ]; then
+    pushd -q "$dir" && npm i --silent && popd -q
+  fi
+  i3-msg -t get_tree | jq | node "$dir/cli.js" | dot -Tpng | icat
 }
 
 

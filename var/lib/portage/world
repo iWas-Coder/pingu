@@ -48,6 +48,7 @@ dev-libs/libthai
 dev-libs/libxdg-basedir
 dev-libs/log4cplus
 dev-libs/wayland
+dev-perl/Gtk2
 dev-python/cairocffi
 dev-python/cffi
 dev-python/html2text
@@ -103,8 +104,10 @@ media-fonts/noto-emoji
 media-gfx/feh
 media-gfx/flameshot
 media-gfx/gimp
+media-gfx/graphviz
 media-gfx/imagemagick
 media-gfx/scrot
+media-gfx/xdot
 media-libs/alsa-lib
 media-libs/exiftool
 media-libs/fontconfig
