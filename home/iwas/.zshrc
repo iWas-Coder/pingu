@@ -75,7 +75,7 @@ alias sudo='sudo '
 alias ls='lsd -v --group-dirs=first'
 alias l='lsd -vlh --group-dirs=first'
 alias ll='lsd -vlha --group-dirs=first'
-alias cat='bat -f'
+alias cat='bat'
 alias icat='kitty +kitten icat'
 alias vi='nvim'
 alias vim='nvim'
@@ -111,6 +111,10 @@ alias rsync.cp='rsync -aP'
 alias eclean-all='sudo eclean-pkg -d && sudo eclean-dist -d'
 alias libreoffice-cli='/usr/bin/libreoffice "-env:UserInstallation=file:///tmp/LibreOffice_Conversion_${USER}" --headless'
 alias chromium.backup="tar -zcvf /home/iwas/vault/backups/chromium.bak/chromium-config.inc-$(date +'%Y%m%d').tar.gz -g /home/iwas/vault/backups/chromium.bak/incremental.diff /home/iwas/.config/chromium /home/iwas/.config/chromium-flags.conf"
+alias wttr="curl 'wttr.in/Barcelona'"
+alias wttr.moon="curl 'wttr.in/moon'"
+alias wttr.rich="curl 'v2d.wttr.in/Barcelona'"
+alias wttr.map="curl 'v3.wttr.in/Barcelona.sxl'"
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status -sb'
