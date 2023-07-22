@@ -5,16 +5,46 @@
 ** Adding MELPA repository
 #+begin_src emacs-lisp
   (require 'package)
+  (setq package-check-signature nil)
   (add-to-list 'package-archives
 	       '("melpa" . "https://melpa.org/packages/"))
-  (package-refresh-contents)
   (package-initialize)
 #+end_src
 
 ** Installing `use-package`
 #+begin_src emacs-lisp
-    (unless (package-installed-p 'use-package)
-      (package-install 'use-package))
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+  (setq use-package-always-ensure t)
+#+end_src
+
+* Performance
+** Garbage Collection
+#+begin_src emacs-lisp
+  (use-package gcmh
+    :config
+    (gcmh-mode 1))
+
+  (setq gc-cons-threshold 402653184
+	gc-cons-percentage 0.6)
+
+  (add-hook 'emacs-startup-hook
+	    (lambda ()
+	      (message "[*] GNU Emacs loaded in %s with %d GC's."
+		       (format "%.2f seconds"
+			       (float-time
+				(time-substract after-init-time before-init-time)))
+		       gcs-done)))
+
+  (setq comp-async-report-warnings-errors nil)
+#+end_src
+
+** Native Compilation
+#+begin_src emacs-lisp
+  (if (boundp 'comp-deferred-compilation)
+      (setq comp-deferred-compilation nil)
+      (setq native-comp-deferred-compilation nil))
+  (setq load-prefer-newer noninteractive)
 #+end_src
 
 * Dashboard
@@ -22,22 +52,21 @@
 Project interaction library for Emacs.
 #+begin_src emacs-lisp
   (use-package projectile
-    :ensure t
     :config
     (projectile-global-mode 1))
 #+end_src
-A library for Nerd Font icons.
+A library for 'Nerd Font' & 'All The Icons' icon sets.
 #+begin_src emacs-lisp
-  (use-package nerd-icons)
+  (use-package all-the-icons)
 #+end_src
 
 ** Opening the dashboard
 #+begin_src emacs-lisp
   (use-package dashboard
-    :ensure t
     :init
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
+    (setq dashboard-display-icons-p t)
     (setq dashboard-banner-logo-title "GNU Emacs")
     (setq dashboard-startup-banner "/home/iwas/.emacs.d/logo.png")
     (setq dashboard-center-content t)
@@ -57,14 +86,14 @@ Setting the dashboard as the default buffer.
 
 * Theme
 #+begin_src emacs-lisp
-  (use-package doom-themes
-    :ensure t)
+  (use-package doom-themes)
+
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
   (load-theme 'doom-one t)
 
-  (use-package doom-modeline
-    :ensure t)
+  (use-package doom-modeline)
+  
   (doom-modeline-mode 1)
 #+end_src
 
@@ -79,7 +108,13 @@ Setting the dashboard as the default buffer.
   (set-face-attribute 'fixed-pitch nil
     :font "JetbrainsMono Nerd Font 14"
     :weight 'medium)
+  (set-face-attribute 'font-lock-comment-face nil
+    :slant 'italic)
+  (set-face-attribute 'font-lock-keyword-face nil
+    :slant 'italic)
+
   (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 14"))
+  (setq global-prettify-symbols-mode t)
 #+end_src
 
 * GUI Settings
@@ -87,16 +122,17 @@ Setting the dashboard as the default buffer.
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
-  (global-display-line-numbers-mode 1)
+  (global-linum-mode t)
   (global-visual-line-mode t)
+  (global-hl-line-mode 1)
   (setq ring-bell-function 'ignore)
+  (setq cursor-type '(bar . 8))
   (setq mouse-wheel-progressive-speed nil)
 #+end_src
 
 * Which Key
 #+begin_src emacs-lisp
-  (use-package which-key
-    :ensure t)
+  (use-package which-key)
   (which-key-mode)
 #+end_src
 
@@ -105,7 +141,6 @@ Installing Counsel.
 #+begin_src emacs-lisp
   (use-package counsel
     :after ivy
-    :ensure t
     :diminish
     :config (counsel-mode))
 #+end_src
@@ -126,14 +161,12 @@ Installing Ivy.
 Enable pretty icons for Ivy.
 #+begin_src emacs-lisp
   (use-package all-the-icons-ivy-rich
-    :ensure t
     :init (all-the-icons-ivy-rich-mode 1))
 #+end_src
 Enable rich mode for Ivy.
 #+begin_src emacs-lisp
   (use-package ivy-rich
     :after ivy
-    :ensure t
     :init (ivy-rich-mode 1)
     :custom
     (ivy-virtual-abbreviate 'full
@@ -146,18 +179,47 @@ Enable rich mode for Ivy.
 
 * App Launcher
 #+begin_src emacs-lisp
-    (defun emacs-counsel-launcher ()
-      (interactive)
-      (with-selected-frame
-	  (make-frame '((name . "emacs-run-launcher")
-			(minibuffer . only)
-			(fullscreen 0)
-			(undecorated . t)
-			(auto-raise . t)
-			(internal-border-width . 10)
-			(width . 80)
-			(height . 11)))
-	  (unwind-protect
-	      (counsel-linux-app)
-	      (delete-frame))))
+  (defun emacs-counsel-launcher ()
+    "App launcher that reads '.desktop' files from within GNU Emacs."
+    (interactive)
+    (with-selected-frame
+	(make-frame '((name . "emacs-run-launcher")
+		      (minibuffer . only)
+		      (fullscreen 0)
+		      (undecorated . t)
+		      (auto-raise . t)
+		      (internal-border-width . 10)
+		      (width . 80)
+		      (height . 11)))
+	(unwind-protect
+	    (counsel-linux-app)
+	    (delete-frame))))
+#+end_src
+
+* Neotree
+#+begin_src emacs-lisp
+  (defcustom neo-window-width 25
+    "Set fixed width for neotree."
+    :type 'integer
+    :group 'neotree)
+
+  (use-package neotree
+    :bind
+    ("C-x C-n" . neotree)
+    :config
+    (setq neo-smart-open t
+	  neo-window-width 30
+	  neo-theme (if (display-graphic-p) 'classic)
+	  inhibit-compacting-font-caches t
+	  projectile-switch-project-action 'neotree-projectile-action)
+    (add-hook 'neo-after-create-hook
+	#'(lambda (_)
+	    (with-current-buffer (get-buffer neo-buffer-name)
+	      (setq truncate-lines t)
+	      (setq word-wrap nil)
+	      (make-local-variable 'auto-hscroll-mode)
+	      (setq auto-hscroll-mode nil)))))
+
+  ;; Show hidden files in neotree
+  (setq-default neo-show-hidden-files t)
 #+end_src
