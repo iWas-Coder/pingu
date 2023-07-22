@@ -87,8 +87,6 @@ root ALL=(ALL:ALL) ALL
 ## Same thing without a password
 # %wheel ALL=(ALL:ALL) NOPASSWD: ALL
 
-iwas ALL = NOPASSWD: /opt/bin/nvidia-smi
-
 ## Uncomment to allow members of group sudo to execute any command
 # %sudo	ALL=(ALL:ALL) ALL
 

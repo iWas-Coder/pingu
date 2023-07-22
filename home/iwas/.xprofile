@@ -32,9 +32,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #########################
 # Set maximum open file descriptors
 ulimit -n 8192
-# NVIDIA GPU Tweaks: Power Limit (175W -> 200W)
-sudo nvidia-smi -pl 200
-# NVIDIA GPU Tweaks: PowerMizer Performance Mode
+# NVIDIA GPU PowerMizer Performance Mode
 nvidia-settings -a "GPUPowerMizerMode=1"
 # Audio
 gentoo-pipewire-launcher &
