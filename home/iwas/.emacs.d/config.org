@@ -4,222 +4,315 @@
 * Package Management
 ** Adding MELPA repository
 #+begin_src emacs-lisp
-  (require 'package)
-  (setq package-check-signature nil)
-  (add-to-list 'package-archives
-	       '("melpa" . "https://melpa.org/packages/"))
-  (package-initialize)
+(require 'package)
+(setq package-check-signature nil)
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
 #+end_src
 
 ** Installing `use-package`
 #+begin_src emacs-lisp
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-  (setq use-package-always-ensure t)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(setq use-package-always-ensure t)
 #+end_src
 
 * Performance
 ** Garbage Collection
 #+begin_src emacs-lisp
-  (use-package gcmh
-    :config
-    (gcmh-mode 1))
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
 
-  (setq gc-cons-threshold 402653184
-	gc-cons-percentage 0.6)
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
 
-  (add-hook 'emacs-startup-hook
-	    (lambda ()
-	      (message "[*] GNU Emacs loaded in %s with %d GC's."
-		       (format "%.2f seconds"
-			       (float-time
-				(time-substract after-init-time before-init-time)))
-		       gcs-done)))
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (message "[*] GNU Emacs loaded in %s with %d GC's."
+		     (format "%.2f seconds"
+			     (float-time
+			      (time-substract after-init-time before-init-time)))
+		     gcs-done)))
 
-  (setq comp-async-report-warnings-errors nil)
+(setq comp-async-report-warnings-errors nil)
 #+end_src
 
 ** Native Compilation
 #+begin_src emacs-lisp
-  (if (boundp 'comp-deferred-compilation)
-      (setq comp-deferred-compilation nil)
-      (setq native-comp-deferred-compilation nil))
-  (setq load-prefer-newer noninteractive)
+(if (boundp 'comp-deferred-compilation)
+    (setq comp-deferred-compilation nil)
+    (setq native-comp-deferred-compilation nil))
+(setq load-prefer-newer noninteractive)
 #+end_src
 
 * Dashboard
 ** Installing dependencies
 Project interaction library for Emacs.
 #+begin_src emacs-lisp
-  (use-package projectile
-    :config
-    (projectile-global-mode 1))
+(use-package projectile
+  :config
+  (projectile-global-mode 1))
 #+end_src
 A library for 'Nerd Font' & 'All The Icons' icon sets.
 #+begin_src emacs-lisp
-  (use-package all-the-icons)
+(use-package all-the-icons)
 #+end_src
 
 ** Opening the dashboard
 #+begin_src emacs-lisp
-  (use-package dashboard
-    :init
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-display-icons-p t)
-    (setq dashboard-banner-logo-title "GNU Emacs")
-    (setq dashboard-startup-banner "/home/iwas/.emacs.d/logo.png")
-    (setq dashboard-center-content t)
-    (setq dashboard-items '((recents . 10)
-			    (agenda . 5)
-			    (bookmarks . 5)
-			    (projects . 5)
-			    (registers . 5)))
-    (global-display-line-numbers-mode 0)
-    :config
-    (dashboard-setup-startup-hook))
+(use-package dashboard
+  :init
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-banner-logo-title "GNU Emacs")
+  (setq dashboard-startup-banner "/home/iwas/.emacs.d/logo.png")
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((recents . 10)
+			  (agenda . 5)
+			  (bookmarks . 5)
+			  (projects . 5)
+			  (registers . 5)))
+  (global-display-line-numbers-mode 0)
+  :config
+  (dashboard-setup-startup-hook))
 #+end_src
 Setting the dashboard as the default buffer.
 #+begin_src emacs-lisp
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+end_src
 
 * Theme
 #+begin_src emacs-lisp
-  (use-package doom-themes)
+(use-package doom-themes)
 
-  (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
+(setq doom-themes-enable-bold t
+      doom-themes-enable-italic t)
+(load-theme 'doom-one t)
 
-  (use-package doom-modeline)
-  
-  (doom-modeline-mode 1)
+(use-package doom-modeline)
+
+(doom-modeline-mode 1)
 #+end_src
 
 * Fonts
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil
-    :font "JetbrainsMono Nerd Font 14"
-    :weight 'medium)
-  (set-face-attribute 'variable-pitch nil
-    :font "JetbrainsMono Nerd Font 14"
-    :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil
-    :font "JetbrainsMono Nerd Font 14"
-    :weight 'medium)
-  (set-face-attribute 'font-lock-comment-face nil
-    :slant 'italic)
-  (set-face-attribute 'font-lock-keyword-face nil
-    :slant 'italic)
+(set-face-attribute 'default nil
+  :font "JetbrainsMono Nerd Font 14"
+  :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+  :font "JetbrainsMono Nerd Font 14"
+  :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+  :font "JetbrainsMono Nerd Font 14"
+  :weight 'medium)
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+  :slant 'italic)
 
-  (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 14"))
-  (setq global-prettify-symbols-mode t)
+(add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 14"))
+(setq global-prettify-symbols-mode t)
 #+end_src
 
 * GUI Settings
 #+begin_src emacs-lisp
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (global-linum-mode t)
-  (global-visual-line-mode t)
-  (global-hl-line-mode 1)
-  (setq ring-bell-function 'ignore)
-  (setq cursor-type '(bar . 8))
-  (setq mouse-wheel-progressive-speed nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(global-linum-mode t)
+(global-visual-line-mode t)
+(global-hl-line-mode 1)
+(setq ring-bell-function 'ignore)
+(setq cursor-type '(bar . 8))
+(setq mouse-wheel-progressive-speed nil)
 #+end_src
 
 * Which Key
 #+begin_src emacs-lisp
-  (use-package which-key)
-  (which-key-mode)
+(use-package which-key)
+(which-key-mode)
 #+end_src
 
 * Ivy + Counsel
 Installing Counsel.
 #+begin_src emacs-lisp
-  (use-package counsel
-    :after ivy
-    :diminish
-    :config (counsel-mode))
+(use-package counsel
+  :after ivy
+  :diminish
+  :config (counsel-mode))
 #+end_src
 Installing Ivy.
 #+begin_src emacs-lisp
-  (use-package ivy
-    :bind
-    (("C-c C-r" . ivy-resume)
-     ("C-x B" . ivy-switch-buffer-other-window))
-    :diminish
-    :custom
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (setq enable-recursive-minibuffers t)
-    :config
-    (ivy-mode))
+(use-package ivy
+  :bind
+  (("C-c C-r" . ivy-resume)
+   ("C-x B" . ivy-switch-buffer-other-window))
+  :diminish
+  :custom
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+  :config
+  (ivy-mode))
 #+end_src
 Enable pretty icons for Ivy.
 #+begin_src emacs-lisp
-  (use-package all-the-icons-ivy-rich
-    :init (all-the-icons-ivy-rich-mode 1))
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1))
 #+end_src
 Enable rich mode for Ivy.
 #+begin_src emacs-lisp
-  (use-package ivy-rich
-    :after ivy
-    :init (ivy-rich-mode 1)
-    :custom
-    (ivy-virtual-abbreviate 'full
-     ivy-rich-switch-buffer-align-virtual-buffer t
-     ivy-rich-path-style 'abbrev)
-    :config
-    (ivy-set-display-transformer 'ivy-switch-buffer
-				 'ivy-rich-switch-buffer-transformer))
+(use-package ivy-rich
+  :after ivy
+  :init (ivy-rich-mode 1)
+  :custom
+  (ivy-virtual-abbreviate 'full
+   ivy-rich-switch-buffer-align-virtual-buffer t
+   ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+			       'ivy-rich-switch-buffer-transformer))
 #+end_src
 
 * App Launcher
 #+begin_src emacs-lisp
-  (defun emacs-counsel-launcher ()
-    "App launcher that reads '.desktop' files from within GNU Emacs."
-    (interactive)
-    (with-selected-frame
-	(make-frame '((name . "emacs-run-launcher")
-		      (minibuffer . only)
-		      (fullscreen 0)
-		      (undecorated . t)
-		      (auto-raise . t)
-		      (internal-border-width . 10)
-		      (width . 80)
-		      (height . 11)))
-	(unwind-protect
-	    (counsel-linux-app)
-	    (delete-frame))))
+(defun emacs-counsel-launcher ()
+  "App launcher that reads '.desktop' files from within GNU Emacs."
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-run-launcher")
+		    (minibuffer . only)
+		    (fullscreen 0)
+		    (undecorated . t)
+		    (auto-raise . t)
+		    (internal-border-width . 10)
+		    (width . 80)
+		    (height . 11)))
+      (unwind-protect
+	  (counsel-linux-app)
+	(delete-frame))))
 #+end_src
 
 * Neotree
 #+begin_src emacs-lisp
-  (defcustom neo-window-width 25
-    "Set fixed width for neotree."
-    :type 'integer
-    :group 'neotree)
+(defcustom neo-window-width 25
+  "Set fixed width for neotree."
+  :type 'integer
+  :group 'neotree)
 
-  (use-package neotree
-    :bind
-    ("C-x C-n" . neotree)
-    :config
-    (setq neo-smart-open t
-	  neo-window-width 30
-	  neo-theme (if (display-graphic-p) 'classic)
-	  inhibit-compacting-font-caches t
-	  projectile-switch-project-action 'neotree-projectile-action)
-    (add-hook 'neo-after-create-hook
-	#'(lambda (_)
-	    (with-current-buffer (get-buffer neo-buffer-name)
-	      (setq truncate-lines t)
-	      (setq word-wrap nil)
-	      (make-local-variable 'auto-hscroll-mode)
-	      (setq auto-hscroll-mode nil)))))
+(use-package neotree
+  :bind
+  ("C-x C-n" . neotree)
+  :config
+  (setq neo-smart-open t
+	neo-window-width 30
+	neo-theme (if (display-graphic-p) 'classic)
+	inhibit-compacting-font-caches t
+	projectile-switch-project-action 'neotree-projectile-action)
+  (add-hook 'neo-after-create-hook
+      #'(lambda (_)
+	  (with-current-buffer (get-buffer neo-buffer-name)
+	    (setq truncate-lines t)
+	    (setq word-wrap nil)
+	    (make-local-variable 'auto-hscroll-mode)
+	    (setq auto-hscroll-mode nil)))))
 
-  ;; Show hidden files in neotree
-  (setq-default neo-show-hidden-files t)
+;; Show hidden files in neotree
+(setq-default neo-show-hidden-files t)
+#+end_src
+
+* Minimap
+#+begin_src emacs-lisp
+(use-package minimap
+  :bind
+  ("C-x C-m" . minimap-mode))
+
+;; Set the minimap to the right side of the editor.
+(setq minimap-window-location 'right)
+#+end_src
+
+* Org Mode customization
+** Definitions
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+(set-language-environment 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq default-file-name-coding-system 'utf-8
+      x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+(setq org-ellipsis " ▼ "
+      org-log-done 'time
+      org-hide-emphasis-markers t
+      org-src-fontify-natively t
+      org-src-preserve-indentation nil
+      org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0
+      org-confirm-babel-evaluate nil)
+
+;; Make M-RET not add blank lines
+(setq org-blank-before-new-entry (quote ((heading . nil)
+					 (plain-list-item . nil))))
+#+end_src
+
+** Org Bullets
+#+begin_src emacs-lisp
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode)
+  :config
+  (setq org-bullets-bullet-list '("◉" "⁑" "⁂" "❖" "✮" "✱" "✸")))
+#+end_src
+
+** Org Fonts
+#+begin_src emacs-lisp
+(defun org-colors-doom-one ()
+  "Enable 'Doom One' colors for Org headers."
+  (interactive)
+  (dolist
+      (face
+       '((org-level-1 1.7 "#51afef" ultra-bold)
+	     (org-level-2 1.6 "#c678dd" extra-bold)
+	     (org-level-3 1.5 "#98be65" bold)
+	     (org-level-4 1.4 "#da8548" semi-bold)
+	     (org-level-5 1.3 "#5699af" normal)
+	     (org-level-6 1.2 "#a9a1e1" normal)
+	     (org-level-7 1.1 "#46d9ff" normal)
+	     (org-level-8 1.0 "#ff6c6b" normal)))
+    (set-face-attribute (nth 0 face) nil
+	  :font "JetbrainsMono Nerd Font"
+	  :weight (nth 3 face)
+	  :height (nth 1 face)
+	  :foreground (nth 2 face)))
+    (set-face-attribute 'org-table nil
+	  :font "JetbrainsMono Nerd Font"
+	  :weight 'normal
+	  :height 1.0
+	  :foreground "#bfafdf"))
+
+(org-colors-doom-one)
+#+end_src
+
+** Org Tempo
+#+begin_src emacs-lisp
+(use-package org-tempo
+  :ensure nil)
+#+end_src
+
+** ToC
+#+begin_src emacs-lisp
+(use-package toc-org
+  :commands toc-org-enable
+  :init (add-hook 'org-mode-hook 'toc-org-enable))
+#+end_src
+
+** Org-to-Man
+#+begin_src emacs-lisp
+(use-package ox-man
+  :ensure nil)
 #+end_src
