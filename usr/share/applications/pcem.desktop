@@ -1,5 +1,6 @@
 [Desktop Entry]
 Type=Application
+Version=1.0
 Name=PCem
 Exec=/usr/bin/pcem
 Terminal=false

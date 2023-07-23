@@ -1,11 +1,6 @@
 [Desktop Entry]
 Type=Application
+Version=1.0
 Name=Spotify
-GenericName=Music Player
-Icon=spotify-client
-TryExec=spotify
-Exec=spotify %U
+Exec=/usr/bin/spotify
 Terminal=false
-MimeType=x-scheme-handler/spotify;
-Categories=Audio;Music;Player;AudioVideo;
-StartupWMClass=spotify
