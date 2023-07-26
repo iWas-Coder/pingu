@@ -164,12 +164,17 @@ gaps inner 8
 ################
 # === APPS === #
 ################
+# GNU Emacs - Client
+bindsym $mod+e exec emacsclient -c
+# GNU Emacs - Eshell
+bindsym $mod+Shift+Return exec emacsclient -ce "(eshell)"
+# GNU Emacs - App Launcher
+bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
+
 # Terminal
 bindsym $mod+Return exec kitty
-# Dmenu (App Launcher)
+# Dmenu
 bindsym $mod+Shift+m exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -p "apps" -sb "#a151d3"'
-# emacs-counsel-launcher (App Launcher)
-bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
 # Clipboard History
 bindsym Mod4+v exec --no-startup-id clipmenu -i -p "clipboard" -sb "#a151d3"
 # Chromium
@@ -178,8 +183,6 @@ bindsym $mod+b exec chromium $chromium_flags
 bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
-# GNU Emacs
-bindsym $mod+e exec emacsclient -c
 
 #########################################
 # === Floating Windows (by default) === #

@@ -5,6 +5,7 @@ ASSETS="$DIR/assets"
 CACHE="$ASSETS/cache"
 
 # === Taking screenshot === #
+sleep 0.5
 scrot $CACHE/base.png
 
 # === Processing the image === #
