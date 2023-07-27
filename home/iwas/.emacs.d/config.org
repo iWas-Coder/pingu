@@ -106,21 +106,39 @@ Setting the dashboard as the default buffer.
 * Fonts
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
-  :font "JetbrainsMono Nerd Font 14"
-  :weight 'medium)
+		    :font "JetbrainsMono Nerd Font 14"
+		    :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "JetbrainsMono Nerd Font 14"
-  :weight 'medium)
+		    :font "JetbrainsMono Nerd Font 14"
+		    :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "JetbrainsMono Nerd Font 14"
-  :weight 'medium)
+		    :font "JetbrainsMono Nerd Font 14"
+		    :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
-  :slant 'italic)
+		    :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
-  :slant 'italic)
+		    :slant 'italic)
 
 (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 14"))
-(setq global-prettify-symbols-mode t)
+
+(global-prettify-symbols-mode +1)
+(setq prettify-symbols-alist '(("lambda" . ?λ)
+                               ("->" . ?→)
+                               ("->>" . ?↠)
+                               ("=>" . ?⇒)
+                               ("map" . ?↦)
+                               ("/=" . ?≠)
+                               ("!=" . ?≠)
+                               ("==" . ?≡)
+                               ("<=" . ?≤)
+                               (">=" . ?≥)
+                               ("=<<" . (?= (Br . Bl) ?≪))
+                               (">>=" . (?≫ (Br . Bl) ?=))
+                               ("<=<" . ?↢)
+                               (">=>" . ?↣)
+                               ("&&" . ?∧)
+                               ("||" . ?∨)
+                               ("not" . ?¬)))
 #+end_src
 
 * GUI Settings
@@ -131,13 +149,18 @@ Setting the dashboard as the default buffer.
 (global-visual-line-mode t)
 (global-hl-line-mode 1)
 (global-display-line-numbers-mode)
+(electric-pair-mode t)
+
+(setq-default cursor-type '(bar . 3))
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
-(setq-default cursor-type '(bar . 3))
 (setq mouse-wheel-progressive-speed nil)
+(setq make-backup-files nil)
+(setq org-support-shift-select t)
 #+end_src
 
-* Which Key
+* Completion
+** Which Key
 #+begin_src emacs-lisp
 (use-package which-key
   :init
@@ -154,6 +177,37 @@ Setting the dashboard as the default buffer.
         which-key-allow-imprecise-window-fit t
         which-key-separator " → "))
 (which-key-mode)
+#+end_src
+
+** Corfu
+#+begin_src emacs-lisp
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  :config
+  (add-hook 'eshell-mode-hook
+	    (lambda () (setq-local corfu-quit-at-boundary t
+				   corfu-quit-no-match t
+				   corfu-auto nil)
+	      (corfu-mode)))
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  (corfu-quit-at-boundary 'separator)
+  (corfu-echo-documentation 0.25)
+  (corfu-preview-current 'insert)
+  (corfu-preselect-first nil)
+  :bind (:map corfu-map
+	      ("M-SPC" . corfu-insert-separator)
+	      ("RET" . nil)
+	      ("TAB" . corfu-next)
+	      ([tab] . corfu-next)
+	      ("S-TAB" . corfu-previous)
+	      ([backtab] . corfu-previous)
+	      ("S-<return>" . corfu-insert)))
 #+end_src
 
 * Ivy + Counsel
@@ -379,15 +433,16 @@ Prompt configuration.
 #+begin_src emacs-lisp
 (add-hook 'eshell-mode-hook (lambda (&rest _)
 			      (setq-local global-hl-line-mode nil
-					  cursor-type 'bar)
+					  cursor-type 'bar
+					  pcomplete-cycle-completions nil
+					  eshell-cmpl-cycle-completions nil)
 			      (with-current-buffer (get-buffer eshell-buffer-name)
 				(display-line-numbers-mode -1))))
 #+end_src
 
 Additional settings.
 #+begin_src emacs-lisp
-(setq eshell-prompt-regexp " λ "
-      eshell-banner-message ""
+(setq eshell-banner-message ""
       eshell-history-size 5000
       eshell-buffer-maximum-lines 5000
       eshell-hist-ignoredups t
