@@ -29,6 +29,10 @@
     - [Kitty](#kitty)
     - [GNU Emacs](#gnu-emacs)
 - [Kernel maintenance](#kernel-maintenance)
+	- [New kernel version](#new-kernel-version)
+		- [Install stage](#install-stage)
+		- [Build stage](#build-stage)
+	- [Reconfigure current kernel version](#reconfigure-current-kernel-version)
 
 ## Install media
 
@@ -149,12 +153,37 @@ $  git clone --bare https://github.com/iwas-coder/pingu /home/$USER/.pingu
 
 (...)
 
+### New kernel version
+
+(...)
+
+#### Install stage
+
+(...)
+
+#### Build stage
+
 Check current `/usr/src/linux` symlink:
 ```shell
 $  eselect kernel list
 ```
 
-Configure the kernel `.config` file with:
+Change the symlink to the new version by doing:
+```shell
+#  eselect kernel set <N>
+```
+
+Ensure the source tree is properly cleaned up:
+```shell
+#  make mrproper
+```
+
+Copy the previous kernel configuration file to the source tree:
+```shell
+#  cp -v /boot/config-<VERSION> .config
+```
+
+Adapt the previous configuration to the new version, and open up the kernel `.config` file with the `menuconfig` editor:
 ```shell
 #  make menuconfig
 ```
@@ -194,16 +223,37 @@ If these files already existed in `/boot` prior to this step, then it renames th
 #  make install
 ```
 
-Create a initial ramdisk FS (i.e. `initramfs` or `initrd`):
+Create the first iteration of the initial ramdisk FS (i.e. `initramfs` or `initrd`):
 ```shell
-#  dracut --kver=<VERSION> --hostonly --early-microcode [--force]
+#  dracut --kver=<VERSION> --hostonly --early-microcode
 ```
-The argument `--force` needs to be specified when it already exists an initramfs (`/boot/initramfs-<VERSION>.img`). Before doing so, though, it is best to make a backup:
+
+Once booted to the newly built kernel, create the second and last iteration of the initrd image (same command as the previous one).
+
+### Reconfigure current kernel version
+
+Open up `/usr/src/linux` directory (where the current installed kernel source tree lives) and open the kernel `.config` file with the `menuconfig` editor:
+
+```shell
+#  make menuconfig
+```
+
+Pass the unit test suite (pytest) to check for config errors:
+```shell
+#  make testconfig
+```
+
+(...)
+
+Make a backup of the current initramfs file (`/boot/initramfs-<VERSION>.img`):
 ```shell
 #  cp -v /boot/initramfs-<VERSION>.img /boot/initramfs-<VERSION>.img.old
 ```
 
-If new kernel version, once booted to it, recreate the initramfs image.
+Create the first iteration of the initial ramdisk FS (i.e. `initramfs` or `initrd`):
+```shell
+#  dracut --kver=<VERSION> --hostonly --early-microcode --force
+```
+The argument `--force` needs to be specified as it already exists an initramfs file (`/boot/initramfs-<VERSION>.img`).
 
 (...)
-

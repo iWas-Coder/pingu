@@ -1,0 +1,4 @@
+# required by media-gfx/graphviz-8.0.5::gentoo
+# required by media-gfx/xdot-1.2-r1::gentoo
+# required by xdot (argument)
+>=media-libs/gd-2.3.3-r3 fontconfig

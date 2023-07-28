@@ -141,7 +141,8 @@ Setting the dashboard as the default buffer.
                                ("not" . ?¬)))
 #+end_src
 
-* GUI Settings
+* General Settings
+** Definitions
 #+begin_src emacs-lisp
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -157,6 +158,24 @@ Setting the dashboard as the default buffer.
 (setq mouse-wheel-progressive-speed nil)
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
+#+end_src
+
+** 'scratch' buffer: "I open at the close"
+#+begin_src emacs-lisp
+(defun prepare-scratch-for-kill ()
+  "Whenever the 'scratch' buffer gets killed, open it again"
+  (save-excursion
+    (set-buffer (get-buffer-create "*scratch*"))
+    (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer t)))
+
+(defun kill-scratch-buffer ()
+  "Kill function for the 'scratch' buffer."
+  (let (kill-buffer-query-functions)
+    (kill-buffer (current-buffer)))
+  (prepare-scratch-for-kill)
+  nil)
+
+(prepare-scratch-for-kill)
 #+end_src
 
 * Completion
