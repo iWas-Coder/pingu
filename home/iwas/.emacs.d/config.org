@@ -448,7 +448,13 @@ Syntax highlighting capabilities.
   (eshell-syntax-highlighting-global-mode +1))
 #+end_src
 
-Prompt configuration.
+Autosuggesting capabilities.
+#+begin_src emacs-lisp
+(use-package esh-autosuggest
+  :hook (eshell-mode . esh-autosuggest-mode))
+#+end_src
+
+Prompt configuration and behaviour.
 #+begin_src emacs-lisp
 (add-hook 'eshell-mode-hook (lambda (&rest _)
 			      (setq-local global-hl-line-mode nil
@@ -456,17 +462,45 @@ Prompt configuration.
 					  pcomplete-cycle-completions nil
 					  eshell-cmpl-cycle-completions nil)
 			      (with-current-buffer (get-buffer eshell-buffer-name)
-				(display-line-numbers-mode -1))))
+				(display-line-numbers-mode -1))
+			      (local-set-key (kbd "<home>") #'eshell-bol)))
 #+end_src
 
 Additional settings.
 #+begin_src emacs-lisp
-(setq eshell-banner-message ""
+(setq eshell-aliases-file "~/.emacs.d/eshell/aliases"
+      eshell-banner-message ""
       eshell-history-size 5000
       eshell-buffer-maximum-lines 5000
       eshell-hist-ignoredups t
       eshell-scroll-to-bottom-on-input t
       eshell-destroy-buffer-when-process-dies t)
+#+end_src
+
+Binding `C-l` to `clear-scrollback` if inside an eshell buffer.
+#+begin_src emacs-lisp
+(defun run-this-in-eshell (cmd)
+  "Runs the command 'cmd' in eshell."
+  (with-current-buffer "*eshell*"
+    (end-of-buffer)
+    (eshell-kill-input)
+    (insert cmd)
+    (eshell-send-input)
+    (end-of-buffer)
+    (eshell-bol)
+    (yank)))
+
+(bind-keys*
+ ("C-l" . (lambda ()
+            (interactive)
+            (run-this-in-eshell "clear-scrollback"))))
+#+end_src
+
+** Eat
+#+begin_src emacs-lisp
+(use-package eat
+  :config
+  (eat-eshell-mode))
 #+end_src
 
 * Runtime performance
