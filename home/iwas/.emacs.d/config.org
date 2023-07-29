@@ -106,20 +106,20 @@ Setting the dashboard as the default buffer.
 * Fonts
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
-		    :font "JetbrainsMono Nerd Font 14"
+		    :font "JetbrainsMono Nerd Font 13"
 		    :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-		    :font "JetbrainsMono Nerd Font 14"
+		    :font "JetbrainsMono Nerd Font 13"
 		    :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-		    :font "JetbrainsMono Nerd Font 14"
+		    :font "JetbrainsMono Nerd Font 13"
 		    :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
 		    :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
 		    :slant 'italic)
 
-(add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 14"))
+(add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 13"))
 
 (global-prettify-symbols-mode +1)
 (setq prettify-symbols-alist '(("lambda" . ?λ)
@@ -290,6 +290,38 @@ Enable rich mode for Ivy.
 
 ;; Show only the pretty name
 (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only)
+#+end_src
+
+* Pulseaudio sink selector
+#+begin_src emacs-lisp
+(defvar node-name-list nil "List of sink names")
+
+(defun pulse/sink-selector ()
+  "Select a sink to use from an interactive list from Pulseaudio."
+  (interactive)
+  (setq node-name-list-str (shell-command-to-string "pactl list sinks | grep -oP '(?<=node.name = \").*?(?=\")'"))
+  (setq node-name-list (split-string node-name-list-str "\n" t " "))
+
+  (ivy-read "Select sink: "
+	    node-name-list
+	    :action (lambda (x)
+		      (shell-command (format "pactl set-default-sink %s" x)))))
+
+(defun pulse/sink-selector-menu ()
+  "Create a frame with a buffer that runs the 'pulse/sink-selector' function."
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-pulse-sink-selector")
+		    (minibuffer . only)
+		    (fullscreen 0)
+		    (undecorated . t)
+		    (auto-raise . t)
+		    (internal-border-width . 10)
+		    (width . 78)
+		    (height . 4)))
+    (unwind-protect
+	(pulse/sink-selector)
+      (delete-frame))))
 #+end_src
 
 * Neotree

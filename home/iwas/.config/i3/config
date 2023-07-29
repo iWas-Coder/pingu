@@ -170,11 +170,11 @@ bindsym $mod+e exec emacsclient -c
 bindsym $mod+Shift+Return exec emacsclient -ce "(eshell)"
 # GNU Emacs - App Launcher
 bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
+# GNU Emacs - Pulseaudio sink selector
+bindsym $mod+Shift+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(pulse/sink-selector-menu)"
 
 # Terminal
 bindsym $mod+Return exec kitty
-# Dmenu
-bindsym $mod+Shift+m exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -p "apps" -sb "#a151d3"'
 # Clipboard History
 bindsym Mod4+v exec --no-startup-id clipmenu -i -p "clipboard" -sb "#a151d3"
 # Chromium
@@ -201,4 +201,5 @@ for_window [class="(?i)chatterino"] floating enable
 for_window [class="(?i)minecraft"] floating enable
 # GNU Emacs run launcher (emacs-run-launcher)
 for_window [title="(?i)emacs-run-launcher"] floating enable
-
+# GNU Emacs pulseaudio sink selector (emacs-pulse-sink-selector)
+for_window [title="(?i)emacs-pulse-sink-selector"] floating enable
