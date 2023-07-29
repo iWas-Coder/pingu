@@ -1,0 +1,7 @@
+alias ls lsd -v --group-dirs=first $*
+alias l lsd -vlh --group-dirs=first $*
+alias ll lsd -vlha --group-dirs=first $*
+alias cat bat $*
+
+alias vf view-file $1
+alias ff find-file $1
