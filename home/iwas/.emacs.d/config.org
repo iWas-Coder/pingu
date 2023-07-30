@@ -106,6 +106,7 @@ Setting the dashboard as the default buffer.
 
 * Fonts
 #+begin_src emacs-lisp
+;; Face attributes for different conditions
 (set-face-attribute 'default nil
 		    :font "JetbrainsMono Nerd Font 13"
 		    :weight 'medium)
@@ -119,30 +120,50 @@ Setting the dashboard as the default buffer.
 		    :weight 'normal
 		    :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
-		    :font "JetbrainsMono Nerd Font 14"
+		    :height 140
 		    :weight 'extra-bold
 		    :slant 'italic)
 
+;; Ensure 'emacsclient' frames have the correct font
 (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 13"))
+#+end_src
 
-(global-prettify-symbols-mode +1)
-(setq prettify-symbols-alist '(("lambda" . ?λ)
-                               ("->" . ?→)
-                               ("->>" . ?↠)
-                               ("=>" . ?⇒)
-                               ("map" . ?↦)
-                               ("/=" . ?≠)
-                               ("!=" . ?≠)
-                               ("==" . ?≡)
-                               ("<=" . ?≤)
-                               (">=" . ?≥)
-                               ("=<<" . (?= (Br . Bl) ?≪))
-                               (">>=" . (?≫ (Br . Bl) ?=))
-                               ("<=<" . ?↢)
-                               (">=>" . ?↣)
-                               ("&&" . ?∧)
-                               ("||" . ?∨)
-                               ("not" . ?¬)))
+#+begin_src emacs-lisp
+;; Pretty symbols substitutions
+(defun load-prettify-symbols ()
+  "Set a buffer-local value for 'prettify-symbols-alist'."
+  (setq prettify-symbols-alist
+	'(("lambda" . ?λ)
+	  ("->" . ?→)
+	  ("->>" . ?↠)
+	  ("=>" . ?⇒)
+	  ("map" . ?↦)
+	  ("/=" . ?≠)
+	  ("!=" . ?≠)
+	  ("==" . ?≡)
+	  ("<=" . ?≤)
+	  (">=" . ?≥)
+	  ("=<<" . (?= (Br . Bl) ?≪))
+	  (">>=" . (?≫ (Br . Bl) ?=))
+	  ("<=<" . ?↢)
+	  (">=>" . ?↣)
+	  ("&&" . ?∧)
+	  ("||" . ?∨)
+	  ("not" . ?¬)
+	  ("#+begin_src" . ?)
+	  ("#+BEGIN_SRC" . ?)
+	  ("#+end_src" . ?)
+	  ("#+END_SRC" . ?)
+	  ("#+author:" . ?)
+	  ("#+AUTHOR:" . ?)
+	  ("#+title:" . ?)
+	  ("#+TITLE:" . ?))))
+(global-prettify-symbols-mode 1)
+
+;; Add pretty symbols to 'org-mode'
+(add-hook 'org-mode-hook 'load-prettify-symbols)
+;; Add pretty symbols to 'prog-mode'
+(add-hook 'prog-mode-hook 'load-prettify-symbols)
 #+end_src
 
 * General Settings
@@ -167,7 +188,7 @@ Setting the dashboard as the default buffer.
 ** 'scratch' buffer: "I open at the close"
 #+begin_src emacs-lisp
 (defun prepare-scratch-for-kill ()
-  "Whenever the 'scratch' buffer gets killed, open it again"
+  "Whenever the 'scratch' buffer gets killed, open it again."
   (save-excursion
     (set-buffer (get-buffer-create "*scratch*"))
     (add-hook 'kill-buffer-query-functions 'kill-scratch-buffer t)))
