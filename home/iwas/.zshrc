@@ -77,8 +77,6 @@ alias l='lsd -vlh --group-dirs=first'
 alias ll='lsd -vlha --group-dirs=first'
 alias cat='bat'
 alias icat='kitty +kitten icat'
-alias vi='nvim'
-alias vim='nvim'
 alias gdb='LC_ALL=en.US.UTF-8 gdb'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
@@ -130,10 +128,13 @@ alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold
 alias ggundo='git reset --soft HEAD@{1}'
 alias ggst='git status -sb'
 alias ggadd='git add -vu; ggst'
-alias ggclean='dialog --title "ggclean" --backtitle "git" --yesno "Are you sure?" 0 0 && git reset --hard && git clean -fxd'
+alias ggclean='dialog --clear --title "ggclean" --defaultno --yesno "Are you sure?" 0 0 && git reset --hard && git clean -fxd; clear'
 
 
+#####################
 # === FUNCTIONS === #
+#####################
+# Start X server from /etc/X11/xinit/xinitrc file
 startx () {
   echo -n "Loading X"
   for _ in $(seq 13); do
@@ -144,6 +145,7 @@ startx () {
   sleep 1.25
   /bin/startx
 }
+# Start the Hyprland Wayland Compositor (WM + Compositing capabilities)
 startw () {
   echo -n "Loading Wayland"
   for _ in $(seq 13); do
@@ -154,6 +156,12 @@ startw () {
   sleep 1.25
   /home/iwas/.wprofile
 }
+# Vi/Vim/Neovim start functions (ask if not better to straight open GNU Emacs and call it a day :D)
+_prefer-emacs-over-nvim_ () { dialog --clear --title 'GNU Emacs v Neovim?' --defaultno --yesno 'Are you sure you want to use Neovim? You could open GNU Emacs (M-e) and start working right ahead! Choose wisely...' 0 0 && /usr/bin/nvim $1; }
+vi () { _prefer-emacs-over-nvim_ $1; clear; }
+vim () { _prefer-emacs-over-nvim_ $1; clear; }
+nvim () { _prefer-emacs-over-nvim_ $1; clear; }
+
 # Improved man command
 man () {
     env \
@@ -294,7 +302,9 @@ i3-layout-viewer () {
 }
 
 
+################
 # === PATH === #
+################
 # Base PATH
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/opt/bin
 # Adding AppImages to PATH
@@ -307,7 +317,9 @@ export PATH=$PATH:/opt/cuda/bin
 export PATH=$PATH:/home/iwas/.local/bin
 
 
+#################
 # === OTHER === #
+#################
 # Add GPG key to tty
 export GPG_TTY=$(tty)
 # Set Kubernetes contexts (in .kube directory)
@@ -324,6 +336,8 @@ else
 fi
 
 
+###############
 # === END === #
+###############
 (( ! ${+functions[p10k-instant-prompt-finalize]} )) || p10k-instant-prompt-finalize
 

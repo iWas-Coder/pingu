@@ -55,9 +55,10 @@ Project interaction library for Emacs.
   :config
   (projectile-global-mode 1))
 #+end_src
-A library for 'Nerd Font' & 'All The Icons' icon sets.
+Various icon sets.
 #+begin_src emacs-lisp
 (use-package all-the-icons)
+(use-package nerd-icons)
 #+end_src
 
 ** Opening the dashboard
@@ -115,8 +116,11 @@ Setting the dashboard as the default buffer.
 		    :font "JetbrainsMono Nerd Font 13"
 		    :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
+		    :weight 'normal
 		    :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
+		    :font "JetbrainsMono Nerd Font 14"
+		    :weight 'extra-bold
 		    :slant 'italic)
 
 (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 13"))
@@ -337,7 +341,7 @@ Enable rich mode for Ivy.
   :config
   (setq neo-smart-open t
 	neo-window-width 30
-	neo-theme (if (display-graphic-p) 'classic)
+	neo-theme (if (display-graphic-p) 'icons)
 	inhibit-compacting-font-caches t
 	projectile-switch-project-action 'neotree-projectile-action)
   (add-hook 'neo-after-create-hook
@@ -361,6 +365,11 @@ Enable rich mode for Ivy.
 
 ;; Set the minimap to the right side of the editor.
 (setq minimap-window-location 'right)
+#+end_src
+
+* Magit
+#+begin_src emacs-lisp
+(use-package magit)
 #+end_src
 
 * Markup languages
