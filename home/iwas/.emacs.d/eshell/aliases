@@ -5,3 +5,6 @@ alias cat bat $*
 
 alias vf view-file $1
 alias ff find-file $1
+
+alias pingu git --git-dir=/home/iwas/.pingu --work-tree=/ $*
+alias pingu-update pingu add -v -u
