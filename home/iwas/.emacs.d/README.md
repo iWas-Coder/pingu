@@ -1,4 +1,4 @@
-<img src="home/iwas/.emacs.d/logo.png">
+<img src="./logo.png">
 
 # GNU Emacs
 
