@@ -105,6 +105,7 @@ Setting the dashboard as the default buffer.
 #+end_src
 
 * Fonts
+Font configuration for different situations.
 #+begin_src emacs-lisp
 ;; Face attributes for different conditions
 (set-face-attribute 'default nil
@@ -128,6 +129,7 @@ Setting the dashboard as the default buffer.
 (add-to-list 'default-frame-alist '(font . "JetbrainsMono Nerd Font 13"))
 #+end_src
 
+Prettify some symbols in certain modes.
 #+begin_src emacs-lisp
 ;; Pretty symbols substitutions
 (defun load-prettify-symbols ()
@@ -201,6 +203,16 @@ Setting the dashboard as the default buffer.
   nil)
 
 (prepare-scratch-for-kill)
+#+end_src
+
+** Highlight indentation guides
+#+begin_src emacs-lisp
+(use-package highlight-indent-guides
+  :config
+  (setq highlight-indent-guides-method 'column))
+
+;; Add indentation guides to 'prog-mode'
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 #+end_src
 
 * Completion
