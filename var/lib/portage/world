@@ -6,7 +6,6 @@ app-arch/cabextract
 app-arch/lrzip
 app-arch/p7zip
 app-arch/pigz
-app-benchmarks/geekbench
 app-benchmarks/sysbench
 app-containers/buildah
 app-containers/docker
