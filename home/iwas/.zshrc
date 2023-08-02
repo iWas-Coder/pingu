@@ -127,7 +127,7 @@ alias ggpush='ggtoken && git push'
 alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
 alias ggundo='git reset --soft HEAD@{1}'
 alias ggst='git status -sb'
-alias ggadd='git add -vu; ggst'
+alias ggadd='git add -vu'
 alias ggclean='dialog --clear --title "ggclean" --defaultno --yesno "Are you sure?" 0 0 && git reset --hard && git clean -fxd; clear'
 
 
