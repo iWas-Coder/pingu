@@ -1,11 +1,4 @@
 LABEL=EFI /boot/EFI vfat noauto,noatime 0 2
-# UUID=8AAD-03BA /boot/EFI vfat noauto,noatime 0 2
-
 LABEL=BOOT /boot ext4 defaults,noatime,nodiratime 0 1
-# UUID=fc157da5-7af7-4605-876b-97b30fe7588c /boot ext4 defaults,noatime,nodiratime 0 1
-
 LABEL=SYS / ext4 defaults,noatime,nodiratime 0 1
-# UUID=9691cbf3-7ea4-4b9b-9960-b36b573c0a0b / ext4 defaults,noatime,nodiratime 0 1
-
 LABEL=DATA /home/iwas/data ext4 defaults,noatime,nodiratime 0 2
-# UUID=5c3e0cce-949e-48e5-a006-1d2e18dfe525 /home/iwas/data ext4 defaults,noatime,nodiratime 0 2
