@@ -21,5 +21,5 @@ nvidia-settings -a "GPUPowerMizerMode=1"
 gentoo-pipewire-launcher &
 /usr/local/bin/picom --experimental-backends &
 feh --bg-fill /home/iwas/.wallpapers/wallpaper_1.jpg --bg-fill /home/iwas/.wallpapers/wallpaper_2.jpg &
-clipmenud &
-
+/usr/local/bin/clipmenud &
+/usr/bin/emacs --daemon &
