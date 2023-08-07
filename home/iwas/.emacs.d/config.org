@@ -171,6 +171,7 @@ Prettify some symbols in certain modes.
 * General Settings
 ** Definitions
 #+begin_src emacs-lisp
+;; Enabling and disabling modes
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -178,13 +179,18 @@ Prettify some symbols in certain modes.
 (global-hl-line-mode 1)
 (global-display-line-numbers-mode)
 (electric-pair-mode t)
+(delete-selection-mode 1)
 
+;; Setting some variables
 (setq-default cursor-type '(bar . 3))
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
 (setq mouse-wheel-progressive-speed nil)
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
+
+;; Replace 'BufferMenu' with 'Ibuffer'
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 #+end_src
 
 ** 'scratch' buffer: "I open at the close"

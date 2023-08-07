@@ -4,13 +4,25 @@
 
 # Pingu: DE & dotfiles
 
-[//]: # (GPLv3 License indicator)
+[//]: # (Repository badges)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 [//]: # (README Body)
 
-(...)
+Pingu is my personal `dotfiles` repository, which creates a Desktop Environment (DE) based on Gentoo's Portage package management tool, which manages packages from its source code; thus, building from source the entire GNU/Linux system.
+
+The layout of this repository is based on a technique I've recently taken to calling it the **Git bare dotfiles organization strategy**, which is extensively explained and discussed both in this 2016 [Hacker News thread](https://news.ycombinator.com/item?id=11070797) by the user *StreakyCobra*, and in an [article published by Atlassian](https://www.atlassian.com/git/tutorials/dotfiles), in their Git tutorials section.
+
+This technique, then, consists in creating a bare repository (the `.git` directory in a complete repo with its worktree there as well) in `$HOME/.pingu`, and defining the worktree as the `/` (root) of the entire filesystem. This is specified command-based, as such:
+```shell
+$  git --git-dir=$HOME/.pingu --work-tree=/
+```
+But, for the sake of convenience, this command is aliased to the `pingu` keyword, which can be used to issue commands to perform normal Git operations under the dotfiles repository, located in this case under `$HOME/.pingu`.
+
+> This work and all its documentation is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License.\
+> This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\
+> This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 ## Table of Contents
 
@@ -69,7 +81,7 @@ Installation guide of the GNU/Linux distribution offered by Gentoo.
 (...)
 
 ```shell
-$  cfdisk /dev/$DISK1
+#  cfdisk /dev/$DISK1
 ```
 
 (...)
@@ -83,14 +95,14 @@ $  cfdisk /dev/$DISK1
 (...)
 
 ```shell
-$  cfdisk /dev/$DISK2
+#  cfdisk /dev/$DISK2
 ```
 
 (...)
 
 | LABEL | MOUNTPOINT       | PARTITION TYPE   | FORMAT | SIZE |
 |-------|------------------|------------------|--------|------|
-| DATA  | /home/$USER/data | Linux filesystem | ext4   | ALL  |
+| DATA  | $HOME/data       | Linux filesystem | ext4   | ALL  |
 
 (...)
 
@@ -115,13 +127,13 @@ $  cfdisk /dev/$DISK2
 (...)
 
 ```shell
-$  git clone --bare https://github.com/iwas-coder/pingu /home/$USER/.pingu
+$  git clone --bare https://github.com/iwas-coder/pingu $HOME/.pingu
 ```
 
 (...)
 
 ```shell
-#  git --git-dir=/home/$USER/.pingu --work-tree=/ checkout -f
+#  git --git-dir=$HOME/.pingu --work-tree=/ checkout -f
 ```
 
 (...)
@@ -135,6 +147,25 @@ $  git clone --bare https://github.com/iwas-coder/pingu /home/$USER/.pingu
 <img src="home/iwas/.config/i3/screenshot-desktop.png" alt="i3" width=100%>
 
 (...)
+
+As an add-on, I use the `picom` compositor (a fork of the initial `compton` project) to add transparency, shadows and animations to all windows and apps. Specifically, I am using the [pijulius's fork](https://github.com/pijulius/picom), which includes ***fantastic animation code*** to the project (the only one I tried that works perfectly for production).
+
+For this reason, I'd like to give a ***shoutout*** to *Istvan Petres* for this fork and all its contributions, thank you!
+
+```shell
+$  cd ~/data/git/external
+$  git clone https://github.com/pijulius/picom picom.pijulius
+$  cd !$
+$  git submodule update --init --recursive
+$  meson setup --buildtype=release . build
+$  ninja -C build
+#  ln -s $(pwd)/build/src/picom /usr/local/bin
+```
+
+If wanted to reduce file size of the binary, using the `upx` utility, do:
+```shell
+$  upx --color --best build/src/picom
+```
 
 ### Kitty
 

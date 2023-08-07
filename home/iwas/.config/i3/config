@@ -193,8 +193,8 @@ for_window [class="(?i)evince"] floating enable
 for_window [class="(?i)rdesktop"] floating enable
 # QEMU
 for_window [class="(?i)qemu"] floating enable
-# MPV
-for_window [class="(?i)mpv"] floating enable
+# FFplay
+for_window [class="(?i)ffplay"] floating enable
 # Chatterino
 for_window [class="(?i)chatterino"] floating enable
 # Minecraft
