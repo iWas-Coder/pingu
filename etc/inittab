@@ -66,11 +66,6 @@ c4:2345:respawn:/sbin/agetty --noclear --nohostname 38400 tty4 linux
 c5:2345:respawn:/sbin/agetty --noclear --nohostname 38400 tty5 linux
 c6:2345:respawn:/sbin/agetty --noclear --nohostname 38400 tty6 linux
 
-##############################################
-# === Three Finger Salute (CTRL+ALT+DEL) === #
-##############################################
-ca:12345:ctrlaltdel:/sbin/shutdown -r now
-
 # Launch `startDM` script
 x:a:once:/usr/bin/startDM
 
