@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-arg_usage () { echo -ne "\n$1 => $2."; }
+arg_usage () { echo -ne "  $1 \t=> $2.\n"; }
 
 usage () {
   echo "Usage:"
   arg_usage "-h/--help" "Show this help panel and exit"
-  arg_usage "-a/--archive" "(...)"
-  arg_usage "-x/--extract" "(...)"
+  arg_usage "-a/--archive" "Compress game with ZPAQ and store it in the vault"
+  arg_usage "-x/--extract" "Fetch the game archival from the vault and decompress it locally"
   echo
 }
 
@@ -33,6 +33,8 @@ MOUNTPOINT="/home/iwas/vault"
 ARCHIVE_DIR="$MOUNTPOINT/games-lrz"
 LRZTAR="lrztar -vv -z -p 10 -H"
 LRZUNTAR="lrztar -vv -z -p 10 -H -d"
+RSYNC_MV="rsync -aP --remove-source-files"
+RSYNC_CP="rsync -aP"
 
 for game in $(ls "$GAMES"); do
   if [ "$game" = "$GAME" ]; then
@@ -45,10 +47,8 @@ for game in $(ls "$GAMES"); do
       pushd "$PARENT_GAME_DIR" &>/dev/null
       # Compress
       $LRZTAR "$NAME_GAME_DIR"
-      # Copy to vault
-      pv "$NAME_GAME_DIR".tar.lrz > "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz
-      # Delete archive (local copy)
-      rm -vf "$NAME_GAME_DIR".tar.lrz
+      # Transfer to vault
+      $RSYNC_MV "$NAME_GAME_DIR".tar.lrz "$ARCHIVE_DIR"
       # Delete
       rm -rvf "$GAME_DIR" \
         || echo "[-] Failed to delete completely the dir '$GAME_DIR'."
@@ -62,8 +62,8 @@ for game in $(ls "$GAMES"); do
       PARENT_GAME_DIR=$(dirname "$GAME_DIR")
       NAME_GAME_DIR=$(basename "$GAME_DIR") 
       pushd "$PARENT_GAME_DIR" &>/dev/null
-      # Copy from vault
-      pv "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz > "$NAME_GAME_DIR".tar.lrz
+      # Transfer from vault
+      $RSYNC_CP "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz .
       # Decompress
       $LRZUNTAR "$NAME_GAME_DIR".tar.lrz
       # Delete archive (local copy)
