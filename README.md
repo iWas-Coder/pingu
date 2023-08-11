@@ -42,6 +42,16 @@ But, for the sake of convenience, this command is aliased to the `pingu` keyword
 		- [Configuring Portage](#configuring-portage)
     - [Building Kernel](#building-kernel)
     - [Basic system configuration](#basic-system-configuration)
+		- [`fstab` file](#fstab-file)
+		- [`hostname` file](#hostname-file)
+		- [`hosts` file](#hosts-file)
+		- [Network configuration](#network-configuration)
+		- [Set root password](#set-root-password)
+		- [System logger](#system-logger)
+		- [Time synchronization](#time-synchronization)
+		- [Filesystem tools](#filesystem-tools)
+	- [Bootloader](#bootloader)
+	- [Finishing](#finishing)
 - [Pingu environment](#pingu-environment)
 - [Main components](#main-components)
     - [i3](#i3)
@@ -49,8 +59,8 @@ But, for the sake of convenience, this command is aliased to the `pingu` keyword
     - [GNU Emacs](#gnu-emacs)
 - [Kernel maintenance](#kernel-maintenance)
 	- [New kernel version](#new-kernel-version)
-		- [Install stage](#install-stage)
-		- [Build stage](#build-stage)
+		- [Emerging sources](#emerging-sources)
+		- [Build](#build)
 	- [Reconfigure current kernel version](#reconfigure-current-kernel-version)
 
 ## Install media
@@ -322,7 +332,7 @@ Also ensure that **mode 1777** is set:
 ```shell
 (chroot) #  env-update
 (chroot) #  source /etc/profile
-#  export PS1="(chroot) ${PS1}"
+(chroot) #  export PS1="(chroot) ${PS1}"
 ```
 
 ### Building Kernel
@@ -331,13 +341,218 @@ Also ensure that **mode 1777** is set:
 
 ```shell
 (chroot) #  emerge -va linux-firmware gentoo-sources
+```
+
+Check current `/usr/src/linux` symlink:
+```shell
 (chroot) #  eselect kernel list
+```
+
+Change the symlink to the previously emerged version by doing:
+```shell
 (chroot) #  eselect kernel set <N>
 ```
+
+Ensure the source tree is properly cleaned up:
+```shell
+(chroot) #  cd /usr/src/linux
+(chroot) #  make mrproper
+```
+
+Generate a generic kernel configuration file, and open it up (`.config`) with the `menuconfig` editor:
+```shell
+(chroot) #  make menuconfig
+```
+
+Pass the unit test suite (pytest) to check for config errors:
+```shell
+(chroot) #  make testconfig
+```
+
+Build the kernel (`vmlinux`), its selected modules (`*.ko`) and the kernel compressed image (`bzImage`).
+```shell
+(chroot) #  KCFLAGS="-march=<ARCH> -O2 -pipe" nice make [-j<N>]
+```
+Add the `-j<N>` flag so that GNU Make can parallelize jobs, where `N` is the number of jobs to handle in parallel.
+
+Replace `<ARCH>` with the CPU's architecture name that GNU GCC handles (e.g. `znver2` for Zen2; `znver3` for Zen3). This can be searched online, or guessed by GCC itself doing:
+```shell
+(chroot) #  gcc -Q -march=native --help=target | grep march | head -n 1
+```
+
+As this has been already configured in `/etc/portage/make.conf` previously, it can be accessed directly:
+```shell
+(chroot) #  KCFLAGS="$(grep -oP 'COMMON_FLAGS="\K[^"]+' /etc/portage/make.conf)" nice make [-j<N>]
+```
+
+Install the built modules into `/lib/modules/<VERSION>`:
+```shell
+(chroot) #  make modules_install
+```
+
+Export the API headers into `./usr`, in case needed later on:
+```shell
+(chroot) #  make headers
+```
+
+Install the kernel's needed resources in `/boot`, using the following mapping:
+- `bzImage` -> `/boot/vmlinuz-<VERSION>`
+- `System.map` -> `/boot/System.map-<VERSION>`
+- `.config` -> `/boot/config-<VERSION>`
+If these files already existed in `/boot` prior to this step, then it renames them to `*.old`, in order to maintain a backup until the new version gets tested.
+```shell
+(chroot) #  make install
+```
+
+```shell
+(chroot) #  emerge -va dracut
+```
+
+Create the first iteration of the initial ramdisk FS (i.e. `initramfs` or `initrd`):
+```shell
+(chroot) #  dracut --kver=<VERSION> --hostonly --early-microcode
+```
+
+Once booted to the newly built kernel, create the second and last iteration of the initrd image (same command as the previous one).
 
 ### Basic system configuration
 
 (...)
+
+#### `fstab` file
+
+Under Linux, all partitions used by the system must be listed in `/etc/fstab`. This file contains the mount points of those partitions (where they are seen in the file system structure), how they should be mounted and with what special options (automatically or not, whether users can mount them or not, etc.).
+
+```
+LABEL=EFI /boot/EFI vfat noauto,noatime 0 2
+LABEL=BOOT /boot ext4 defaults,noatime,nodiratime 0 1
+LABEL=SYS / ext4 defaults,noatime,nodiratime 0 1
+LABEL=DATA /home/iwas/data ext4 defaults,noatime,nodiratime 0 2
+```
+
+#### `hostname` file
+
+One of the choices the system administrator has to make is name their PC. This seems to be quite easy, but lots of users are having difficulties finding the appropriate name for the hostname. To speed things up, know that the decision is not final, as it can be changed afterwards.
+
+```shell
+(chroot) #  echo "sheldon" > /etc/hostname
+```
+
+#### `hosts` file
+
+An important next step may be to inform this new system about other hosts in its network environment. Network host names can be defined in the `/etc/hosts` file. Adding host names here will enable host name to IP addresses resolution for hosts that are not resolved by the nameserver.
+
+```
+127.0.0.1 sheldon.swa2.ml sheldon localhost
+```
+
+#### Network configuration
+
+There are many options available for configuring network interfaces. Most LAN networks operate a DHCP server. If this is the case, then using the dhcpcd program to obtain an IP address is recommended. To install:
+
+```shell
+(chroot) #  emerge -va dhcpcd
+```
+
+Then, add the service to the default runlevel (OpenRC) and start it right up:
+
+```shell
+(chroot) #  rc-update add dhcpcd default
+(chroot) #  rc-service dhcpcd start
+```
+
+#### Set root password
+
+Set the root password using the `passwd` command:
+
+```shell
+(chroot) #  passwd
+```
+
+#### System logger
+
+Some tools are missing from the stage3 archive because several packages provide the same functionality. It is now up to the user to choose which ones to install. The first tool to decision is a logging mechanism for the system. UNIX and Linux have an excellent history of logging capabilities; if needed, everything that happens on the system can be logged in a log file.
+
+The package `sysklogd` offers the traditional set of system logging daemons. The default logging configuration works well out of the box which makes this package a good option for beginners.
+
+```shell
+(chroot) #  emerge -va sysklogd
+(chroot) #  rc-update add sysklogd default
+```
+
+#### Time synchronization
+
+It is important to use some method of synchronizing the system clock. This is usually done via the NTP protocol and software. Other implementations using the NTP protocol exist, like `chrony`. To set it up, do:
+
+```shell
+(chroot) #  emerge -va chrony
+(chroot) #  rc-update add chronyd default
+```
+
+#### Filesystem tools
+
+Depending on the filesystems used, it may be necessary to install the required file system utilities (for checking the filesystem integrity, (re)formatting file systems, etc.). Note that ext4 user space tools (`e2fsprogs`) are already installed as a part of the `@system` set.
+
+For a basic approach, installing all VFAT-related FS userspace tools is a good starting point:
+
+```shell
+(chroot) #  emerge -va dosfstools
+```
+
+### Bootloader
+
+With the Linux kernel configured, system tools installed and configuration files edited, it is time to install the last important piece of a Linux installation: the bootloader. The bootloader is responsible for firing up the Linux kernel upon boot; without it, the system would not know how to proceed after the UEFI/BIOS firmware is loaded.
+
+By default, the majority of Linux systems now rely upon GRUB. With no additional configuration, GRUB gladly supports older BIOS ("pc") systems. With a small amount of configuration, necessary before build time, GRUB can support more than a half a dozen additional platforms.
+
+```shell
+(chroot) #  emerge -va grub
+```
+
+Next, install the necessary GRUB files to the `/boot/grub/` directory via the `grub-install` command:
+
+```shell
+(chroot) #  grub-install --bootloader-id=GRUB --efi-directory=/boot/EFI --recheck
+```
+
+Then, generate a generic GRUB configuration file, with the `grub-mkconfig` command:
+
+```shell
+(chroot) #  grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### Finishing
+
+Working as root on a Unix/Linux system is dangerous and should be avoided as much as possible. Therefore it is strongly recommended to add a user for day-to-day use. For instance, before rebooting, let's do so:
+
+```shell
+(chroot) #  useradd -m -s /bin/bash -G tty,wheel,audio,video,input,users iwas
+(chroot) #  passwd iwas
+```
+
+Exit the chrooted environment and unmount all mounted partitions. Then type in that one magical command that initiates the final, true test: `reboot`.
+
+```shell
+(chroot) #  exit
+#  cd
+#  umount /mnt/system/dev/{shm,pts}
+#  umount -R /mnt/system
+#  reboot
+```
+
+Do not forget to remove the bootable media (ISO), otherwise it might be booted again instead of the new installed system.
+
+Once booted to the newly built kernel, create the second and last iteration of the initrd image:
+
+```shell
+#  dracut --kver=<VERSION> --hostonly --early-microcode --force
+```
+
+With the installation finished and the system rebooted, if everything has gone well, we can now remove the downloaded *stage3 tarball* from the disk. Remember that it was downloaded to the `/` directory:
+
+```shell
+#  rm /stage3-*.tar.*
+```
 
 ## Pingu environment
 
@@ -405,11 +620,11 @@ $  upx --color --best build/src/picom
 
 (...)
 
-#### Install stage
+#### Emerging sources
 
 (...)
 
-#### Build stage
+#### Build
 
 Check current `/usr/src/linux` symlink:
 ```shell
@@ -423,6 +638,7 @@ Change the symlink to the new version by doing:
 
 Ensure the source tree is properly cleaned up:
 ```shell
+#  cd /usr/src/linux
 #  make mrproper
 ```
 
@@ -450,6 +666,11 @@ Add the `-j<N>` flag so that GNU Make can parallelize jobs, where `N` is the num
 Replace `<ARCH>` with the CPU's architecture name that GNU GCC handles (e.g. `znver2` for Zen2; `znver3` for Zen3). This can be searched online, or guessed by GCC itself doing:
 ```shell
 $  gcc -Q -march=native --help=target | grep march | head -n 1
+```
+
+As this has been already configured in `/etc/portage/make.conf` during system's installation, it can be accessed directly:
+```shell
+#  KCFLAGS="$(grep -oP 'COMMON_FLAGS="\K[^"]+' /etc/portage/make.conf)" nice make [-j<N>]
 ```
 
 Install the built modules into `/lib/modules/<VERSION>`:
