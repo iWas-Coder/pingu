@@ -172,6 +172,8 @@ bindsym $mod+Shift+Return exec emacsclient -ce "(eshell)"
 bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
 # GNU Emacs - Pulseaudio sink selector
 bindsym $mod+Shift+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(pulse/sink-selector-menu)"
+# GNU Emacs - Power action selector
+bindsym Control+$mod+Delete exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(power/action-selector-menu)"
 
 # Terminal
 bindsym $mod+Return exec kitty
@@ -203,3 +205,5 @@ for_window [class="(?i)minecraft"] floating enable
 for_window [title="(?i)emacs-run-launcher"] floating enable
 # GNU Emacs pulseaudio sink selector (emacs-pulse-sink-selector)
 for_window [title="(?i)emacs-pulse-sink-selector"] floating enable
+# GNU Emacs power action selector (emacs-power-action-selector)
+for_window [title="(?i)emacs-power-action-selector"] floating enable

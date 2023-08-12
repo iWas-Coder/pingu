@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=Lockscreen
-Exec=/usr/share/lockscreen/lock
-Terminal=false

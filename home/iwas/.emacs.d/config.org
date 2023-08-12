@@ -367,6 +367,47 @@ Enable rich mode for Ivy.
       (delete-frame))))
 #+end_src
 
+* Power options menu
+#+begin_src emacs-lisp
+(defun power/sudo-shell-command (cmd)
+  (shell-command (concat "echo " (read-passwd "passwd: ") " | sudo -S " cmd)))
+
+(defun power/action-selector ()
+  "Select a power action from a list."
+  (interactive)
+  (let ((actions '("Lock" "Log Out" "Restart" "Power Off"))
+	(cmds '("/usr/local/bin/lock" "/usr/local/bin/logout" "/usr/bin/reboot" "/usr/bin/halt"))
+	selected-action)
+
+    (ivy-read "Select action: "
+	      actions
+	      :action (lambda (x)
+			(setq selected-action (nth (cl-position x actions :test 'equal) cmds))
+			(if selected-action
+			    (if (or (string-equal x "Restart") (string-equal x "Power Off"))
+				(when (y-or-n-p (format "Are you sure you want to '%s'? " x))
+				  (power/sudo-shell-command selected-action))
+			      (when (y-or-n-p (format "Are you sure you want to '%s'? " x))
+				(shell-command selected-action)))
+			  (message "Invalid action"))))))
+
+(defun power/action-selector-menu ()
+  "Create a frame with a buffer that runs the 'power/action-selector' function."
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-power-action-selector")
+		    (minibuffer . only)
+		    (fullscreen 0)
+		    (undecorated . t)
+		    (auto-raise . t)
+		    (internal-border-width . 10)
+		    (width . 24)
+		    (height . 6)))
+    (unwind-protect
+	(power/action-selector)
+      (delete-frame))))
+#+end_src
+
 * Neotree
 #+begin_src emacs-lisp
 (defcustom neo-window-width 25

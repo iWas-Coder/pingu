@@ -1,0 +1,13 @@
+#!/bin/sh
+
+alias DBUS_LIST_SESSIONS="dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 'org.freedesktop.login1.Manager.ListSessions'"
+alias DBUS_TERMINATE_SESSION="dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession'"
+
+USER_ID=$(DBUS_LIST_SESSIONS | grep -oP 'uint32 \K\d+')
+
+if [ $USER_ID -eq $(id -u) ]; then
+  USER_NAME=$(id -nu $USER_ID)
+  SESSION=$(DBUS_LIST_SESSIONS | grep $USER_ID -B 1 | grep -oP 'string "\Kc\d+(?=")')
+
+  DBUS_TERMINATE_SESSION string:"$SESSION"
+fi
