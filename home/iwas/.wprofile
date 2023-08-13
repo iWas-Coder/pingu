@@ -1,42 +1,24 @@
 #!/bin/sh
 
-####################
-# === Pingu DE === #
-####################
-# DE Name
-export XDG_CURRENT_DESKTOP=Pingu
-# Downloads folder
-export XDG_DOWNLOAD_DIR="$HOME/downloads"
-# Web Browser
-export BROWSER="chromium $(cat /home/$(logname)/.config/chromium-flags-wl.conf | xargs)"
-# Text Editor
-export EDITOR=nvim
-
-#######################
-# === GL Settings === #
-#######################
-export CLUTTER_DEFAULT_FPS=144
+#################################
+# === Environment Variables === #
+#################################
 export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
-export __GL_VRR_ALLOWED=1
 export __GL_SYNC_DISPLAY_DEVICE=DP-0
 export __GL_THREADED_OPTIMIZATIONS=1
-# Mesa threaded shader compilation
+export __GL_VRR_ALLOWED=1
+export _JAVA_AWT_WM_NONREPARENTING=1
+export BROWSER="chromium $(cat /home/iwas/.config/chromium-flags-wl.conf | xargs)"
+export CLUTTER_DEFAULT_FPS=144
+export EDITOR=nvim
+export WLR_NO_HARDWARE_CURSORS=1
+export XDG_CURRENT_DESKTOP=Pingu
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
+export XCURSOR_SIZE=16
 export multithread_glsl_compiler=1
 
-############################
-# === Wayland Settings === #
-############################
-export XCURSOR_SIZE=16
-export WLR_NO_HARDWARE_CURSORS=1
-
-##########################
-# === Other settings === #
-##########################
-# Fix the Java Problem
-export _JAVA_AWT_WM_NONREPARENTING=1
-
-#############################################
-# === Start Hyprland (new dbus session) === #
-#############################################
+#########################
+# === Startup Tasks === #
+#########################
 cd ~
 exec dbus-run-session Hyprland
