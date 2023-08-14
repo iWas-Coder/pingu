@@ -11,10 +11,10 @@ scrot $CACHE/base.png
 # === Processing the image === #
 # Blurring
 convert $CACHE/base.png -blur 0x8 $CACHE/blurred.png
-# Linux overlay (main monitor)
-composite -gravity center -geometry +550+535 $ASSETS/linux.png $CACHE/blurred.png $CACHE/overlayed_1.png
-# GNU Savannah overlay (second monitor)
-composite -gravity southwest -geometry -5 $ASSETS/gnu.png $CACHE/overlayed_1.png $CACHE/overlayed_2.png
+# 'GNU Love' overlay (main monitor)
+composite -gravity center -geometry +732+145 $ASSETS/gnu-love.png $CACHE/blurred.png $CACHE/overlayed_1.png
+# 'Flying GNU' overlay (second monitor)
+composite -gravity southwest -geometry +50+600 $ASSETS/flying-gnu.png $CACHE/overlayed_1.png $CACHE/overlayed_2.png
 # Locked indicator (main monitor)
 composite -gravity north -geometry +535+330 $ASSETS/lock.png $CACHE/overlayed_2.png $CACHE/overlayed_3.png
 # Locked indicator (second monitor)
