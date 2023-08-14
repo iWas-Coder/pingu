@@ -113,10 +113,11 @@ bar {
 	workspace_min_width 25
         status_command /home/iwas/.config/bumblebee-status/bumblebee-status                       \
 		            -t iceberg-rainbow                                                                \
-		            -m kernel load cpu memory sensors2 disk nvidiagpu nic datetime                    \
+		            -m kernel load cpu memory sensors2 disk:sys disk:data nvidiagpu nic datetime      \
 		            -p cpu.format="{:05.1f}%"                                                         \
                    nic.exclude="lo,dummy0,sit0,veth*,br-*"                                        \
-                   disk.path="/home/iwas/data" disk.format="DATA: {used}/{size} ({percent:.1f}%)" \
+                   sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)"                  \
+                   data.path="/home/iwas/data" data.format="DATA: {used}/{size} ({percent:.1f}%)" \
                    datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                                   \
                    sensors2.chip_include="k10temp-pci-00c3"
 
