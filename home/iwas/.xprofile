@@ -16,7 +16,6 @@ export multithread_glsl_compiler=1
 #########################
 # === Startup Tasks === #
 #########################
-ulimit -n 8192
 nvidia-settings -a "GPUPowerMizerMode=1"
 gentoo-pipewire-launcher &
 /usr/local/bin/picom --experimental-backends &
