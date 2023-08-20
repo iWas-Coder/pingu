@@ -119,7 +119,8 @@ bar {
                    sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)"                  \
                    data.path="/home/iwas/data" data.format="DATA: {used}/{size} ({percent:.1f}%)" \
                    datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                                   \
-                   sensors2.chip_include="k10temp-pci-00c3"
+                   sensors2.chip_include="k10temp-pci-00c3"                                       \
+                   nvidiagpu.format="󰺷 GPU: {gpu_usage_pct}% | MEM: {mem_usage_pct}% ({mem_used}MiB) | CLK: {clock_gpu}MHz | TEMP: {temp}°C"
 
 	colors {
 		background #222222CC
