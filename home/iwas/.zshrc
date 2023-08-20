@@ -93,7 +93,7 @@ alias venv.create='python3 -m venv .venv'
 alias venv.activate='. .venv/bin/activate'
 alias dmesg='dmesg --color=always'
 alias loc='cloc'
-alias emacs='emacsclient -c'
+alias emacs='emacsclient -c -t'
 # Custom
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o vers=3.0,credentials=/home/iwas/.smb/penny.key,uid=1000,forceuid,gid=1000,forcegid,file_mode=0664,dir_mode=0775,sec=ntlmv2i,rw'
 alias umount.vault='sudo umount /home/iwas/vault'
