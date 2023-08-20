@@ -231,6 +231,7 @@ x11-misc/dmenu
 x11-misc/i3lock
 x11-misc/i3status
 x11-misc/picom
+x11-misc/screenkey
 x11-misc/vdpauinfo
 x11-misc/xclip
 x11-misc/xsel
