@@ -110,6 +110,7 @@ alias wttr="curl 'wttr.in/Barcelona'"
 alias wttr.moon="curl 'wttr.in/moon'"
 alias wttr.rich="curl 'v2d.wttr.in/Barcelona'"
 alias wttr.map="curl 'v3.wttr.in/Barcelona.sxl'"
+alias ffprobe.id_codec='ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1'
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
 alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status -sb'
@@ -256,7 +257,7 @@ games () {
 }
 # FFMPEG Plex Transcoding
 ffmpeg.plex_transcoding () {
-  if [ ! -z "$2" ] && [ "$2" = "-o" ] && [ ! -z "$3" ]; then
+  if [ "$2" = "-o" ] && [ ! -z "$3" ]; then
     ffmpeg               \
       -hwaccel cuda      \
       -i "$1"            \
@@ -271,6 +272,14 @@ ffmpeg.plex_transcoding () {
       "$3"
   else
     echo "[-] Incorrect syntax :("
+  fi
+}
+ffplay.cuvid () {
+  codec=$(ffprobe.id_codec "$1")
+  if [[ "$codec" =~ ^(av1|h264|hevc|mjpeg|mpeg1|mpeg2|mpeg4|vc1|vp8|vp9)$ ]]; then
+    ffplay -vcodec "${codec}_cuvid" "$1"
+  else
+    echo "[-] Codec not supported (try plain 'ffplay') :("
   fi
 }
 # 7z list archive's content without additional information (clean format)
