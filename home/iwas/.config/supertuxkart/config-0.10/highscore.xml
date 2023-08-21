@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<highscores version="4">
+  <highscore track-name    ="abyss"
+             number-karts  ="8"
+             difficulty    ="2"
+             hscore-type   ="HST_STANDARD"
+             number-of-laps="3"
+             reverse       ="false">
+             <entry time    ="168.374"
+                    name    ="iwas"
+                    kartname="tux"/>
+  </highscore>
+</highscores>
