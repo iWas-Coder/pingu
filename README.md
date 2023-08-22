@@ -269,7 +269,7 @@ Also ensure that **mode 1777** is set:
 
 #### Entering the new environment
 
-(...)
+Now that all partitions are initialized and the base environment installed, it is time to enter the new installation environment by chrooting into it. This means that the session will change its root (most top-level location that can be accessed) from the current installation environment to the installation system (namely the initialized partitions). Hence the name, change root or *chroot*.
 
 ```shell
 #  chroot /mnt/system /bin/bash
@@ -277,7 +277,7 @@ Also ensure that **mode 1777** is set:
 #  export PS1="(chroot) ${PS1}"
 ```
 
-(...)
+Now that the new environment has been entered, it is necessary to mount the *BOOT* and *EFI* partition. This will be important when it is time to compile the kernel and install the bootloader:
 
 ```shell
 (chroot) #  mount -L BOOT /boot
@@ -286,39 +286,59 @@ Also ensure that **mode 1777** is set:
 
 #### Configuring Portage
 
-(...)
+Next step is to install a snapshot of the Gentoo ebuild repository. This snapshot contains a collection of files that informs Portage about available software titles (for installation), which profiles the system administrator can select, package or profile specific news items, etc. This will fetch the latest snapshot (which is released on a daily basis) from one of Gentoo's mirrors and install it onto the system:
 
 ```shell
 (chroot) #  emerge-webrsync
 ```
 
-(...)
+It is possible to update the Gentoo ebuild repository to the latest version. This command will use the rsync protocol to update the Gentoo ebuild repository (which was fetched earlier on through `emerge-webrsync`) to the latest state:
 
 ```shell
 (chroot) #  emerge --sync
 ```
 
-(...)
+When the Gentoo ebuild repository is synchronized, Portage may notice that new *news items* are available for reading. *News items* were created to provide a communication medium to push critical messages to users via the Gentoo ebuild repository.
+
+List all of them with:
 
 ```shell
-(chroot) #  emerge -vauDU @world
+(chroot) #  eselect news list
 ```
 
-(...)
+Read all new items with:
 
 ```shell
 (chroot) #  eselect news read
 ```
 
-(...)
+Or read specific items with:
+
+```shell
+(chroot) #  eselect news read <N>
+```
+
+Purge already read items with:
+
+```shell
+(chroot) #  eselect news purge
+```
+
+At this point, it is wise to update the system's `@world` set so that a base can be established. This following step is necessary so the system can apply any updates or *USE flag changes* which have appeared since the *stage3* was built and from any profile selection:
+
+```shell
+(chroot) #  emerge -vauDU @world
+```
+
+Configure the timezone with:
 
 ```shell
 (chroot) #  ls /usr/share/zoneinfo
 (chroot) #  echo "Europe/Madrid" > /etc/timezone
-(chroot) #  emerge --config sys-libs/timezone-data
+(chroot) #  emerge --config timezone-data
 ```
 
-(...)
+Configure the locales with:
 
 ```shell
 (chroot) #  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
@@ -327,7 +347,7 @@ Also ensure that **mode 1777** is set:
 (chroot) #  eselect locale set <N>
 ```
 
-(...)
+Reload the environment with:
 
 ```shell
 (chroot) #  env-update
@@ -337,10 +357,10 @@ Also ensure that **mode 1777** is set:
 
 ### Building Kernel
 
-(...)
+Now it is time to configure and compile the kernel sources. For the purposes of the installation, there are several packages we need to get before proceeding to the actual building stage:
 
 ```shell
-(chroot) #  emerge -va linux-firmware gentoo-sources
+(chroot) #  emerge -va dev-python/pytest gentoo-sources linux-headers linux-firmware
 ```
 
 Check current `/usr/src/linux` symlink:
@@ -413,8 +433,6 @@ Create the first iteration of the initial ramdisk FS (i.e. `initramfs` or `initr
 (chroot) #  dracut --kver=<VERSION> --hostonly --early-microcode
 ```
 
-Once booted to the newly built kernel, create the second and last iteration of the initrd image (same command as the previous one).
-
 ### Basic system configuration
 
 (...)
@@ -448,17 +466,11 @@ An important next step may be to inform this new system about other hosts in its
 
 #### Network configuration
 
-There are many options available for configuring network interfaces. Most LAN networks operate a DHCP server. If this is the case, then using the dhcpcd program to obtain an IP address is recommended. To install:
+There are many options available for configuring network interfaces. Most LAN networks operate a DHCP server. If this is the case, then using the `dhcpcd` program to obtain an IP address is recommended.
 
 ```shell
 (chroot) #  emerge -va dhcpcd
-```
-
-Then, add the service to the default runlevel (OpenRC) and start it right up:
-
-```shell
 (chroot) #  rc-update add dhcpcd default
-(chroot) #  rc-service dhcpcd start
 ```
 
 #### Set root password
