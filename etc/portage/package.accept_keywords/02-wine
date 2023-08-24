@@ -2,4 +2,3 @@
 dev-util/blueprint-compiler ~amd64
 media-libs/vkBasalt ~amd64
 dev-python/vkbasalt-cli ~amd64
-app-emulation/wine-proton ~amd64

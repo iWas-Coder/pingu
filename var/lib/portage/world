@@ -27,6 +27,7 @@ app-misc/neofetch
 app-misc/scrub
 app-office/libreoffice
 app-portage/cpuid2cpuflags
+app-portage/eix
 app-portage/gentoolkit
 app-shells/zsh
 app-text/dos2unix

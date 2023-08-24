@@ -1,14 +1,10 @@
+<img src="./logo.png" width=200>
+
 # Portage
 
 (...)
 
-## Useful commands
-
-1. Full system upgrade
-2. Continue a build process
-3. 'Multiple pkg instances within a single pkg slot' problem
-
-### 1. Full system upgrade
+### Full system upgrade
 
 Contracted form:
 ```shell
@@ -20,7 +16,7 @@ Extended form:
 sudo emerge --verbose --ask --upgrade --deep --changed-use @world
 ```
 
-### 2. Continue a build process
+### Continue a build process
 
 After cancelling a build process within emerge (e.g. chromium), it can be resumed if all temporary build files are preserved; this can be checked by doing:
 ```shell
@@ -35,9 +31,8 @@ Wrapping all up, the build process can be resumed by doing:
 sudo ebuild $(equery w chromium) merge
 ```
 
-### 3. 'Multiple pkg instances within a single pkg slot' problem
+### 'Multiple pkg instances within a single pkg slot' problem
 
 ```shell
 qdepends -CQqqF '%{CAT}/%{PN}:%{SLOT}' '^CAT/PN'
 ```
-
