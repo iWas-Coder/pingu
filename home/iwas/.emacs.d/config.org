@@ -121,7 +121,6 @@ Font configuration for different situations.
 		    :weight 'normal
 		    :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
-		    :height 140
 		    :weight 'extra-bold
 		    :slant 'italic)
 
@@ -191,6 +190,8 @@ Prettify some symbols in certain modes.
 
 ;; Replace 'BufferMenu' with 'Ibuffer'
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+;; '<f5>' shortcut for 'M-x compile' command
+(global-set-key (kbd "<f5>") 'compile)
 #+end_src
 
 ** 'scratch' buffer: "I open at the close"
@@ -307,10 +308,7 @@ Enable rich mode for Ivy.
   :custom
   (ivy-virtual-abbreviate 'full
    ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-			       'ivy-rich-switch-buffer-transformer))
+   ivy-rich-path-style 'abbrev))
 #+end_src
 
 * App Launcher
