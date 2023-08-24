@@ -274,6 +274,7 @@ ffmpeg.plex_transcoding () {
     echo "[-] Incorrect syntax :("
   fi
 }
+# FFMPEG (ffplay) with NVIDIA's CUVID (decode) codecs support
 ffplay.cuvid () {
   codec=$(ffprobe.id_codec "$1")
   if [[ "$codec" =~ ^(av1|h264|hevc|mjpeg|mpeg1|mpeg2|mpeg4|vc1|vp8|vp9)$ ]]; then
@@ -297,6 +298,23 @@ podman.save () {
 # Podman load repository (image with all tags) from tar.gz with progress (tqdm)
 podman.load () {
   pv "$1" | podman load
+}
+# Podman create a Gentoo dev environment
+podman.gentoo_shell () {
+  podman run                                                                        \
+    --rm                                                                            \
+    -it                                                                             \
+    --name "$(hostname)-ct"                                                         \
+    --hostname "$(hostname)-ct"                                                     \
+    -v /etc/portage/make.conf:/etc/portage/make.conf:ro                             \
+    -v /etc/portage/package.accept_keywords:/etc/portage/package.accept_keywords:ro \
+    -v /etc/portage/package.license:/etc/portage/package.license:ro                 \
+    -v /etc/portage/package.mask:/etc/portage/package.mask:ro                       \
+    -v /etc/portage/package.use:/etc/portage/package.use:ro                         \
+    -v /etc/portage/patches:/etc/portage/patches:ro                                 \
+    gentoo/stage3                                                                   \
+    sh -c "emerge-webrsync && /bin/bash -i"
+  podman rmi gentoo/stage3
 }
 # i3-layout-viewer
 i3-layout-viewer () {
