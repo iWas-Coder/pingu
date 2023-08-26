@@ -1,10 +1,16 @@
 alias ls lsd -v --group-dirs=first $*
 alias l lsd -vlh --group-dirs=first $*
 alias ll lsd -vlha --group-dirs=first $*
-alias cat bat $*
+
+alias cat /usr/bin/cat $*
 
 alias vf view-file $1
+alias view vf $1
+
 alias ff find-file $1
+alias vi ff $1
+alias vim ff $1
+alias nvim ff $1
 
 alias pingu git --git-dir=/home/iwas/.pingu --work-tree=/ $*
 alias pingu-update pingu add -v -u
