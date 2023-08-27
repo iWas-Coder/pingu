@@ -39,6 +39,7 @@ app-text/texlive
 app-text/tree
 app-text/wdiff
 dev-db/libdbi
+dev-java/openjdk
 dev-lang/python
 dev-lang/zig
 dev-libs/libaio

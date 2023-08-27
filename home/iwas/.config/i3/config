@@ -172,6 +172,8 @@ bindsym $mod+e exec emacsclient -c
 bindsym $mod+Shift+Return exec emacsclient -ce "(eshell)"
 # GNU Emacs - App Launcher
 bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
+# GNU Emacs - Game Launcher
+bindsym $mod+g exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(games/game-launcher-menu)"
 # GNU Emacs - Pulseaudio sink selector
 bindsym $mod+Shift+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(pulse/sink-selector-menu)"
 # GNU Emacs - Power action selector
@@ -203,9 +205,11 @@ for_window [class="(?i)ffplay"] floating enable
 for_window [class="(?i)chatterino"] floating enable
 # Minecraft
 for_window [class="(?i)minecraft"] floating enable
-# GNU Emacs run launcher (emacs-run-launcher)
+# GNU Emacs - App Launcher (emacs-run-launcher)
 for_window [title="(?i)emacs-run-launcher"] floating enable
-# GNU Emacs pulseaudio sink selector (emacs-pulse-sink-selector)
+# GNU Emacs - Game Launcher (emacs-game-launcher)
+for_window [title="(?i)emacs-game-launcher"] floating enable
+# GNU Emacs - Pulseaudio sink selector (emacs-pulse-sink-selector)
 for_window [title="(?i)emacs-pulse-sink-selector"] floating enable
-# GNU Emacs power action selector (emacs-power-action-selector)
+# GNU Emacs - Power action selector (emacs-power-action-selector)
 for_window [title="(?i)emacs-power-action-selector"] floating enable

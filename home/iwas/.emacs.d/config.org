@@ -336,6 +336,42 @@ Enable rich mode for Ivy.
 (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only)
 #+end_src
 
+* Game Launcher
+#+begin_src emacs-lisp
+(defun games/async-shell-command-new-frame (command)
+  (let ((display-buffer-alist (list (cons "\\*Async Shell Command\\*.*"
+					  (cons #'display-buffer-no-window nil)))))
+    (other-frame-prefix)
+    (async-shell-command command)))
+
+(defun games/game-launcher ()
+  "Game launcher that reads all working symlinks within '/usr/local/games'."
+  (interactive)
+  (setq game-list-str (shell-command-to-string "find /usr/local/games -type l -exec sh -c 'test -e \"$1\" && printf \"%s\\n\" \"$(basename \"$1\")\"' sh {} \\; | grep -v '\\.' | sort -n"))
+  (setq game-list (split-string game-list-str "\n" t " "))
+
+  (ivy-read "Run game: "
+	    game-list
+	    :action (lambda (x)
+		      (games/async-shell-command-new-frame (format "/usr/local/games/%s" x)))))
+
+(defun games/game-launcher-menu ()
+  "Create a frame with a buffer that runs the 'games/game-launcher' function."
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-game-launcher")
+		    (minibuffer . only)
+		    (fullscreen 0)
+		    (undecorated . t)
+		    (auto-raise . t)
+		    (internal-border-width . 10)
+		    (width . 28)
+		    (height . 8)))
+    (unwind-protect
+	(games/game-launcher)
+      (delete-frame))))
+#+end_src
+
 * Pulseaudio sink selector
 #+begin_src emacs-lisp
 (defvar node-name-list nil "List of sink names")
