@@ -195,6 +195,8 @@ Prettify some symbols in certain modes.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 ;; '<f5>' shortcut for 'M-x compile' command
 (global-set-key (kbd "<f5>") 'compile)
+;; '<f2>' shortcut for 'M-x man' command
+(global-set-key (kbd "<f2>") 'man)
 #+end_src
 
 ** 'scratch' buffer: "I open at the close"
