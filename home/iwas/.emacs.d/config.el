@@ -12,7 +12,7 @@
   :config
   (gcmh-mode 1))
 
-(setq gc-cons-threshold 402653184
+(setq gc-cons-threshold (* 50 1000 1000)
       gc-cons-percentage 0.6)
 
 (add-hook 'emacs-startup-hook
@@ -32,7 +32,7 @@
 
 (use-package projectile
   :config
-  (projectile-global-mode 1))
+  (projectile-mode +1))
 
 (use-package all-the-icons)
 (use-package nerd-icons)
@@ -509,11 +509,11 @@
 (defun run-this-in-eshell (cmd)
   "Runs the command 'cmd' in eshell."
   (with-current-buffer "*eshell*"
-    (end-of-buffer)
+    (goto-char (point-max))
     (eshell-kill-input)
     (insert cmd)
     (eshell-send-input)
-    (end-of-buffer)
+    (goto-char (point-max))
     (eshell-bol)
     (yank)))
 

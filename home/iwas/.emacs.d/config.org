@@ -25,7 +25,7 @@
   :config
   (gcmh-mode 1))
 
-(setq gc-cons-threshold 402653184
+(setq gc-cons-threshold (* 50 1000 1000)
       gc-cons-percentage 0.6)
 
 (add-hook 'emacs-startup-hook
@@ -53,7 +53,7 @@ Project interaction library for Emacs.
 #+begin_src emacs-lisp
 (use-package projectile
   :config
-  (projectile-global-mode 1))
+  (projectile-mode +1))
 #+end_src
 Various icon sets.
 #+begin_src emacs-lisp
@@ -642,11 +642,11 @@ Binding `C-l` to `clear-scrollback` if inside an eshell buffer.
 (defun run-this-in-eshell (cmd)
   "Runs the command 'cmd' in eshell."
   (with-current-buffer "*eshell*"
-    (end-of-buffer)
+    (goto-char (point-max))
     (eshell-kill-input)
     (insert cmd)
     (eshell-send-input)
-    (end-of-buffer)
+    (goto-char (point-max))
     (eshell-bol)
     (yank)))
 
