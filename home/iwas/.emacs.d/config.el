@@ -121,7 +121,9 @@
 	  ("#+author:" . ?)
 	  ("#+AUTHOR:" . ?)
 	  ("#+title:" . ?)
-	  ("#+TITLE:" . ?))))
+	  ("#+TITLE:" . ?)
+	  ("#+options:" . ?)
+	  ("#+OPTIONS:" . ?))))
 (global-prettify-symbols-mode 1)
 
 ;; Add pretty symbols to 'org-mode'
@@ -473,6 +475,12 @@
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+(setq org-agenda-files
+      '("~/.emacs.d/agenda.org.d/todo.org")
+      org-agenda-start-with-log-mode t
+      org-log-done 'time
+      org-log-into-drawer t)
 
 (use-package ox-man
   :ensure nil)

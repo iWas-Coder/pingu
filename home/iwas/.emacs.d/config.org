@@ -1,6 +1,42 @@
 #+AUTHOR: Wasym A. Alonso
 #+TITLE: iWas's GNU Emacs Config
 
+* Table of Contents :toc:
+- [[#package-management][Package Management]]
+  - [[#adding-melpa-repository][Adding MELPA repository]]
+  - [[#installing-use-package][Installing `use-package`]]
+- [[#startup-performance][Startup Performance]]
+  - [[#garbage-collection][Garbage Collection]]
+  - [[#native-compilation][Native Compilation]]
+- [[#dashboard][Dashboard]]
+  - [[#installing-dependencies][Installing dependencies]]
+  - [[#opening-the-dashboard][Opening the dashboard]]
+- [[#theme][Theme]]
+- [[#fonts][Fonts]]
+- [[#general-settings][General Settings]]
+  - [[#definitions][Definitions]]
+  - [[#scratch-buffer-i-open-at-the-close]['scratch' buffer: "I open at the close"]]
+  - [[#highlight-indentation-guides][Highlight indentation guides]]
+- [[#completion][Completion]]
+  - [[#which-key][Which Key]]
+  - [[#corfu][Corfu]]
+- [[#ivy--counsel][Ivy + Counsel]]
+- [[#app-launcher][App Launcher]]
+- [[#game-launcher][Game Launcher]]
+- [[#pulseaudio-sink-selector][Pulseaudio sink selector]]
+- [[#power-options-menu][Power options menu]]
+- [[#neotree][Neotree]]
+- [[#minimap][Minimap]]
+- [[#magit][Magit]]
+- [[#markup-languages][Markup languages]]
+  - [[#markdown][Markdown]]
+  - [[#org-mode][Org Mode]]
+- [[#terminal-modes][Terminal Modes]]
+  - [[#vterm][Vterm]]
+  - [[#eshell][Eshell]]
+  - [[#eat][Eat]]
+- [[#runtime-performance][Runtime performance]]
+
 * Package Management
 ** Adding MELPA repository
 #+begin_src emacs-lisp
@@ -161,7 +197,9 @@ Prettify some symbols in certain modes.
 	  ("#+author:" . ?)
 	  ("#+AUTHOR:" . ?)
 	  ("#+title:" . ?)
-	  ("#+TITLE:" . ?))))
+	  ("#+TITLE:" . ?)
+	  ("#+options:" . ?)
+	  ("#+OPTIONS:" . ?))))
 (global-prettify-symbols-mode 1)
 
 ;; Add pretty symbols to 'org-mode'
@@ -580,6 +618,15 @@ Enable rich mode for Ivy.
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
+#+end_src
+
+*** Org Agenda
+#+begin_src emacs-lisp
+(setq org-agenda-files
+      '("~/.emacs.d/agenda.org.d/todo.org")
+      org-agenda-start-with-log-mode t
+      org-log-done 'time
+      org-log-into-drawer t)
 #+end_src
 
 *** Org-to-Man
