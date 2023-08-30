@@ -1,0 +1,2 @@
+* Agenda
+This is a personal and work *agenda* document powered by GNU Emacs and Org Mode (Org Agenda module, specifically).
