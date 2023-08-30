@@ -1,2 +1,5 @@
 *.org linguist-detectable=true
 *.org linguist-language=emacs
+
+*.el linguist-detectable=true
+*.el linguist-language=emacs
