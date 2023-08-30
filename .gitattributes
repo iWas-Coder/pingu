@@ -3,3 +3,6 @@
 
 *.el linguist-detectable=true
 *.el linguist-language=emacs
+
+*.elc linguist-detectable=true
+*.elc linguist-language=emacs
