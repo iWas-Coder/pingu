@@ -28,7 +28,7 @@ But, for the sake of convenience, this command is aliased to the `pingu` keyword
 
 - [Install media](#install-media)
     - [Official Gentoo Minimal Installation ISO](#official-gentoo-minimal-installation-iso)
-    - [Alternative GNU/Linux LiveCD ISO](#alternative-gnu-linux-livecd-iso)
+    - [Alternative GNU/Linux LiveCD ISO](#alternative-gnulinux-livecd-iso)
 - [Installation](#installation)
     - [Disks preparation](#disks-preparation)
 		- [Partitioning](#partitioning)
@@ -157,7 +157,7 @@ Installation guide of the GNU/Linux distribution offered by Gentoo.
 #  cd /mnt/system
 ```
 
-This is the URL pattern where the Stage-3 tarball lives (updated periodically): `https://distfiles.gentoo.org/releases/amd64/autobuilds/*/stage3-amd64-desktop-openrc-*.tar.xz`, where `*` is the timestamp taken when that particular tarball was built.
+This is the URL pattern where the Stage-3 tarball lives (updated periodically): `https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/stage3-amd64-desktop-openrc-*.tar.xz`, where `*` is the timestamp taken when that particular tarball was built.
 
 Assume `$STAGE3` is the previous URL.
 

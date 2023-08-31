@@ -1,0 +1,609 @@
+#+AUTHOR: Wasym A. Alonso
+
+#+ATTR_HTML: :width 400
+[[https://i.pinimg.com/originals/4d/df/9f/4ddf9fe1136a06629a3c6fc629a8b66d.png]]
+
+#+TITLE: Pingu: DE & dotfiles
+
+[[https://www.gnu.org/licenses/gpl-3.0.html][https://img.shields.io/badge/License-GPLv3-blue.svg]]
+
+Pingu is my personal ~dotfiles~ repository, which creates a Desktop Environment (DE) based on Gentoo's Portage package management tool, which manages packages from its source code; thus, building from source the entire GNU/Linux system.
+
+The layout of this repository is based on a technique I've recently taken to calling it the **Git bare dotfiles organization strategy**, which is extensively explained and discussed both in this 2016 [[https://news.ycombinator.com/item?id=11070797][Hacker News thread]] by the user /StreakyCobra/, and in an [[https://www.atlassian.com/git/tutorials/dotfiles][article published by Atlassian]], in their Git tutorials section.
+
+This technique, then, consists in creating a bare repository (the ~.git~ directory in a complete repo with its worktree there as well) in ~$HOME/.pingu~, and defining the worktree as the ~/~ (root) of the entire filesystem. This is specified command-based, as such:
+#+begin_src sh
+$  git --git-dir=$HOME/.pingu --work-tree=/
+#+end_src
+But, for the sake of convenience, this command is aliased to the ~pingu~ keyword, which can be used to issue commands to perform normal Git operations under the dotfiles repository, located in this case under ~$HOME/.pingu~.
+
+#+BEGIN_EXPORT html
+<style>
+blockquote {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #FFF8DC;
+    border-left: 2px solid #ffeb8e;
+    border-left-color: rgb(255, 228, 102);
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+}
+</style>
+#+END_EXPORT
+
+#+BEGIN_QUOTE
+This work and all its documentation is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#+END_QUOTE
+
+* Table of Contents :toc:
+- [[#install-media][Install media]]
+  - [[#official-gentoo-minimal-installation-iso][Official Gentoo Minimal Installation ISO]]
+  - [[#alternative-gnulinux-livecd-iso][Alternative GNU/Linux LiveCD ISO]]
+- [[#installation][Installation]]
+  - [[#disks-preparation][Disks preparation]]
+  - [[#stage-3-base-system][Stage-3 Base System]]
+  - [[#building-target-system][Building Target System]]
+  - [[#building-kernel][Building Kernel]]
+  - [[#basic-system-configuration][Basic system configuration]]
+  - [[#bootloader][Bootloader]]
+  - [[#finishing][Finishing]]
+- [[#pingu-environment][Pingu environment]]
+- [[#main-components][Main components]]
+  - [[#i3][i3]]
+  - [[#kitty][Kitty]]
+  - [[#gnu-emacs][GNU Emacs]]
+
+* Install media
+
+(...)
+
+** Official Gentoo Minimal Installation ISO
+
+This is the URL pattern where the ISO lives (updated periodically): ~https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal-*.iso~, where ~*~ is the timestamp taken when that particular ISO was built.
+
+Assume ~$ISO~ is the previous URL.
+
+A ~$ISO.DIGESTS~ file is available, which provides a set of hashes to verify the integrity of the downloaded ISO. If only wanted a SHA256 hash, the file ~$ISO.sha256~ file can be downloaded instead.
+
+Also, a ~$ISO.asc~ file is available, which contains the PGP signature of the downloaded ISO. In order to verify the authenticity of the signature, one must do:
+
+#+begin_src sh
+$  gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
+$  gpg --verify install-amd64-minimal-*.iso.asc
+#+end_src
+
+** Alternative GNU/Linux LiveCD ISO
+
+(...)
+
+* Installation
+
+Installation guide of the GNU/Linux distribution offered by Gentoo.
+
+(...)
+
+** Disks preparation
+
+(...)
+
+*** Partitioning
+
+(...)
+
+#+begin_src sh
+#  cfdisk /dev/vda
+#+end_src
+
+(...)
+
+| LABEL | MOUNTPOINT | PARTITION TYPE   | FORMAT | SIZE |
+|-------+------------+------------------+--------+------|
+| EFI   | /boot/EFI  | EFI System       | fat32  | 128M |
+| BOOT  | /boot      | Linux filesystem | ext4   | 896M |
+| SYS   | /          | Linux filesystem | ext4   | REST |
+
+(...)
+
+#+begin_src sh
+#  cfdisk /dev/vda
+#+end_src
+
+(...)
+
+| LABEL | MOUNTPOINT       | PARTITION TYPE   | FORMAT | SIZE |
+|-------+------------------+------------------+--------+------|
+| DATA  | $HOME/data       | Linux filesystem | ext4   | ALL  |
+
+(...)
+
+*** Formatting and mounting root partition
+
+(...)
+
+#+begin_src sh
+#  mkfs.vfat -F 32 -n EFI /dev/vda1
+#  mkfs.ext4 -L BOOT /dev/vda2
+#  mkfs.ext4 -L SYS /dev/vda3
+#  mkfs.ext4 -L DATA /dev/vdb1
+#+end_src
+
+(...)
+
+#+begin_src sh
+#  wipefs /dev/{vda*,vdb*}
+#+end_src
+
+(...)
+
+#+begin_src sh
+#  mount -L SYS /mnt/system --mkdir
+#+end_src
+
+** Stage-3 Base System
+
+(...)
+
+#+begin_src sh
+#  cd /mnt/system
+#+end_src
+
+This is the URL pattern where the Stage-3 tarball lives (updated periodically): ~https://distfiles.gentoo.org/releases/amd64/autobuilds/current-install-amd64-minimal/stage3-amd64-desktop-openrc-*.tar.xz~, where ~*~ is the timestamp taken when that particular tarball was built.
+
+Assume ~$STAGE3~ is the previous URL.
+
+A ~$STAGE3.DIGESTS~ file is available, which provides a set of hashes to verify the integrity of the downloaded tarball. If only wanted a SHA256 hash, the file ~$STAGE3.sha256~ file can be downloaded instead.
+
+Also, a ~$STAGE3.asc~ file is available, which contains the PGP signature of the downloaded tarball. In order to verify the authenticity of the signature, one must do:
+
+#+begin_src sh
+$  gpg --auto-key-locate=clear,nodefault,wkd --locate-key releng@gentoo.org
+$  gpg --verify stage3-amd64-desktop-openrc-*.tar.xz.asc
+#+end_src
+
+After all is on check, unpack the downloaded tarball (from within ~/mnt/system~ root's mountpoint) by doing:
+
+#+begin_src sh
+#  tar -xpvf stage3-amd64-desktop-openrc-*.tar.xz --xattrs-include='*.*' --numeric-owner
+#+end_src
+The ~--xattrs-include='*.*'~ argument is used to include preservation of the the extended attributes in all namespaces stored in the archive. Also, the ~--numeric-owner~ argument is used to ensure that the user and group IDs of the files being extracted from the tarball will remain the same as Gentoo's release engineering team intended (even if adventurous users are not using official Gentoo live environments).
+
+** Building Target System
+
+(...)
+
+*** Compile options
+
+Edit the file ~/mnt/system/etc/portage/make.conf~ accordingly to the specific hardware. [[etc/portage/make.conf][The proposed skeleton]] is suggested in order to have this system configuration.
+
+There are several things that might need a change. Let's go through them, discussing for each one its possible values:
+
+- ~-march=~: This setting specifies the name of the target architecture. With this setting set, GCC will be free to generate instructions that work on the specified CPU, but (typically) not on earlier CPUs in the architecture family. A commonly used value is ~native~, as that tells the compiler to select the target architecture of the current system (if GCC is able to detect it). Other common values are ~znver1~ (/Ryzen 1000 and 2000 series/), ~znver2~ (/Ryzen 3000, 4000, 5000, and EPYC 7xx2 series/), ~znver3~ (/5000 and EPYC 7xx3 series/), ~alderlake~ (/Intel 12th Gen/), ~skylake~ (/Intel 6-11th Gen/), etc. This also can be searched [[https://wiki.gentoo.org/wiki/Safe_CFLAGS][online]], or guessed by GCC itself (issuing ~gcc -Q -march=native --help=target | grep march | head -n 1~).
+
+- ~-j~: This setting sets the number of jobs that ~make~ will try to execute in a parallel manner. This can be equal to the number of CPUs (threads) seen by the kernel, but I enjoy setting it to a lower number to be able to multitask quite efficiently while emerging (compiling/building) a set of packages, e.g. ~-j10~ with 16 CPUs.
+
+- ~VIDEO_CARDS~: This setting should be configured appropriately depending on the available GPU(s). Common choices include ~nouveau~ (/NVIDIA GPU - Reverse Engineered FOSS Driver/), ~nvidia~ (/NVIDIA GPU - Privative Driver/), ~amdgpu radeonsi~ (/AMD Modern GPU/), ~radeon~ (/AMD Old GPU/), ~intel~ (/Intel GPU/), ~virgl~ (/Virtio GPU/), ~vmware~ (/VMware SVGA GPU/), ~virtualbox~ (/Virtualbox GPU/), etc.
+
+- ~ACCEPT_LICENSE~: This setting can be set to override the system wide accepted default licenses in the profiles. The license groups defined in the Gentoo repository, managed by the Gentoo Licenses project, are:
+	- ~@GPL-COMPATIBLE~: GPL compatible licenses approved by the Free Software Foundation [[https://www.gnu.org/licenses/license-list.html][<ref>]].
+	- ~@FSF-APPROVED~: Free software licenses approved by the FSF. Includes ~@GPL-COMPATIBLE~.
+	- ~@OSI-APPROVED~: Licenses approved by the Open Source Initiative [[https://www.opensource.org/licenses][<ref>]].
+	- ~@MISC-FREE~: Misc licenses that are probably free software, i.e. follow the Free Software Definition, but are not approved by either FSF or OSI [[https://www.gnu.org/philosophy/free-sw.html][<ref>]].
+	- ~@FREE-SOFTWARE~: Combines ~@FSF-APPROVED~, ~@OSI-APPROVED~ and ~@MISC-FREE~.
+	- ~@FSF-APPROVED-OTHER~: FSF-approved licenses for "free documentation" and "works of practical use besides software and documentation" (including fonts).
+	- ~@MISC-FREE-DOCS~: Misc licenses for free documents and other works (including fonts) that follow the free definition, but are NOT listed in ~@FSF-APPROVED-OTHER~ [[https://freedomdefined.org/][<ref>]].
+	- ~@FREE-DOCUMENTS~: Combines ~@FSF-APPROVED-OTHER~ and ~@MISC-FREE-DOCS~.
+	- ~@FREE~: Metaset of all licenses with the freedom to use, share, modify and share modifications. Combines ~@FREE-SOFTWARE~ and ~@FREE-DOCUMENTS~.
+	- ~@BINARY-REDISTRIBUTABLE~: Licenses that at least permit free redistribution of the software in binary form. Includes ~@FREE~.
+	- ~@EULA~: License agreements that try to take away your rights. These are more restrictive than "all-rights-reserved" or require explicit approval.
+
+*** Copy DNS info
+
+One thing still remains to be done before entering the new environment and that is copying over the DNS information in ~/etc/resolv.conf~. This needs to be done to ensure that networking still works even after entering the new environment. ~/etc/resolv.conf~ contains the name servers for the network.
+
+To copy this information, it is recommended to pass the ~-L, --dereference~ option to the cp command. This ensures that, if ~/etc/resolv.conf~ is a symbolic link, that the link's target file is copied instead of the symbolic link itself. Otherwise in the new environment the symbolic link would point to a non-existing file (as the link's target is most likely not available inside the new environment).
+
+#+begin_src sh
+#  cp -L /etc/resolv.conf /mnt/system/etc/
+#+end_src
+
+*** Mounting necessary filesystems
+
+In a few moments, the Linux root will be changed towards the new location. The filesystems that need to be made available are:
+
+- ~/proc~: Pseudo-filesystem that it looks like regular files, but is generated on-the-fly by the Linux kernel.
+#+begin_src sh
+#  mount -t proc /proc /mnt/system/proc
+#+end_src
+- ~/sys~: Pseudo-filesystem, like ~/proc~, which it was once meant to replace, and is more structured than ~/proc~.
+#+begin_src sh
+#  mount -R /sys /mnt/system/sys
+#  mount --make-rslave /mnt/system/sys
+#+end_src
+- ~/dev~: Regular file system which contains all devices, and it is partially managed by the Linux device manager (usually *udev*).
+#+begin_src sh
+#  mount -R /dev /mnt/system/dev
+#  mount --make-rslave /mnt/system/dev
+#+end_src
+- ~/run~: Temporary file system used for files generated at runtime, such as PID files or locks.
+#+begin_src sh
+#  mount -B /run /mnt/system/run
+#  mount --make-slave /mnt/system/run
+#+end_src
+
+The ~/proc~ location will be mounted on ~/mnt/system/proc~ whereas the others are *bind-mounted*. The latter means that, for instance, ~/mnt/system/sys~ will actually be ~/sys~ (it is just a second entry point to the same filesystem) whereas ~/mnt/system/proc~ is a new mount (instance so to speak) of the filesystem.
+
+When using **non-Gentoo installation media**, this might not be sufficient. Some distributions make ~/dev/shm~ a symbolic link to ~/run/shm~ which, after the chroot, becomes invalid. Making ~/dev/shm~ a proper tmpfs mount up front can fix this:
+#+begin_src sh
+#  test -L /dev/shm && rm /dev/shm && mkdir /dev/shm
+#  mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm
+#+end_src
+Also ensure that *mode 1777* is set:
+#+begin_src sh
+#  chmod 1777 /dev/shm /run/shm
+#+end_src
+
+*** Entering the new environment
+
+Now that all partitions are initialized and the base environment installed, it is time to enter the new installation environment by chrooting into it. This means that the session will change its root (most top-level location that can be accessed) from the current installation environment to the installation system (namely the initialized partitions). Hence the name, change root or /chroot/.
+
+#+begin_src sh
+#  chroot /mnt/system /bin/bash
+#  source /etc/profile
+#  export PS1="(chroot) ${PS1}"
+#+end_src
+
+Now that the new environment has been entered, it is necessary to mount the /BOOT/ and /EFI/ partition. This will be important when it is time to compile the kernel and install the bootloader:
+
+#+begin_src sh
+(chroot) #  mount -L BOOT /boot
+(chroot) #  mount -L EFI /boot/EFI --mkdir
+#+end_src
+
+*** Configuring Portage
+
+Next step is to install a snapshot of the Gentoo ebuild repository. This snapshot contains a collection of files that informs Portage about available software titles (for installation), which profiles the system administrator can select, package or profile specific news items, etc. This will fetch the latest snapshot (which is released on a daily basis) from one of Gentoo's mirrors and install it onto the system:
+
+#+begin_src sh
+(chroot) #  emerge-webrsync
+#+end_src
+
+It is possible to update the Gentoo ebuild repository to the latest version. This command will use the rsync protocol to update the Gentoo ebuild repository (which was fetched earlier on through ~emerge-webrsync~) to the latest state:
+
+#+begin_src sh
+(chroot) #  emerge --sync
+#+end_src
+
+When the Gentoo ebuild repository is synchronized, Portage may notice that new /news items/ are available for reading. /News items/ were created to provide a communication medium to push critical messages to users via the Gentoo ebuild repository.
+
+List all of them with:
+
+#+begin_src sh
+(chroot) #  eselect news list
+#+end_src
+
+Read all new items with:
+
+#+begin_src sh
+(chroot) #  eselect news read
+#+end_src
+
+Or read specific items with:
+
+#+begin_src sh
+(chroot) #  eselect news read <N>
+#+end_src
+
+Purge already read items with:
+
+#+begin_src sh
+(chroot) #  eselect news purge
+#+end_src
+
+At this point, it is wise to update the system's ~@world~ set so that a base can be established. This following step is necessary so the system can apply any updates or /USE flag changes/ which have appeared since the /stage3/ was built and from any profile selection:
+
+#+begin_src sh
+(chroot) #  emerge -vauDU @world
+#+end_src
+
+Configure the timezone with:
+
+#+begin_src sh
+(chroot) #  ls /usr/share/zoneinfo
+(chroot) #  echo "Europe/Madrid" > /etc/timezone
+(chroot) #  emerge --config timezone-data
+#+end_src
+
+Configure the locales with:
+
+#+begin_src sh
+(chroot) #  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+(chroot) #  locale-gen
+(chroot) #  eselect locale list
+(chroot) #  eselect locale set <N>
+#+end_src
+
+Reload the environment with:
+
+#+begin_src sh
+(chroot) #  env-update
+(chroot) #  source /etc/profile
+(chroot) #  export PS1="(chroot) ${PS1}"
+#+end_src
+
+** Building Kernel
+
+Now it is time to configure and compile the kernel sources. For the purposes of the installation, there are several packages we need to get before proceeding to the actual building stage:
+
+#+begin_src sh
+(chroot) #  emerge -va dev-python/pytest gentoo-sources linux-headers linux-firmware
+#+end_src
+
+Check current ~/usr/src/linux~ symlink:
+#+begin_src sh
+(chroot) #  eselect kernel list
+#+end_src
+
+Change the symlink to the previously emerged version by doing:
+#+begin_src sh
+(chroot) #  eselect kernel set <N>
+#+end_src
+
+Ensure the source tree is properly cleaned up:
+#+begin_src sh
+(chroot) #  cd /usr/src/linux
+(chroot) #  make mrproper
+#+end_src
+
+Generate a generic kernel configuration file, and open it up (~.config~) with the ~menuconfig~ editor:
+#+begin_src sh
+(chroot) #  make menuconfig
+#+end_src
+
+Pass the unit test suite (pytest) to check for config errors:
+#+begin_src sh
+(chroot) #  make testconfig
+#+end_src
+
+Build the kernel (~vmlinux~), its selected modules (~*.ko~) and the kernel compressed image (~bzImage~).
+#+begin_src sh
+(chroot) #  KCFLAGS="-march=<ARCH> -O2 -pipe" nice make [-j<N>]
+#+end_src
+Add the ~-j<N>~ flag so that GNU Make can parallelize jobs, where ~N~ is the number of jobs to handle in parallel.
+
+Replace ~<ARCH>~ with the CPU's architecture name that GNU GCC handles (e.g. ~znver2~ for Zen2; ~znver3~ for Zen3). This can be searched online, or guessed by GCC itself doing:
+#+begin_src sh
+(chroot) #  gcc -Q -march=native --help=target | grep march | head -n 1
+#+end_src
+
+As this has been already configured in ~/etc/portage/make.conf~ previously, it can be accessed directly:
+#+begin_src sh
+(chroot) #  KCFLAGS="$(grep -oP 'COMMON_FLAGS="\K[^"]+' /etc/portage/make.conf)" nice make [-j<N>]
+#+end_src
+
+Install the built modules into ~/lib/modules/<VERSION>~:
+#+begin_src sh
+(chroot) #  make modules_install
+#+end_src
+
+Export the API headers into ~./usr~, in case needed later on:
+#+begin_src sh
+(chroot) #  make headers
+#+end_src
+
+Install the kernel's needed resources in ~/boot~, using the following mapping:
+- ~bzImage~ -> ~/boot/vmlinuz-<VERSION>~
+- ~System.map~ -> ~/boot/System.map-<VERSION>~
+- ~.config~ -> ~/boot/config-<VERSION>~
+If these files already existed in ~/boot~ prior to this step, then it renames them to ~*.old~, in order to maintain a backup until the new version gets tested.
+#+begin_src sh
+(chroot) #  make install
+#+end_src
+
+(...)
+
+#+begin_src sh
+(chroot) #  emerge -va dracut
+#+end_src
+
+Create the first iteration of the initial ramdisk FS (i.e. ~initramfs~ or ~initrd~):
+#+begin_src sh
+(chroot) #  dracut --kver=<VERSION> --hostonly --early-microcode
+#+end_src
+
+** Basic system configuration
+
+(...)
+
+*** ~fstab~ file
+
+Under Linux, all partitions used by the system must be listed in ~/etc/fstab~. This file contains the mount points of those partitions (where they are seen in the file system structure), how they should be mounted and with what special options (automatically or not, whether users can mount them or not, etc.).
+
+#+begin_src
+LABEL=EFI /boot/EFI vfat noauto,noatime 0 2
+LABEL=BOOT /boot ext4 defaults,noatime,nodiratime 0 1
+LABEL=SYS / ext4 defaults,noatime,nodiratime 0 1
+LABEL=DATA /home/iwas/data ext4 defaults,noatime,nodiratime 0 2
+#+end_src
+
+*** ~hostname~ file
+
+One of the choices the system administrator has to make is name their PC. This seems to be quite easy, but lots of users are having difficulties finding the appropriate name for the hostname. To speed things up, know that the decision is not final, as it can be changed afterwards.
+
+#+begin_src sh
+(chroot) #  echo "sheldon" > /etc/hostname
+#+end_src
+
+*** ~hosts~ file
+
+An important next step may be to inform this new system about other hosts in its network environment. Network host names can be defined in the ~/etc/hosts~ file. Adding host names here will enable host name to IP addresses resolution for hosts that are not resolved by the nameserver.
+
+#+begin_src
+127.0.0.1 sheldon.swa2.ml sheldon localhost
+#+end_src
+
+*** Network configuration
+
+There are many options available for configuring network interfaces. Most LAN networks operate a DHCP server. If this is the case, then using the ~dhcpcd~ program to obtain an IP address is recommended.
+
+#+begin_src sh
+(chroot) #  emerge -va dhcpcd
+(chroot) #  rc-update add dhcpcd default
+#+end_src
+
+*** Set root password
+
+Set the root password using the ~passwd~ command:
+
+#+begin_src sh
+(chroot) #  passwd
+#+end_src
+
+*** System logger
+
+Some tools are missing from the stage3 archive because several packages provide the same functionality. It is now up to the user to choose which ones to install. The first tool to decision is a logging mechanism for the system. UNIX and Linux have an excellent history of logging capabilities; if needed, everything that happens on the system can be logged in a log file.
+
+The package ~sysklogd~ offers the traditional set of system logging daemons. The default logging configuration works well out of the box which makes this package a good option for beginners.
+
+#+begin_src sh
+(chroot) #  emerge -va sysklogd
+(chroot) #  rc-update add sysklogd default
+#+end_src
+
+*** Time synchronization
+
+It is important to use some method of synchronizing the system clock. This is usually done via the NTP protocol and software. Other implementations using the NTP protocol exist, like ~chrony~. To set it up, do:
+
+#+begin_src sh
+(chroot) #  emerge -va chrony
+(chroot) #  rc-update add chronyd default
+#+end_src
+
+*** Filesystem tools
+
+Depending on the filesystems used, it may be necessary to install the required file system utilities (for checking the filesystem integrity, (re)formatting file systems, etc.). Note that ext4 user space tools (~e2fsprogs~) are already installed as a part of the ~@system~ set.
+
+For a basic approach, installing all VFAT-related FS userspace tools is a good starting point:
+
+#+begin_src sh
+(chroot) #  emerge -va dosfstools
+#+end_src
+
+** Bootloader
+
+With the Linux kernel configured, system tools installed and configuration files edited, it is time to install the last important piece of a Linux installation: the bootloader. The bootloader is responsible for firing up the Linux kernel upon boot; without it, the system would not know how to proceed after the UEFI/BIOS firmware is loaded.
+
+By default, the majority of Linux systems now rely upon GRUB. With no additional configuration, GRUB gladly supports older BIOS ("pc") systems. With a small amount of configuration, necessary before build time, GRUB can support more than a half a dozen additional platforms.
+
+#+begin_src sh
+(chroot) #  emerge -va grub
+#+end_src
+
+Next, install the necessary GRUB files to the ~/boot/grub/~ directory via the ~grub-install~ command:
+
+#+begin_src sh
+(chroot) #  grub-install --bootloader-id=GRUB --efi-directory=/boot/EFI --recheck
+#+end_src
+
+Then, generate a generic GRUB configuration file, with the ~grub-mkconfig~ command:
+
+#+begin_src sh
+(chroot) #  grub-mkconfig -o /boot/grub/grub.cfg
+#+end_src
+
+** Finishing
+
+Working as root on a Unix/Linux system is dangerous and should be avoided as much as possible. Therefore it is strongly recommended to add a user for day-to-day use. For instance, before rebooting, let's do so:
+
+#+begin_src sh
+(chroot) #  useradd -m -s /bin/bash -G tty,wheel,audio,video,input,users iwas
+(chroot) #  passwd iwas
+#+end_src
+
+Exit the chrooted environment and unmount all mounted partitions. Then type in that one magical command that initiates the final, true test: ~reboot~.
+
+#+begin_src sh
+(chroot) #  exit
+#  cd
+#  umount /mnt/system/dev/{shm,pts}
+#  umount -R /mnt/system
+#  reboot
+#+end_src
+
+Do not forget to remove the bootable media (ISO), otherwise it might be booted again instead of the new installed system.
+
+Once booted to the newly built kernel, create the second and last iteration of the initrd image:
+
+#+begin_src sh
+#  dracut --kver=<VERSION> --hostonly --early-microcode --force
+#+end_src
+
+With the installation finished and the system rebooted, if everything has gone well, we can now remove the downloaded /stage3 tarball/ from the disk. Remember that it was downloaded to the ~/~ directory:
+
+#+begin_src sh
+#  rm /stage3-*.tar.*
+#+end_src
+
+* Pingu environment
+
+(...)
+
+#+begin_src sh
+$  git clone --bare https://github.com/iwas-coder/pingu $HOME/.pingu
+#+end_src
+
+(...)
+
+#+begin_src sh
+#  git --git-dir=$HOME/.pingu --work-tree=/ checkout -f
+#+end_src
+
+(...)
+
+* Main components
+
+(...)
+
+** i3
+
+#+ATTR_HTML: :width 100%
+[[home/iwas/.config/i3/screenshot-desktop.png]]
+
+(...)
+
+As an add-on, I use the ~picom~ compositor (a fork of the initial ~compton~ project) to add transparency, shadows and animations to all windows and apps. Specifically, I am using the [[https://github.com/pijulius/picom][pijulius's fork]], which includes _fantastic animation code_ to the project (the only one I tried that works perfectly for production).
+
+For this reason, I'd like to give a _shoutout_ to /Istvan Petres/ for this fork and all its contributions, thank you!
+
+#+begin_src sh
+$  cd ~/data/git/external
+$  git clone https://github.com/pijulius/picom picom.pijulius
+$  cd !$
+$  git submodule update --init --recursive
+$  meson setup --buildtype=release . build
+$  ninja -C build
+#  ln -s $(pwd)/build/src/picom /usr/local/bin
+#+end_src
+
+If wanted to reduce file size of the binary, using the ~upx~ utility, do:
+#+begin_src sh
+$  upx --color --best build/src/picom
+#+end_src
+
+** Kitty
+
+#+ATTR_HTML: :width 100%
+[[home/iwas/.config/kitty/screenshot-terminal.png]]
+
+(...)
+
+** GNU Emacs
+
+#+ATTR_HTML: :width 100%
+[[home/iwas/.emacs.d/screenshot-dashboard.png]]
+#+ATTR_HTML: :width 100%
+[[home/iwas/.emacs.d/screenshot-editor.png]]

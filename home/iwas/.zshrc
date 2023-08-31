@@ -301,11 +301,14 @@ podman.load () {
 }
 # Podman create a Gentoo dev environment
 podman.gentoo_shell () {
+  xhost +
   podman run                                                                        \
     --rm                                                                            \
     -it                                                                             \
     --name "$(hostname)-ct"                                                         \
     --hostname "$(hostname)-ct"                                                     \
+    -e DISPLAY=$DISPLAY                                                             \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro                                             \
     -v /etc/portage/make.conf:/etc/portage/make.conf:ro                             \
     -v /etc/portage/package.accept_keywords:/etc/portage/package.accept_keywords:ro \
     -v /etc/portage/package.license:/etc/portage/package.license:ro                 \
@@ -314,6 +317,7 @@ podman.gentoo_shell () {
     -v /etc/portage/patches:/etc/portage/patches:ro                                 \
     gentoo/stage3                                                                   \
     sh -c "emerge-webrsync && /bin/bash -i"
+  xhost -
   podman rmi gentoo/stage3
 }
 # i3-layout-viewer
