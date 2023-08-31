@@ -12,6 +12,18 @@ alias vi ff $1
 alias vim ff $1
 alias nvim ff $1
 
+alias ggst git status -sb
+alias ggtoken cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"
+alias ggfetch git fetch --all -p -P && echo; ggst
+alias ggpush ggtoken && git push
+alias gglog git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all
+alias ggundo git reset --soft HEAD@{1}
+alias ggadd git add -vu
+alias ggclean dialog --clear --title "ggclean" --defaultno --yesno "Are you sure?" 0 0 && git reset --hard && git clean -fxd; clear
+
 alias pingu git --git-dir=/home/iwas/.pingu --work-tree=/ $*
+alias pingu-fetch pingu fetch --all -p -P && echo; pingu status -sb
+alias pingu-push ggtoken && pingu push
+alias pingu-list pingu ls-tree --full-tree --name-only -r HEAD
 alias pingu-update pingu add -v -u
-alias pingu-log pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"
+alias pingu-log pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all

@@ -122,7 +122,7 @@ alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; ggst'
 alias ggpush='ggtoken && git push'
-alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
+alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all'
 alias ggundo='git reset --soft HEAD@{1}'
 alias ggst='git status -sb'
 alias ggadd='git add -vu'
