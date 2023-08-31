@@ -117,7 +117,7 @@ alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status -sb'
 alias pingu-push='ggtoken && pingu push'
 alias pingu-list='pingu ls-tree --full-tree --name-only -r HEAD'
 alias pingu-update='pingu add -v -u'
-alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)"'
+alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all'
 # Git Custom
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; ggst'

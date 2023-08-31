@@ -1,15 +1,16 @@
 #+AUTHOR: Wasym A. Alonso
-
-#+ATTR_HTML: :width 400
-[[https://i.pinimg.com/originals/4d/df/9f/4ddf9fe1136a06629a3c6fc629a8b66d.png]]
-
 #+TITLE: Pingu: DE & dotfiles
 
+#+CAPTION: Pingu logo
+#+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 400
+[[https://i.pinimg.com/originals/4d/df/9f/4ddf9fe1136a06629a3c6fc629a8b66d.png]]
+# License badge
 [[https://www.gnu.org/licenses/gpl-3.0.html][https://img.shields.io/badge/License-GPLv3-blue.svg]]
 
 Pingu is my personal ~dotfiles~ repository, which creates a Desktop Environment (DE) based on Gentoo's Portage package management tool, which manages packages from its source code; thus, building from source the entire GNU/Linux system.
 
-The layout of this repository is based on a technique I've recently taken to calling it the **Git bare dotfiles organization strategy**, which is extensively explained and discussed both in this 2016 [[https://news.ycombinator.com/item?id=11070797][Hacker News thread]] by the user /StreakyCobra/, and in an [[https://www.atlassian.com/git/tutorials/dotfiles][article published by Atlassian]], in their Git tutorials section.
+The layout of this repository is based on a technique I've recently taken to calling it the *Git bare dotfiles organization strategy*, which is extensively explained and discussed both in this 2016 [[https://news.ycombinator.com/item?id=11070797][Hacker News thread]] by the user /StreakyCobra/, and in an [[https://www.atlassian.com/git/tutorials/dotfiles][article published by Atlassian]], in their Git tutorials section.
 
 This technique, then, consists in creating a bare repository (the ~.git~ directory in a complete repo with its worktree there as well) in ~$HOME/.pingu~, and defining the worktree as the ~/~ (root) of the entire filesystem. This is specified command-based, as such:
 #+begin_src sh
@@ -570,6 +571,8 @@ $  git clone --bare https://github.com/iwas-coder/pingu $HOME/.pingu
 
 ** i3
 
+#+CAPTION: i3 screenshot
+#+ATTR_ORG: :width 100%
 #+ATTR_HTML: :width 100%
 [[home/iwas/.config/i3/screenshot-desktop.png]]
 
@@ -596,6 +599,8 @@ $  upx --color --best build/src/picom
 
 ** Kitty
 
+#+CAPTION: Kitty screenshot
+#+ATTR_ORG: :width 100%
 #+ATTR_HTML: :width 100%
 [[home/iwas/.config/kitty/screenshot-terminal.png]]
 
@@ -603,7 +608,13 @@ $  upx --color --best build/src/picom
 
 ** GNU Emacs
 
+#+CAPTION: GNU Emacs screenshot (1)
+#+ATTR_ORG: :width 100%
 #+ATTR_HTML: :width 100%
 [[home/iwas/.emacs.d/screenshot-dashboard.png]]
+#+CAPTION: GNU Emacs screenshot (2)
+#+ATTR_ORG: :width 100%
 #+ATTR_HTML: :width 100%
 [[home/iwas/.emacs.d/screenshot-editor.png]]
+
+(...)
