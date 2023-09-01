@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'package)
 (setq package-check-signature nil)
 (add-to-list 'package-archives

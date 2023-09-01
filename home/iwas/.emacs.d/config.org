@@ -2,6 +2,7 @@
 #+TITLE: iWas's GNU Emacs Config
 
 * Table of Contents :toc:
+- [[#lexical-binding][Lexical binding]]
 - [[#package-management][Package Management]]
   - [[#adding-melpa-repository][Adding MELPA repository]]
   - [[#installing-use-package][Installing `use-package`]]
@@ -36,6 +37,12 @@
   - [[#eshell][Eshell]]
   - [[#eat][Eat]]
 - [[#runtime-performance][Runtime performance]]
+
+* Lexical binding
+~lexical-binding~ is a special variable in Emacs Lisp that controls the scoping behavior of variables within lexical environments. When it is set to ~t~, it enables lexical scoping for variables, which means that variables are bound to values based on their lexical context or where they are defined in the code.
+#+begin_src emacs-lisp
+;; -*- lexical-binding: t; -*-
+#+end_src
 
 * Package Management
 ** Adding MELPA repository
