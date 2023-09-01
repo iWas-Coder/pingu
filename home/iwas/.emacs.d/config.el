@@ -429,7 +429,7 @@
 
 (setq org-ellipsis " ▼ "
       org-log-done 'time
-      org-hide-emphasis-markers t
+      org-hide-emphasis-markers nil
       org-src-fontify-natively t
       org-src-preserve-indentation nil
       org-src-tab-acts-natively t

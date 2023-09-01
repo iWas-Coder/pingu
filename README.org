@@ -37,7 +37,9 @@ blockquote {
 
 #+BEGIN_QUOTE
 This work and all its documentation is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License.
+
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #+END_QUOTE
 
@@ -183,7 +185,7 @@ Edit the file ~/mnt/system/etc/portage/make.conf~ accordingly to the specific ha
 
 There are several things that might need a change. Let's go through them, discussing for each one its possible values:
 
-- ~-march=~: This setting specifies the name of the target architecture. With this setting set, GCC will be free to generate instructions that work on the specified CPU, but (typically) not on earlier CPUs in the architecture family. A commonly used value is ~native~, as that tells the compiler to select the target architecture of the current system (if GCC is able to detect it). Other common values are ~znver1~ (/Ryzen 1000 and 2000 series/), ~znver2~ (/Ryzen 3000, 4000, 5000, and EPYC 7xx2 series/), ~znver3~ (/5000 and EPYC 7xx3 series/), ~alderlake~ (/Intel 12th Gen/), ~skylake~ (/Intel 6-11th Gen/), etc. This also can be searched [[https://wiki.gentoo.org/wiki/Safe_CFLAGS][online]], or guessed by GCC itself (issuing ~gcc -Q -march=native --help=target | grep march | head -n 1~).
+- ~-march=~: This setting specifies the name of the target architecture. With this setting set, GCC will be free to generate instructions that work on the specified CPU, but (typically) not on earlier CPUs in the architecture family. A commonly used value is ~native~, as that tells the compiler to select the target architecture of the current system (if GCC is able to detect it). Other common values are ~znver1~ (/Ryzen 1000 and 2000 series/), ~znver2~ (/Ryzen 3000, 4000, 5000, and EPYC 7xx2 series/), ~znver3~ (/5000 and EPYC 7xx3 series/), ~alderlake~ (/Intel 12th Gen/), ~skylake~ (/Intel 6-11th Gen/), etc. This also can be searched [[https://wiki.gentoo.org/wiki/Safe_CFLAGS][online]], or guessed by GCC itself (issuing ~gcc -Q -march=native --help=target | grep march | head -n 1 | tr -d ' \t'~).
 
 - ~-j~: This setting sets the number of jobs that ~make~ will try to execute in a parallel manner. This can be equal to the number of CPUs (threads) seen by the kernel, but I enjoy setting it to a lower number to be able to multitask quite efficiently while emerging (compiling/building) a set of packages, e.g. ~-j10~ with 16 CPUs.
 
@@ -372,19 +374,11 @@ Pass the unit test suite (pytest) to check for config errors:
 
 Build the kernel (~vmlinux~), its selected modules (~*.ko~) and the kernel compressed image (~bzImage~).
 #+begin_src sh
-(chroot) #  KCFLAGS="-march=<ARCH> -O2 -pipe" nice make [-j<N>]
+(chroot) #  KCFLAGS="$(emerge --info | grep -iw cflags)" nice make [-j<N>]
 #+end_src
-Add the ~-j<N>~ flag so that GNU Make can parallelize jobs, where ~N~ is the number of jobs to handle in parallel.
-
-Replace ~<ARCH>~ with the CPU's architecture name that GNU GCC handles (e.g. ~znver2~ for Zen2; ~znver3~ for Zen3). This can be searched online, or guessed by GCC itself doing:
-#+begin_src sh
-(chroot) #  gcc -Q -march=native --help=target | grep march | head -n 1
-#+end_src
+Add the ~-j<N>~ flag so that GNU Make can parallelize jobs, where ~N~ is the number of jobs to handle in parallel. The ~CFLAGS~ are passed in from Portage's info (supplied previously in ~/etc/portage/make.conf~)
 
 As this has been already configured in ~/etc/portage/make.conf~ previously, it can be accessed directly:
-#+begin_src sh
-(chroot) #  KCFLAGS="$(grep -oP 'COMMON_FLAGS="\K[^"]+' /etc/portage/make.conf)" nice make [-j<N>]
-#+end_src
 
 Install the built modules into ~/lib/modules/<VERSION>~:
 #+begin_src sh
