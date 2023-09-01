@@ -1,4 +1,2 @@
 media-libs/libsdl2 pipewire vulkan haptic gles1 gles2
-# required by media-libs/libsdl2-2.24.2::gentoo[gles1]
-# required by libsdl2 (argument)
 >=media-libs/mesa-22.2.5 gles1
