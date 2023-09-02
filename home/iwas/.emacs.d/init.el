@@ -29,7 +29,7 @@
 
 (if (boundp 'comp-deferred-compilation)
     (setq comp-deferred-compilation nil)
-    (setq native-comp-deferred-compilation nil))
+  (setq native-comp-deferred-compilation nil))
 (setq load-prefer-newer noninteractive)
 
 (use-package projectile
@@ -127,7 +127,8 @@
 	  ("#+options:" . ?)
 	  ("#+OPTIONS:" . ?)
 	  ("#+property:" . ?)
-	  ("#+PROPERTY:" . ?))))
+	  ("#+PROPERTY:" . ?)
+	  (":tangle" . ?⇶))))
 (global-prettify-symbols-mode 1)
 
 ;; Add pretty symbols to 'org-mode'
@@ -185,17 +186,17 @@
 (use-package which-key
   :init
   (setq which-key-side-window-location 'bottom
-	  which-key-sort-order #'which-key-key-order-alpha
-        which-key-sort-uppercase-first nil
-        which-key-add-column-padding 1
-        which-key-max-display-columns nil
-        which-key-min-display-lines 6
-        which-key-side-window-slot -10
-        which-key-side-window-max-height 0.25
-        which-key-idle-delay 0.8
-        which-key-max-description-length 25
-        which-key-allow-imprecise-window-fit t
-        which-key-separator " → "))
+	which-key-sort-order #'which-key-key-order-alpha
+	which-key-sort-uppercase-first nil
+	which-key-add-column-padding 1
+	which-key-max-display-columns nil
+	which-key-min-display-lines 6
+	which-key-side-window-slot -10
+	which-key-side-window-max-height 0.25
+	which-key-idle-delay 0.8
+	which-key-max-description-length 25
+	which-key-allow-imprecise-window-fit t
+	which-key-separator " → "))
 (which-key-mode)
 
 (use-package corfu
@@ -251,8 +252,8 @@
   :init (ivy-rich-mode 1)
   :custom
   (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev))
+			  ivy-rich-switch-buffer-align-virtual-buffer t
+			  ivy-rich-path-style 'abbrev))
 
 (defun emacs-counsel-launcher ()
   "App launcher that reads '.desktop' files from within GNU Emacs."
@@ -266,9 +267,9 @@
 		    (internal-border-width . 10)
 		    (width . 30)
 		    (height . 10)))
-      (unwind-protect
-	  (counsel-linux-app)
-	(delete-frame))))
+    (unwind-protect
+	(counsel-linux-app)
+      (delete-frame))))
 
 ;; Show only the pretty name
 (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only)
@@ -388,13 +389,13 @@
 	inhibit-compacting-font-caches t
 	projectile-switch-project-action 'neotree-projectile-action)
   (add-hook 'neo-after-create-hook
-      #'(lambda (&rest _)
-	  (with-current-buffer (get-buffer neo-buffer-name)
-	    (display-line-numbers-mode -1)
-	    (setq truncate-lines t)
-	    (setq word-wrap nil)
-	    (make-local-variable 'auto-hscroll-mode)
-	    (setq auto-hscroll-mode nil)))))
+	    #'(lambda (&rest _)
+		(with-current-buffer (get-buffer neo-buffer-name)
+		  (display-line-numbers-mode -1)
+		  (setq truncate-lines t)
+		  (setq word-wrap nil)
+		  (make-local-variable 'auto-hscroll-mode)
+		  (setq auto-hscroll-mode nil)))))
 
 ;; Show hidden files in neotree
 (setq-default neo-show-hidden-files t)
@@ -453,25 +454,25 @@
   (dolist
       (face
        '((org-level-1 1.7 "#51afef" ultra-bold)
-	     (org-level-2 1.6 "#c678dd" extra-bold)
-	     (org-level-3 1.5 "#98be65" bold)
-	     (org-level-4 1.4 "#da8548" semi-bold)
-	     (org-level-5 1.3 "#5699af" normal)
-	     (org-level-6 1.2 "#a9a1e1" normal)
-	     (org-level-7 1.1 "#46d9ff" normal)
-	     (org-level-8 1.0 "#ff6c6b" normal)))
+	       (org-level-2 1.6 "#c678dd" extra-bold)
+	       (org-level-3 1.5 "#98be65" bold)
+	       (org-level-4 1.4 "#da8548" semi-bold)
+	       (org-level-5 1.3 "#5699af" normal)
+	       (org-level-6 1.2 "#a9a1e1" normal)
+	       (org-level-7 1.1 "#46d9ff" normal)
+	       (org-level-8 1.0 "#ff6c6b" normal)))
     (set-face-attribute (nth 0 face) nil
-	  :font "JetbrainsMono Nerd Font"
-	  :weight (nth 3 face)
-	  :height (nth 1 face)
-	  :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil
-	  :font "JetbrainsMono Nerd Font"
-	  :weight 'normal
-	  :height 1.0
-	  :foreground "#bfafdf"))
+			:font "JetbrainsMono Nerd Font"
+			:weight (nth 3 face)
+			:height (nth 1 face)
+			:foreground (nth 2 face)))
+  (set-face-attribute 'org-table nil
+		      :font "JetbrainsMono Nerd Font"
+		      :weight 'normal
+		      :height 1.0
+		      :foreground "#bfafdf"))
 
-(org-colors-doom-one)
+(add-hook 'after-init-hook 'org-colors-doom-one)
 
 (use-package org-tempo
   :ensure nil)
@@ -488,11 +489,6 @@
 
 (use-package ox-man
   :ensure nil)
-
-(use-package org-auto-tangle
-  :defer t
-  :hook
-  (org-mode . org-auto-tangle-mode))
 
 (use-package vterm)
 (setq shell-file-name "/bin/zsh"
@@ -536,8 +532,8 @@
 
 (bind-keys*
  ("C-l" . (lambda ()
-            (interactive)
-            (run-this-in-eshell "clear-scrollback"))))
+	    (interactive)
+	    (run-this-in-eshell "clear-scrollback"))))
 
 (use-package eat
   :config
