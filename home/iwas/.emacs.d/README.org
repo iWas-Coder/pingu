@@ -1,5 +1,11 @@
 #+AUTHOR: Wasym A. Alonso
 #+TITLE: iWas's GNU Emacs Config
+#+PROPERTY: header-args :tangle init.el
+#+auto_tangle: t
+
+[[logo.png]]
+
+GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text editor*, a *directory editor* or *file manager* (~dired~), etc. and is extremely extensible to perform the task that you want it to actually do. It is described as /the extensible, customizable, self-documenting, real-time display editor/.
 
 * Table of Contents :toc:
 - [[#lexical-binding][Lexical binding]]
@@ -206,7 +212,9 @@ Prettify some symbols in certain modes.
 	  ("#+title:" . ?)
 	  ("#+TITLE:" . ?)
 	  ("#+options:" . ?)
-	  ("#+OPTIONS:" . ?))))
+	  ("#+OPTIONS:" . ?)
+	  ("#+property:" . ?)
+	  ("#+PROPERTY:" . ?))))
 (global-prettify-symbols-mode 1)
 
 ;; Add pretty symbols to 'org-mode'
@@ -640,6 +648,14 @@ Enable rich mode for Ivy.
 #+begin_src emacs-lisp
 (use-package ox-man
   :ensure nil)
+#+end_src
+
+*** Org auto tangle
+#+begin_src emacs-lisp
+(use-package org-auto-tangle
+  :defer t
+  :hook
+  (org-mode . org-auto-tangle-mode))
 #+end_src
 
 * Terminal Modes
