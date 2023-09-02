@@ -522,11 +522,11 @@
 (defun run-this-in-eshell (cmd)
   "Runs the command 'cmd' in eshell."
   (with-current-buffer "*eshell*"
-    (goto-char (point-max))
+    (end-of-buffer)
     (eshell-kill-input)
     (insert cmd)
     (eshell-send-input)
-    (goto-char (point-max))
+    (end-of-buffer)
     (eshell-bol)
     (yank)))
 
