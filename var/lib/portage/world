@@ -57,6 +57,7 @@ dev-python/html2text
 dev-python/netifaces
 dev-python/pip
 dev-python/psutil
+dev-python/pyftpdlib
 dev-python/pytest
 dev-python/requests
 dev-python/tqdm
