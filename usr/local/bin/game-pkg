@@ -6,7 +6,7 @@ usage () {
   echo "Usage:"
   arg_usage "-h/--help" "Show this help panel and exit"
   arg_usage "-a/--archive" "Compress game with ZPAQ and store it in the vault"
-  arg_usage "-x/--extract" "Fetch the game archival from the vault and decompress it locally"
+  arg_usage "-i/--install" "Fetch the game archival from the vault and decompress it locally"
   echo
 }
 
@@ -49,28 +49,26 @@ for game in $(ls "$GAMES"); do
       $LRZTAR "$NAME_GAME_DIR"
       # Transfer to vault
       $RSYNC_MV "$NAME_GAME_DIR".tar.lrz "$ARCHIVE_DIR"
-      # Delete
+      # Delete game (local copy)
       rm -rvf "$GAME_DIR" \
         || echo "[-] Failed to delete completely the dir '$GAME_DIR'."
-      # Log local game directory (~/.game-pkg.log)
+      # Tag game as archived (write line from logfile)
       echo "$GAME $GAME_DIR" >> "$LOGFILE"
       popd &>/dev/null
     # === Extract mode === #
-    elif [ "$MODE" = "-x" ] || [ "$MODE" = "--extract" ]; then
+    elif [ "$MODE" = "-i" ] || [ "$MODE" = "--install" ]; then
       # Compute game paths (with logfile)
       GAME_DIR=$(cat "$LOGFILE" | grep "$GAME" | awk '{print $2}')
       PARENT_GAME_DIR=$(dirname "$GAME_DIR")
       NAME_GAME_DIR=$(basename "$GAME_DIR") 
       pushd "$PARENT_GAME_DIR" &>/dev/null
-      # Transfer from vault
+      # Copy from vault
       $RSYNC_CP "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz .
-      # Decompress
+      # Decompress (local copy)
       $LRZUNTAR "$NAME_GAME_DIR".tar.lrz
       # Delete archive (local copy)
       rm -vf "$NAME_GAME_DIR".tar.lrz
-      # Delete
-      rm -vf "$ARCHIVE_DIR"/"$NAME_GAME_DIR".tar.lrz
-      # Remove line from log
+      # Tag game as installed (delete line from logfile)
       sed -i "/$GAME/d" "$LOGFILE"
       popd &>/dev/null
     else
@@ -78,4 +76,3 @@ for game in $(ls "$GAMES"); do
     fi
   fi
 done
-
