@@ -153,6 +153,7 @@
 (setq mouse-wheel-progressive-speed nil)
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
+(setq completion-cycle-threshold 3)
 
 ;; Replace 'BufferMenu' with 'Ibuffer'
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -212,20 +213,16 @@
   :custom
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-separator ?\s)
+  (corfu-quit-at-boundary nil)
+  (corfu-quit-no-match nil)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.0)
-  (corfu-quit-at-boundary 'separator)
   (corfu-echo-documentation 0.25)
-  (corfu-preview-current 'insert)
-  (corfu-preselect-first nil)
-  :bind (:map corfu-map
-	      ("M-SPC" . corfu-insert-separator)
-	      ("RET" . nil)
-	      ("TAB" . corfu-next)
-	      ([tab] . corfu-next)
-	      ("S-TAB" . corfu-previous)
-	      ([backtab] . corfu-previous)
-	      ("S-<return>" . corfu-insert)))
+  (corfu-preview-current nil)
+  (corfu-preselect 'prompt)
+  (corfu-on-exact-match nil)
+  (corfu-scroll-margin 5))
 
 (use-package counsel
   :after ivy
