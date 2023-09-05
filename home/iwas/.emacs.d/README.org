@@ -18,6 +18,9 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
   - [[#installing-dependencies][Installing dependencies]]
   - [[#opening-the-dashboard][Opening the dashboard]]
 - [[#theme][Theme]]
+- [[#rainbow][Rainbow]]
+  - [[#rainbow-mode][Rainbow mode]]
+  - [[#rainbow-delimiters][Rainbow delimiters]]
 - [[#fonts][Fonts]]
 - [[#general-settings][General Settings]]
   - [[#definitions][Definitions]]
@@ -150,6 +153,23 @@ Setting the dashboard as the default buffer.
       doom-modeline-bar-width 5
       doom-modeline-persp-name t
       doom-modeline-persp-icon t)
+#+end_src
+
+* Rainbow
+** Rainbow mode
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :diminish
+  :hook
+  org-mode prog-mode)
+#+end_src
+
+** Rainbow delimiters
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook
+  ((prog-mode . rainbow-delimiters-mode)
+   (org-mode . rainbow-delimiters-mode)))
 #+end_src
 
 * Fonts
@@ -318,7 +338,7 @@ Prettify some symbols in certain modes.
   (corfu-auto t)
   (corfu-separator ?\s)
   (corfu-quit-at-boundary nil)
-  (corfu-quit-no-match nil)
+  (corfu-quit-no-match 'separator)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.0)
   (corfu-echo-documentation 0.25)

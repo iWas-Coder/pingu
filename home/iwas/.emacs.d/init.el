@@ -72,6 +72,16 @@
       doom-modeline-persp-name t
       doom-modeline-persp-icon t)
 
+(use-package rainbow-mode
+  :diminish
+  :hook
+  org-mode prog-mode)
+
+(use-package rainbow-delimiters
+  :hook
+  ((prog-mode . rainbow-delimiters-mode)
+   (org-mode . rainbow-delimiters-mode)))
+
 ;; Face attributes for different conditions
 (set-face-attribute 'default nil
 		    :font "JetbrainsMono Nerd Font 13"
@@ -215,7 +225,7 @@
   (corfu-auto t)
   (corfu-separator ?\s)
   (corfu-quit-at-boundary nil)
-  (corfu-quit-no-match nil)
+  (corfu-quit-no-match 'separator)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.0)
   (corfu-echo-documentation 0.25)
