@@ -1,1 +1,1 @@
-app-emulation/qemu QEMU_SOFTMMU_TARGETS: i386 QEMU_USER_TARGETS: i386
+app-emulation/qemu QEMU_SOFTMMU_TARGETS: i386 aarch64 QEMU_USER_TARGETS: i386 aarch64
