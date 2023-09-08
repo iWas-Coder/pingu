@@ -37,6 +37,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 - [[#neotree][Neotree]]
 - [[#minimap][Minimap]]
 - [[#magit][Magit]]
+- [[#additional-languages][Additional languages]]
 - [[#markup-languages][Markup languages]]
   - [[#markdown][Markdown]]
   - [[#org-mode][Org Mode]]
@@ -64,6 +65,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 
 ** Installing `use-package`
 #+begin_src emacs-lisp
+(require 'use-package)
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (setq use-package-always-ensure t)
@@ -255,6 +257,8 @@ Prettify some symbols in certain modes.
 (global-display-line-numbers-mode)
 (electric-pair-mode t)
 (delete-selection-mode 1)
+(semantic-mode t)
+(global-semantic-stickyfunc-mode t)
 
 ;; Setting some variables
 (setq-default cursor-type '(bar . 3))
@@ -559,6 +563,11 @@ Enable rich mode for Ivy.
 * Magit
 #+begin_src emacs-lisp
 (use-package magit)
+#+end_src
+
+* Additional languages
+#+begin_src emacs-lisp
+(use-package yaml-mode)
 #+end_src
 
 * Markup languages

@@ -6,6 +6,7 @@
 	     '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(require 'use-package)
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (setq use-package-always-ensure t)
@@ -155,6 +156,8 @@
 (global-display-line-numbers-mode)
 (electric-pair-mode t)
 (delete-selection-mode 1)
+(semantic-mode t)
+(global-semantic-stickyfunc-mode t)
 
 ;; Setting some variables
 (setq-default cursor-type '(bar . 3))
@@ -415,6 +418,8 @@
 (setq minimap-window-location 'right)
 
 (use-package magit)
+
+(use-package yaml-mode)
 
 (use-package markdown-mode)
 
