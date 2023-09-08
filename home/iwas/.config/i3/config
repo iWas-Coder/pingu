@@ -168,8 +168,8 @@ gaps inner 8
 ################
 # GNU Emacs - Client
 bindsym $mod+e exec emacsclient -c
-# GNU Emacs - Eshell
-bindsym $mod+Shift+Return exec emacsclient -ce "(eshell)"
+# GNU Emacs - Dired
+bindsym $mod+Shift+Return exec emacsclient -ce "(dired nil)"
 # GNU Emacs - App Launcher
 bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
 # GNU Emacs - Game Launcher
