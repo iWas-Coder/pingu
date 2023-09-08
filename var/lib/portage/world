@@ -8,8 +8,6 @@ app-arch/p7zip
 app-arch/pigz
 app-benchmarks/sysbench
 app-containers/buildah
-app-containers/docker
-app-containers/docker-cli
 app-containers/nvidia-container-toolkit
 app-containers/podman
 app-crypt/gcr
