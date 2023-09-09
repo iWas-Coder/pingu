@@ -167,9 +167,7 @@ gaps inner 8
 # === APPS === #
 ################
 # GNU Emacs - Client
-bindsym $mod+e exec emacsclient -c
-# GNU Emacs - Dired
-bindsym $mod+Shift+Return exec emacsclient -ce "(dired nil)"
+bindsym $mod+Return exec emacsclient -c
 # GNU Emacs - App Launcher
 bindsym $mod+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-launcher)"
 # GNU Emacs - Game Launcher
@@ -180,7 +178,7 @@ bindsym $mod+Shift+m exec --no-startup-id emacsclient -cF "((visibility . nil))"
 bindsym Control+$mod+Delete exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(power/action-selector-menu)"
 
 # Terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec kitty
 # Clipboard History
 bindsym Mod4+v exec --no-startup-id clipmenu -i -p "clipboard" -sb "#a151d3"
 # Chromium
