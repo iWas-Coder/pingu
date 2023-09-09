@@ -1,0 +1,95 @@
+#!/bin/sh
+
+C_RESET='\033[0m'
+C_RED='\033[1;31m'
+C_YELLOW='\033[1;33m'
+C_PURPLE='\033[0;35m'
+
+C_LOG_INFO=$C_YELLOW
+C_LOG_WARNING=$C_PURPLE
+C_LOG_ERROR=$C_RED
+
+printc () {
+  COLOR_SEQ="$1"
+  MSG="$2"
+  END_SEQ="$3"
+  [ -z "$END_SEQ" ] && END_SEQ='\n'
+  printf "${COLOR_SEQ}${MSG}${C_RESET}${END_SEQ}"
+}
+
+N_BAK=3
+CPUS=10
+CURR_DATE="$(date +'%Y%m%d')"
+HOSTNAME="$(hostname)"
+VAULT_DIR="/home/iwas/vault"
+BACKUP_DIR="${VAULT_DIR}/backups/${HOSTNAME}.bak.d"
+BACKUP_FILE="${HOSTNAME}-${CURR_DATE}.bak"
+
+# Print argument usage
+arg_usage () { echo -ne "\n$1 => $2."; }
+
+# Print help/usage panel
+usage () {
+  echo "Usage:"
+  arg_usage "-h/--help" "Show this help panel and exit"
+}
+
+# Check if given path is a mountpoint
+is_mounted () { mountpoint -q "$1"; }
+
+# System backup
+system_backup () {
+  sudo nice mksquashfs / \
+    "$BACKUP_FILE"       \
+    -processors $CPUS    \
+    -e /lost+found /media /mnt /var /tmp /dev /proc /run /sys /home/iwas/data /home/iwas/vault
+}
+
+# Ctrl+C handler
+ctrl_c () {
+  printc $C_LOG_ERROR "ERROR: Exited abnormally (C-c => INT)"
+  exit 1
+}
+trap ctrl_c INT
+
+# Pre-script environment checks
+cd /home/iwas
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  usage
+  exit 0
+elif ! is_mounted "$VAULT_DIR"; then
+  printc $C_LOG_ERROR "ERROR: Vault ($VAULT_DIR) is not mounted"
+  exit 1
+fi
+
+# Check if Chromium ('chrome' processes) is open (it must be closed)
+if [ $(pgrep -ci chrome) -ne 0 ]; then
+  printc $C_LOG_ERROR "ERROR: 'chrome' processes are running. Close them all before creating a backup"
+  exit 1
+fi
+
+# Create directory for this system's backups, if not already there
+if [ ! -d "$BACKUP_DIR" ]; then
+  printc $C_LOG_WARNING "WARNING: Creating directory '$BACKUP_DIR' (not found)"
+  mkdir "$BACKUP_DIR"
+elif [ -e "${BACKUP_DIR}/${BACKUP_FILE}" ]; then
+  printc $C_LOG_WARNING "WARNING: Backup file for today is already present in vault. Exiting..."
+  exit 0
+fi
+
+# Create backup file and transfer it to the vault
+printc $C_LOG_INFO "INFO: Creating '$BACKUP_FILE' using SquashFS (needs root privileges)"
+system_backup
+printc $C_LOG_INFO "INFO: Transferring '$BACKUP_FILE' to '$BACKUP_DIR' using rsync"
+rsync -aP --remove-source-files "$BACKUP_FILE" "$BACKUP_DIR"
+
+# Rotate backup files (if > N_BAK, then remove oldest)
+N_BACKUPS=$(ls "$BACKUP_DIR" | wc -l)
+if [ $N_BACKUPS -gt $N_BAK ]; then
+  OLDEST_BACKUP_FILE="$(ls -rt $BACKUP_DIR | head -n 1)"
+  printc $C_LOG_WARNING "WARNING: $N_BAK backups already in vault. Deleting oldest ($OLDEST_BACKUP_FILE) in 5s..."
+  sleep 5
+  rm -v "${BACKUP_DIR}/${OLDEST_BACKUP_FILE}"
+fi
+
+printc $C_LOG_INFO "INFO: Backup completed successfully for system '$HOSTNAME' on date '$CURR_DATE'. Exiting..."

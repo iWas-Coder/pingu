@@ -93,7 +93,6 @@ alias venv.create='python3 -m venv .venv'
 alias venv.activate='. .venv/bin/activate'
 alias dmesg='dmesg --color=always'
 alias loc='cloc'
-alias emacs='emacsclient -c -t'
 # Custom
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o vers=3.0,credentials=/home/iwas/.smb/penny.key,uid=1000,forceuid,gid=1000,forcegid,file_mode=0664,dir_mode=0775,sec=ntlmv2i,rw'
 alias umount.vault='sudo umount /home/iwas/vault'
@@ -101,11 +100,9 @@ alias picom.start='cat /home/iwas/.xprofile | grep -i picom | bash'
 alias picom.stop='pidof picom | xargs kill -9 &>/dev/null'
 alias picom.restart='picom.stop; picom.start'
 alias perms='stat -c "%n -> %a (%A)"'
-alias mksquashfs.backup="sudo nice mksquashfs / sheldon-$(date +'%Y%m%d').bak -processors 10 -e /boot /dev /lost+found /media /mnt /proc /run /sys /tmp /var /home/iwas/data /home/iwas/vault /home/iwas/.config/chromium"
 alias rsync.mv='rsync -aP --remove-source-files'
 alias rsync.cp='rsync -aP'
 alias eclean-all='sudo eclean-pkg -d && sudo eclean-dist -d'
-alias chromium.backup="tar -zcvf /home/iwas/vault/backups/chromium.bak/chromium-config.inc-$(date +'%Y%m%d').tar.gz -g /home/iwas/vault/backups/chromium.bak/incremental.diff /home/iwas/.config/chromium /home/iwas/.config/chromium-flags.conf"
 alias wttr="curl 'wttr.in/Barcelona'"
 alias wttr.moon="curl 'wttr.in/moon'"
 alias wttr.rich="curl 'v2d.wttr.in/Barcelona'"
