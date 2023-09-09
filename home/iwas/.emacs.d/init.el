@@ -167,6 +167,7 @@
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
 (setq completion-cycle-threshold 3)
+(setq sh-basic-offset 2)
 
 ;; Replace 'BufferMenu' with 'Ibuffer'
 (global-set-key (kbd "C-x C-b") 'ibuffer)
