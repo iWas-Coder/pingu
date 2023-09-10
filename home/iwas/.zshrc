@@ -152,7 +152,7 @@ startw () {
   /home/iwas/.wprofile
 }
 # Vi/Vim/Neovim start functions (ask if not better to straight open GNU Emacs and call it a day :D)
-_prefer-emacs-over-nvim_ () { dialog --clear --title 'GNU Emacs v Neovim?' --defaultno --yesno 'Are you sure you want to use Neovim? You could open GNU Emacs (M-e) and start working right ahead! Choose wisely...' 0 0 && /usr/bin/nvim $1; }
+_prefer-emacs-over-nvim_ () { dialog --clear --title 'GNU Emacs v Neovim?' --defaultno --yesno 'Are you sure you want to use Neovim? You could open GNU Emacs (M-Return) and start working right ahead! Choose wisely...' 0 0 && /usr/bin/nvim $1; }
 vi () { _prefer-emacs-over-nvim_ $1; clear; }
 vim () { _prefer-emacs-over-nvim_ $1; clear; }
 nvim () { _prefer-emacs-over-nvim_ $1; clear; }
