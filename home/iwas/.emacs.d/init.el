@@ -1,5 +1,12 @@
 ;; -*- lexical-binding: t; -*-
 
+(defun config-gen-comp ()
+  "Tangles the '.org' file to 'init.el', and byte and natively compiles it to 'init.elc' and 'init.eln' respectively."
+  (interactive)
+  (org-babel-tangle)
+  (byte-recompile-directory "." 0)
+  (native-compile "init.el"))
+
 (require 'package)
 (setq package-check-signature nil)
 (add-to-list 'package-archives
@@ -30,7 +37,8 @@
 
 (when (featurep 'native-compile)
   (setq native-comp-async-report-warnings-errors nil)
-  (setq native-comp-deferred-compilation t))
+  (setq native-comp-deferred-compilation t)
+  (setq comp-speed 3))
 
 (use-package projectile
   :config
@@ -163,7 +171,6 @@
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
 (setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-scroll-amount '(1))
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
 (setq completion-cycle-threshold 3)

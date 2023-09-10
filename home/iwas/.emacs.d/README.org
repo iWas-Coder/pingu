@@ -8,6 +8,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 
 * Table of Contents :toc:
 - [[#lexical-binding][Lexical binding]]
+- [[#config-generation-and-compilation][Config generation and compilation]]
 - [[#package-management][Package Management]]
   - [[#adding-melpa-repository][Adding MELPA repository]]
   - [[#installing-use-package][Installing `use-package`]]
@@ -54,6 +55,16 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 ;; -*- lexical-binding: t; -*-
 #+end_src
 
+* Config generation and compilation
+#+begin_src emacs-lisp
+(defun config-gen-comp ()
+  "Tangles the '.org' file to 'init.el', and byte and natively compiles it to 'init.elc' and 'init.eln' respectively."
+  (interactive)
+  (org-babel-tangle)
+  (byte-recompile-directory "." 0)
+  (native-compile "init.el"))
+#+end_src
+
 * Package Management
 ** Adding MELPA repository
 #+begin_src emacs-lisp
@@ -97,7 +108,8 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 #+begin_src emacs-lisp
 (when (featurep 'native-compile)
   (setq native-comp-async-report-warnings-errors nil)
-  (setq native-comp-deferred-compilation t))
+  (setq native-comp-deferred-compilation t)
+  (setq comp-speed 3))
 #+end_src
 
 * Dashboard
@@ -265,7 +277,6 @@ Prettify some symbols in certain modes.
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
 (setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-scroll-amount '(1))
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
 (setq completion-cycle-threshold 3)
