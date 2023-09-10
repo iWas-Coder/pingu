@@ -28,10 +28,9 @@
 
 (setq comp-async-report-warnings-errors nil)
 
-(if (boundp 'comp-deferred-compilation)
-    (setq comp-deferred-compilation nil)
-  (setq native-comp-deferred-compilation nil))
-(setq load-prefer-newer noninteractive)
+(when (featurep 'native-compile)
+  (setq native-comp-async-report-warnings-errors nil)
+  (setq native-comp-deferred-compilation t))
 
 (use-package projectile
   :config
@@ -164,6 +163,7 @@
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
 (setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-scroll-amount '(1))
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
 (setq completion-cycle-threshold 3)
@@ -175,6 +175,12 @@
 (global-set-key (kbd "<f5>") 'compile)
 ;; '<f2>' shortcut for 'M-x man' command
 (global-set-key (kbd "<f2>") 'man)
+
+(use-package good-scroll
+  :config
+  (setq good-scroll-render-rate 0.007)
+  (setq good-scroll-step 50))
+(good-scroll-mode 1)
 
 (defun prepare-scratch-for-kill ()
   "Whenever the 'scratch' buffer gets killed, open it again."
