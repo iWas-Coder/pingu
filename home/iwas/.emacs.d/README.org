@@ -25,7 +25,6 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 - [[#fonts][Fonts]]
 - [[#general-settings][General Settings]]
   - [[#definitions][Definitions]]
-  - [[#smooth-scrolling][Smooth scrolling]]
   - [[#scratch-buffer-i-open-at-the-close]['scratch' buffer: "I open at the close"]]
   - [[#highlight-indentation-guides][Highlight indentation guides]]
 - [[#completion][Completion]]
@@ -58,7 +57,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 * Config generation and compilation
 #+begin_src emacs-lisp
 (defun config-gen-comp ()
-  "Tangles the '.org' file to 'init.el', and byte and natively compiles it to 'init.elc' and 'init.eln' respectively."
+  "Tangles the '*.org' file to '*.el', and compiles it to '*.elc' and '*.eln'."
   (interactive)
   (org-babel-tangle)
   (byte-recompile-directory "." 0)
@@ -288,15 +287,6 @@ Prettify some symbols in certain modes.
 (global-set-key (kbd "<f5>") 'compile)
 ;; '<f2>' shortcut for 'M-x man' command
 (global-set-key (kbd "<f2>") 'man)
-#+end_src
-
-** Smooth scrolling
-#+begin_src emacs-lisp
-(use-package good-scroll
-  :config
-  (setq good-scroll-render-rate 0.007)
-  (setq good-scroll-step 50))
-(good-scroll-mode 1)
 #+end_src
 
 ** 'scratch' buffer: "I open at the close"

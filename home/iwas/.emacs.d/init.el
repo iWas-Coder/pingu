@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (defun config-gen-comp ()
-  "Tangles the '.org' file to 'init.el', and byte and natively compiles it to 'init.elc' and 'init.eln' respectively."
+  "Tangles the '*.org' file to '*.el', and compiles it to '*.elc' and '*.eln'."
   (interactive)
   (org-babel-tangle)
   (byte-recompile-directory "." 0)
@@ -182,12 +182,6 @@
 (global-set-key (kbd "<f5>") 'compile)
 ;; '<f2>' shortcut for 'M-x man' command
 (global-set-key (kbd "<f2>") 'man)
-
-(use-package good-scroll
-  :config
-  (setq good-scroll-render-rate 0.007)
-  (setq good-scroll-step 50))
-(good-scroll-mode 1)
 
 (defun prepare-scratch-for-kill ()
   "Whenever the 'scratch' buffer gets killed, open it again."
