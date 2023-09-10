@@ -27,6 +27,11 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
   - [[#definitions][Definitions]]
   - [[#scratch-buffer-i-open-at-the-close]['scratch' buffer: "I open at the close"]]
   - [[#highlight-indentation-guides][Highlight indentation guides]]
+- [[#dired][Dired]]
+  - [[#single-dired-buffer][Single Dired buffer]]
+  - [[#file-icons][File icons]]
+  - [[#ranger-fm-capabilities][Ranger FM capabilities]]
+  - [[#rainbow-colours][Rainbow colours]]
 - [[#completion][Completion]]
   - [[#which-key][Which Key]]
   - [[#corfu][Corfu]]
@@ -315,6 +320,67 @@ Prettify some symbols in certain modes.
 
 ;; Add indentation guides to 'prog-mode'
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+#+end_src
+
+* Dired
+#+begin_src emacs-lisp
+(setq dired-listing-switches "-agho --group-directories-first")
+#+end_src
+
+** Single Dired buffer
+#+begin_src emacs-lisp
+(use-package dired-single)
+
+(defun dired-single/init ()
+  "'dired-single' keybinding configuration for Dired."
+  (define-key dired-mode-map [remap dired-find-file]
+    'dired-single-buffer)
+  (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
+    'dired-single-buffer-mouse)
+  (define-key dired-mode-map [remap dired-up-directory]
+    'dired-single-up-directory))
+
+(if (boundp 'dired-mode-map)
+    (dired-single/init)
+  (add-hook 'dired-load-hook 'dired-single/init))
+#+end_src
+
+** File icons
+#+begin_src emacs-lisp
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+#+end_src
+
+** Ranger FM capabilities
+#+begin_src emacs-lisp
+(use-package dired-ranger)
+#+end_src
+
+** Rainbow colours
+#+begin_src emacs-lisp
+(use-package dired-rainbow
+  :after dired
+  :custom
+  (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
+   (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
+   (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
+   (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb" "pdf" "ps" "rtf" "djvu" "epub" "odp" "ppt" "pptx"))
+   (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md" "mkd" "nfo" "pod" "rst" "tex" "textfile" "txt"))
+   (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb" "sqlite" "nc"))
+   (dired-rainbow-define media "#de751f" ("mp3" "mp4" "mkv" "MP3" "MP4" "avi" "mpeg" "mpg" "flv" "ogg" "mov" "mid" "midi" "wav" "aiff" "flac"))
+   (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg" "jpg" "png" "psd" "eps" "svg"))
+   (dired-rainbow-define log "#c17d11" ("log"))
+   (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh" "vim"))
+   (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql" "mysql" "pgsql" "sql" "r" "clj" "cljs" "scala" "js"))
+   (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++" "h++" "hpp" "hxx" "m" "cc" "cs" "cp" "cpp" "go" "f" "for" "ftn" "f90" "f95" "f03" "f08" "s" "rs" "hi" "hs" "pyc" ".java"))
+   (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+   (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz" "xz" "z" "Z" "jar" "war" "ear" "rar" "sar" "xpi" "apk" "xz" "tar"))
+   (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab" "pak" "pk3" "vdf" "vpk" "bsp"))
+   (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc" "signature" "sig" "p12" "pem"))
+   (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
+   (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
+   (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
+   (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*"))
 #+end_src
 
 * Completion
