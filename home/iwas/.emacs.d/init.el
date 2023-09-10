@@ -555,6 +555,13 @@
 	    (interactive)
 	    (run-this-in-eshell "clear-scrollback"))))
 
+(defun eshell-other-window ()
+  "Create an interactive Eshell buffer in another window."
+  (interactive)
+  (other-window-prefix)
+  (eshell))
+(global-set-key (kbd "C-x j") 'eshell-other-window)
+
 (use-package eat
   :config
   (eat-eshell-mode))

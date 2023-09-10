@@ -756,6 +756,15 @@ Binding `C-l` to `clear-scrollback` if inside an eshell buffer.
 	    (run-this-in-eshell "clear-scrollback"))))
 #+end_src
 
+#+begin_src emacs-lisp
+(defun eshell-other-window ()
+  "Create an interactive Eshell buffer in another window."
+  (interactive)
+  (other-window-prefix)
+  (eshell))
+(global-set-key (kbd "C-x j") 'eshell-other-window)
+#+end_src
+
 ** Eat
 #+begin_src emacs-lisp
 (use-package eat
