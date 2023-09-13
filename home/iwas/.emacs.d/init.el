@@ -215,21 +215,6 @@
 
 (setq dired-listing-switches "-agho --group-directories-first")
 
-(use-package dired-single)
-
-(defun dired-single/init ()
-  "'dired-single' keybinding configuration for Dired."
-  (define-key dired-mode-map [remap dired-find-file]
-    'dired-single-buffer)
-  (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
-    'dired-single-buffer-mouse)
-  (define-key dired-mode-map [remap dired-up-directory]
-    'dired-single-up-directory))
-
-(if (boundp 'dired-mode-map)
-    (dired-single/init)
-  (add-hook 'dired-load-hook 'dired-single/init))
-
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 

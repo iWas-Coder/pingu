@@ -28,7 +28,6 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
   - [[#scratch-buffer-i-open-at-the-close]['scratch' buffer: "I open at the close"]]
   - [[#highlight-indentation-guides][Highlight indentation guides]]
 - [[#dired][Dired]]
-  - [[#single-dired-buffer][Single Dired buffer]]
   - [[#file-icons][File icons]]
   - [[#ranger-fm-capabilities][Ranger FM capabilities]]
   - [[#rainbow-colours][Rainbow colours]]
@@ -333,24 +332,6 @@ Prettify some symbols in certain modes.
 * Dired
 #+begin_src emacs-lisp
 (setq dired-listing-switches "-agho --group-directories-first")
-#+end_src
-
-** Single Dired buffer
-#+begin_src emacs-lisp
-(use-package dired-single)
-
-(defun dired-single/init ()
-  "'dired-single' keybinding configuration for Dired."
-  (define-key dired-mode-map [remap dired-find-file]
-    'dired-single-buffer)
-  (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
-    'dired-single-buffer-mouse)
-  (define-key dired-mode-map [remap dired-up-directory]
-    'dired-single-up-directory))
-
-(if (boundp 'dired-mode-map)
-    (dired-single/init)
-  (add-hook 'dired-load-hook 'dired-single/init))
 #+end_src
 
 ** File icons
