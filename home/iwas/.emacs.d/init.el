@@ -275,7 +275,7 @@
   (corfu-auto t)
   (corfu-separator ?\s)
   (corfu-quit-at-boundary nil)
-  (corfu-quit-no-match 'separator)
+  (corfu-quit-no-match t)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.0)
   (corfu-echo-documentation 0.25)
@@ -467,6 +467,7 @@
 (use-package magit)
 
 (use-package yaml-mode)
+(use-package haskell-mode)
 
 (use-package markdown-mode)
 

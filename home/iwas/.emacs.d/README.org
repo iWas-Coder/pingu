@@ -409,7 +409,7 @@ Prettify some symbols in certain modes.
   (corfu-auto t)
   (corfu-separator ?\s)
   (corfu-quit-at-boundary nil)
-  (corfu-quit-no-match 'separator)
+  (corfu-quit-no-match t)
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.0)
   (corfu-echo-documentation 0.25)
@@ -635,6 +635,7 @@ Enable rich mode for Ivy.
 * Additional languages
 #+begin_src emacs-lisp
 (use-package yaml-mode)
+(use-package haskell-mode)
 #+end_src
 
 * Markup languages
