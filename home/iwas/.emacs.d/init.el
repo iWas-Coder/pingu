@@ -165,6 +165,8 @@
 (delete-selection-mode 1)
 (semantic-mode t)
 (global-semantic-stickyfunc-mode t)
+(global-auto-revert-mode 1)
+(pixel-scroll-precision-mode t)
 
 ;; Setting some variables
 (setq-default cursor-type '(bar . 3))
@@ -175,6 +177,12 @@
 (setq org-support-shift-select t)
 (setq completion-cycle-threshold 3)
 (setq sh-basic-offset 2)
+(setq global-auto-revert-non-file-buffers t)
+(setq pixel-scroll-precision-use-momentum t)
+(setq pixel-scroll-precision-interpolate-mice t)
+(setq pixel-scroll-precision-interpolate-page t)
+(setq pixel-scroll-precision-interpolation-factor 0.7)
+(setq pixel-scroll-precision-large-scroll-height nil)
 
 ;; Replace 'BufferMenu' with 'Ibuffer'
 (global-set-key (kbd "C-x C-b") 'ibuffer)

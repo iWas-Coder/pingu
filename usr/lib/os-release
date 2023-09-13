@@ -2,4 +2,4 @@ NAME="GNU/Linux"
 ID=gnu-linux
 PRETTY_NAME="GNU/Linux"
 HOME_URL="https://github.com/iwas-coder/pingu"
-VERSION_ID="6.1.38-pingu+git20230717"
+VERSION_ID="6.1.38-pingu+git20230912"
