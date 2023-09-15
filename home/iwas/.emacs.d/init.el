@@ -163,8 +163,6 @@
 (global-display-line-numbers-mode)
 (electric-pair-mode t)
 (delete-selection-mode 1)
-(semantic-mode t)
-(global-semantic-stickyfunc-mode t)
 (global-auto-revert-mode 1)
 (pixel-scroll-precision-mode t)
 
