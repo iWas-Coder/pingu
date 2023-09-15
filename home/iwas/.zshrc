@@ -296,7 +296,7 @@ podman.save () {
 podman.load () {
   pv "$1" | podman load
 }
-# Podman create a Gentoo dev environment
+# Podman create a Gentoo stage3 shell environment
 podman.gentoo_shell () {
   xhost +
   podman run                                                                        \
@@ -316,6 +316,30 @@ podman.gentoo_shell () {
     sh -c "emerge-webrsync && /bin/bash -i"
   xhost -
   podman rmi gentoo/stage3
+}
+# Podman create a Haskell dev environment (devcontainer)
+podman.dev.haskell () {
+  podman run                    \
+    --rm                        \
+    -it                         \
+    --name "haskell-dev-ct"     \
+    --hostname "haskell-dev-ct" \
+    -v $(pwd):/root/dev         \
+    haskell                     \
+    sh -c "cd /root/dev && /bin/bash -i"
+  podman rmi haskell
+}
+# Podman create a Java dev environment (devcontainer)
+podman.dev.java () {
+  podman run                             \
+    --rm                                 \
+    -it                                  \
+    --name "java-dev-ct"                 \
+    --hostname "java-dev-ct"             \
+    -v $(pwd):/root/dev                  \
+    mcr.microsoft.com/devcontainers/java \
+    sh -c "apt install -y maven && cd /root/dev && /bin/bash -i"
+  podman rmi mcr.microsoft.com/devcontainers/java
 }
 # i3-layout-viewer
 i3-layout-viewer () {
