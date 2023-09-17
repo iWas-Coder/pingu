@@ -37,7 +37,7 @@
 
 (when (featurep 'native-compile)
   (setq native-comp-async-report-warnings-errors nil)
-  (setq native-comp-deferred-compilation t)
+  (setq native-comp-jit-compilation t)
   (setq comp-speed 3))
 
 (use-package projectile
@@ -115,8 +115,6 @@
   "Set a buffer-local value for 'prettify-symbols-alist'."
   (setq prettify-symbols-alist
 	'(("lambda" . ?λ)
-	  ("map" . ?⟾)
-	  ("not" . ?¬)
 	  ("<-" . ?⟵)
 	  ("<--" . ?⟻)
 	  ("->" . ?⟶)
@@ -188,6 +186,12 @@
 (global-set-key (kbd "<f5>") 'compile)
 ;; '<f2>' shortcut for 'M-x man' command
 (global-set-key (kbd "<f2>") 'man)
+
+;; Disable 'electric-pair-mode' with '<>' predicate for 'org-mode'
+(add-hook 'org-mode-hook
+	  (lambda () (setq-local electric-pair-inhibit-predicate
+				 `(lambda (c)
+				    (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 
 (defun prepare-scratch-for-kill ()
   "Whenever the 'scratch' buffer gets killed, open it again."

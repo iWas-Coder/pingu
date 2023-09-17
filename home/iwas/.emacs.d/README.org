@@ -111,7 +111,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 #+begin_src emacs-lisp
 (when (featurep 'native-compile)
   (setq native-comp-async-report-warnings-errors nil)
-  (setq native-comp-deferred-compilation t)
+  (setq native-comp-jit-compilation t)
   (setq comp-speed 3))
 #+end_src
 
@@ -220,8 +220,6 @@ Prettify some symbols in certain modes.
   "Set a buffer-local value for 'prettify-symbols-alist'."
   (setq prettify-symbols-alist
 	'(("lambda" . ?λ)
-	  ("map" . ?⟾)
-	  ("not" . ?¬)
 	  ("<-" . ?⟵)
 	  ("<--" . ?⟻)
 	  ("->" . ?⟶)
@@ -297,6 +295,12 @@ Prettify some symbols in certain modes.
 (global-set-key (kbd "<f5>") 'compile)
 ;; '<f2>' shortcut for 'M-x man' command
 (global-set-key (kbd "<f2>") 'man)
+
+;; Disable 'electric-pair-mode' with '<>' predicate for 'org-mode'
+(add-hook 'org-mode-hook
+	  (lambda () (setq-local electric-pair-inhibit-predicate
+				 `(lambda (c)
+				    (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 #+end_src
 
 ** 'scratch' buffer: "I open at the close"
