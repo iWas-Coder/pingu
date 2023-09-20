@@ -163,6 +163,7 @@
 (delete-selection-mode 1)
 (global-auto-revert-mode 1)
 (pixel-scroll-precision-mode t)
+(tooltip-mode -1)
 
 ;; Setting some variables
 (setq-default cursor-type '(bar . 3))
@@ -179,6 +180,9 @@
 (setq pixel-scroll-precision-interpolate-page t)
 (setq pixel-scroll-precision-interpolation-factor 0.7)
 (setq pixel-scroll-precision-large-scroll-height nil)
+(setq use-dialog-box nil)
+(setq x-gtk-use-system-tooltips nil)
+(setq org-return-follows-link t)
 
 ;; Replace 'BufferMenu' with 'Ibuffer'
 (global-set-key (kbd "C-x C-b") 'ibuffer)
