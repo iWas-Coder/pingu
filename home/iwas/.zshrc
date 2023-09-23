@@ -296,6 +296,16 @@ podman.save () {
 podman.load () {
   pv "$1" | podman load
 }
+# Podman create a vanilla Debian instance
+podman.deb () {
+  podman run                             \
+    --rm                                 \
+    -it                                  \
+    --name debian-ct                     \
+    -v /etc/bash/bashrc-ct:/root/.bashrc \
+    debian                               \
+    /bin/bash
+}
 # Podman create a Gentoo stage3 shell environment
 podman.gentoo_shell () {
   xhost +
