@@ -374,6 +374,8 @@ export PATH=$PATH:/usr/local/games
 export PATH=$PATH:/opt/cuda/bin
 # Adding local binaries to PATH
 export PATH=$PATH:/home/iwas/.local/bin
+# Adding Wine to PATH
+export PATH=$PATH:/etc/eselect/wine/bin
 
 
 #################

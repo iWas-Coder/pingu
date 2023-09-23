@@ -1,4 +1,6 @@
-# move app-text/blueprint-compiler dev-util/blueprint-compiler
 dev-util/blueprint-compiler ~amd64
 media-libs/vkBasalt ~amd64
 dev-python/vkbasalt-cli ~amd64
+app-emulation/wine-mono ~amd64
+app-emulation/wine-gecko ~amd64
+app-emulation/wine-staging ~amd64

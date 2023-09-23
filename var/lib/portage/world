@@ -17,7 +17,7 @@ app-editors/emacs
 app-editors/neovim
 app-emulation/pcem
 app-emulation/qemu
-app-emulation/wine-proton
+app-emulation/wine-staging
 app-eselect/eselect-python
 app-eselect/eselect-repository
 app-misc/jq
