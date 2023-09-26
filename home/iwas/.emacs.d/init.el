@@ -474,6 +474,7 @@
 
 (use-package yaml-mode)
 (use-package haskell-mode)
+(use-package terraform-mode)
 
 (use-package markdown-mode)
 

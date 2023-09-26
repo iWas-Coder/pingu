@@ -642,6 +642,7 @@ Enable rich mode for Ivy.
 #+begin_src emacs-lisp
 (use-package yaml-mode)
 (use-package haskell-mode)
+(use-package terraform-mode)
 #+end_src
 
 * Markup languages
