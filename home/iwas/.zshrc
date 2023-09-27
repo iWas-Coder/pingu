@@ -355,14 +355,6 @@ podman.dev.java () {
     sh -c "apt install -y maven && /bin/bash -i"
   podman rmi mcr.microsoft.com/devcontainers/java
 }
-# i3-layout-viewer
-i3-layout-viewer () {
-  dir="/usr/local/share/i3-layout-viewer"
-  if [ ! -d "$dir/node-modules" ]; then
-    pushd -q "$dir" && npm i --silent && popd -q
-  fi
-  i3-msg -t get_tree | jq | node "$dir/cli.js" | dot -Tpng | icat
-}
 
 
 ################
