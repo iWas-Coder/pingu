@@ -110,20 +110,23 @@ alias wttr.map="curl 'v3.wttr.in/Barcelona.sxl'"
 alias ffprobe.id_codec='ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1'
 # Pingu
 alias pingu='git --git-dir=/home/iwas/.pingu --work-tree=/'
-alias pingu-fetch='pingu fetch --all -p -P && echo; pingu status -sb'
-alias pingu-push='ggtoken && pingu push'
-alias pingu-list='pingu ls-tree --full-tree --name-only -r HEAD'
-alias pingu-update='pingu add -v -u'
-alias pingu-log='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all'
-# Git Custom
+alias pgfetch='pingu fetch --all -p -P && echo; pingu status -sb'
+alias pgpush='ggtoken && pingu push'
+alias pgls='pingu ls-tree --full-tree --name-only -r HEAD'
+alias pglog='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all'
+alias pgundo='pingu reset --soft HEAD@{1}'
+alias pgst='pingu status -sb'
+alias pgadd='pingu add -vu'
+# Git
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; ggst'
 alias ggpush='ggtoken && git push'
+alias ggls='git ls-tree --full-tree --name-only -r HEAD'
 alias gglog='git log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%as%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim italic white)~ %an%C(reset)" --all'
 alias ggundo='git reset --soft HEAD@{1}'
 alias ggst='git status -sb'
 alias ggadd='git add -vu'
-alias ggclean='dialog --clear --title "ggclean" --defaultno --yesno "Are you sure?" 0 0 && git reset --hard && git clean -fxd; clear'
+alias ggclean='git reset --hard && git clean -fxd'
 
 
 #####################
@@ -190,8 +193,6 @@ rmk () { scrub -p dod $1; shred -zun 10 -v $1; }
 evince () { /usr/bin/evince "$*" &>/dev/null & disown; }
 # Open Foliate E-BOOK Reader in the background and detach from shell session
 foliate () { /bin/com.github.johnfactotum.Foliate "$*" &>/dev/null & disown; }
-# Start working in a Git repository (ggfetch && open VSCode)
-ggcode () { ggfetch && code $(git rev-parse --show-toplevel) }
 # Git branch management (wrapper for git switch && git branch)
 ggbrnch () {
   # Return to previous branch
