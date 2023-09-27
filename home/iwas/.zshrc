@@ -329,14 +329,16 @@ podman.gentoo_shell () {
 }
 # Podman create a Haskell dev environment (devcontainer)
 podman.dev.haskell () {
-  podman run                    \
-    --rm                        \
-    -it                         \
-    --name "haskell-dev-ct"     \
-    --hostname "haskell-dev-ct" \
-    -v $(pwd):/root/dev         \
-    haskell                     \
-    sh -c "cd /root/dev && /bin/bash -i"
+  podman run                             \
+    --rm                                 \
+    -it                                  \
+    --name "haskell-dev-ct"              \
+    --hostname "haskell-dev-ct"          \
+    -v /etc/bash/bashrc-ct:/root/.bashrc \
+    -v $(pwd):/root/dev                  \
+    -w /root/dev                         \
+    haskell                              \
+    /bin/bash
   podman rmi haskell
 }
 # Podman create a Java dev environment (devcontainer)
@@ -347,8 +349,9 @@ podman.dev.java () {
     --name "java-dev-ct"                 \
     --hostname "java-dev-ct"             \
     -v $(pwd):/root/dev                  \
+    -w /root/dev                         \
     mcr.microsoft.com/devcontainers/java \
-    sh -c "apt install -y maven && cd /root/dev && /bin/bash -i"
+    sh -c "apt install -y maven && /bin/bash -i"
   podman rmi mcr.microsoft.com/devcontainers/java
 }
 # i3-layout-viewer
