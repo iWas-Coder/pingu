@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <players version="1" >
     <current player="iwas"/>
-    <player name="iwas" guest="false" use-frequency="28"
+    <player name="iwas" guest="false" use-frequency="30"
             icon-filename="1.png"
             unique-id="1" saved-session="true"
             saved-user="431184" saved-token="5de657ddc0801d04b5d7696a"
@@ -85,24 +85,24 @@
           <var counter="0"/>
           <var counter="0"/>
           <var counter="0"/>
-          <var counter="12"/>
-          <var counter="12"/>
-          <var counter="496"/>
+          <var counter="14"/>
+          <var counter="14"/>
+          <var counter="526"/>
           <var counter="0"/>
           <var counter="22"/>
-          <var counter="53"/>
+          <var counter="54"/>
           <var counter="0"/>
           <var counter="3"/>
-          <var counter="32"/>
+          <var counter="38"/>
           <var counter="0"/>
           <var counter="2"/>
-          <var counter="147"/>
+          <var counter="160"/>
           <var counter="0"/>
           <var counter="6"/>
-          <var counter="16"/>
+          <var counter="18"/>
           <var counter="0"/>
           <var counter="3"/>
-          <var counter="0"/>
+          <var counter="15"/>
           <var counter="0"/>
           <var counter="0"/>
           <var counter="0"/>

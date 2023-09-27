@@ -40,10 +40,10 @@ Event 3 : Gamepad button press
     <action name="fire" event="3" id="1" />
     <action name="lookBack" event="3" id="0" />
     <action name="pauserace" event="3" id="6" />
-    <action name="menuUp" event="2" id="1" direction="0" range="0" />
-    <action name="menuDown" event="2" id="1" direction="1" range="0" />
-    <action name="menuLeft" event="2" id="0" direction="0" range="0" />
-    <action name="menuRight" event="2" id="0" direction="1" range="0" />
+    <action name="menuUp" event="3" id="11" />
+    <action name="menuDown" event="3" id="12" />
+    <action name="menuLeft" event="3" id="13" />
+    <action name="menuRight" event="3" id="14" />
     <action name="menuSelect" event="3" id="0" />
     <action name="menuCancel" event="3" id="1" />
 </gamepad>
