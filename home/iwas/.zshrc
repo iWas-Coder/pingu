@@ -356,6 +356,20 @@ podman.dev.java () {
     sh -c "apt install -y maven && /bin/bash -i"
   podman rmi mcr.microsoft.com/devcontainers/java
 }
+# Podman create a Nim dev environment (devcontainer)
+podman.dev.nim () {
+  podman run                             \
+    --rm                                 \
+    -it                                  \
+    --name "nim-dev-ct"                  \
+    --hostname "nim-dev-ct"              \
+    -v /etc/bash/bashrc-ct:/root/.bashrc \
+    -v $(pwd):/root/dev                  \
+    -w /root/dev                         \
+    nimlang/nim                          \
+    /bin/bash
+  podman rmi nimlang/nim
+}
 
 
 ################
