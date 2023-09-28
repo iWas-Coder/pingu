@@ -306,6 +306,7 @@ podman.deb () {
     -v /etc/bash/bashrc-ct:/root/.bashrc \
     debian                               \
     /bin/bash
+  podman rmi debian
 }
 # Podman create a Gentoo stage3 shell environment
 podman.gentoo_shell () {
