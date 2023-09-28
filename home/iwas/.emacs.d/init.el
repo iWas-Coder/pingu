@@ -460,8 +460,9 @@
 		  (make-local-variable 'auto-hscroll-mode)
 		  (setq auto-hscroll-mode nil)))))
 
-;; Show hidden files in neotree
-(setq-default neo-show-hidden-files t)
+;; Show hidden files in neotree, and autorefresh
+(setq-default neo-show-hidden-files t
+	      neo-autorefresh t)
 
 (use-package minimap
   :bind
