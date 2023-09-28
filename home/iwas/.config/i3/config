@@ -163,9 +163,9 @@ focus_follows_mouse no
 gaps outer 8
 gaps inner 8
 
-################
-# === APPS === #
-################
+######################
+# === GNU EMACS  === #
+######################
 # GNU Emacs - Client
 bindsym $mod+Return exec emacsclient -c
 # GNU Emacs - App Launcher
@@ -173,14 +173,17 @@ bindsym $mod+m exec emacsclient -cF "((visibility . nil))" -e "(emacs-counsel-la
 # GNU Emacs - Game Launcher
 bindsym $mod+g exec emacsclient -cF "((visibility . nil))" -e "(games/game-launcher-menu)"
 # GNU Emacs - Pulseaudio sink selector
-bindsym $mod+Shift+m exec emacsclient -cF "((visibility . nil))" -e "(pulse/sink-selector-menu)"
+bindsym $mod+Shift+m exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(pulse/sink-selector-menu)"
 # GNU Emacs - Power action selector
-bindsym Control+$mod+Delete exec emacsclient -cF "((visibility . nil))" -e "(power/action-selector-menu)"
+bindsym Control+$mod+Delete exec --no-startup-id emacsclient -cF "((visibility . nil))" -e "(power/action-selector-menu)"
 
+################
+# === APPS === #
+################
 # Terminal
 bindsym $mod+Shift+Return exec kitty
 # Clipboard History
-bindsym Mod4+v exec clipmenu -i -p "clipboard" -sb "#a151d3"
+bindsym Mod4+v exec --no-startup-id clipmenu -i -p "clipboard" -sb "#a151d3"
 # Chromium
 set $chromium_flags $(cat /home/iwas/.config/chromium-flags.conf | xargs)
 bindsym $mod+b exec chromium $chromium_flags
@@ -188,7 +191,7 @@ bindsym $mod+Shift+b exec chromium --incognito $chromium_flags
 # Flameshot
 bindsym Mod4+Shift+s exec flameshot gui
 # Boomer
-bindsym Mod4+Shift+z exec boomer
+bindsym Mod4+Shift+z exec --no-startup-id boomer
 
 #########################################
 # === Floating Windows (by default) === #
