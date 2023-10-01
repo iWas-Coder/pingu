@@ -292,6 +292,7 @@ Prettify some symbols in certain modes.
 (setq use-dialog-box nil)
 (setq x-gtk-use-system-tooltips nil)
 (setq org-return-follows-link t)
+(setq compilation-scroll-output t)
 
 ;; Replace 'BufferMenu' with 'Ibuffer'
 (global-set-key (kbd "C-x C-b") 'ibuffer)
