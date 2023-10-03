@@ -1,4 +1,5 @@
 =sys-kernel/gentoo-sources-6.1.38
+app-admin/awscli
 app-admin/helm
 app-admin/sudo
 app-admin/sysklogd
