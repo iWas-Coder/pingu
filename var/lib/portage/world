@@ -90,6 +90,7 @@ dev-util/vulkan-tools
 dev-util/xxd
 dev-vcs/git
 dev-vcs/repo
+games-board/stockfish
 games-emulation/dosbox
 games-misc/cowsay
 games-misc/fortune-mod
