@@ -5,7 +5,7 @@
                 "x": 385,
                 "y": 739
             },
-            "height": 1218,
+            "height": 1227,
             "tabs": [
                 {
                     "highlightsEnabled": true,
@@ -262,12 +262,27 @@
                         "moderationMode": false,
                         "type": "split"
                     }
+                },
+                {
+                    "highlightsEnabled": true,
+                    "splits2": {
+                        "data": {
+                            "name": "afor_digital",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
                 }
             ],
             "type": "main",
-            "width": 837,
-            "x": 133,
-            "y": 415
+            "width": 831,
+            "x": 139,
+            "y": 392
         }
     ]
 }
