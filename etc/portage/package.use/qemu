@@ -1,1 +1,6 @@
-app-emulation/qemu QEMU_SOFTMMU_TARGETS: i386 aarch64 QEMU_USER_TARGETS: i386 aarch64
+>=dev-libs/glib-2.76.4 static-libs
+>=sys-libs/zlib-1.2.13-r1 static-libs
+>=sys-apps/attr-2.5.1-r2 static-libs
+>=dev-libs/libpcre2-10.42-r1 static-libs
+
+app-emulation/qemu static-user QEMU_SOFTMMU_TARGETS: i386 aarch64 QEMU_USER_TARGETS: i386 aarch64
