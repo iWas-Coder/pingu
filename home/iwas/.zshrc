@@ -370,6 +370,23 @@ podman.dev.nim () {
     /bin/bash
   podman rmi nimlang/nim
 }
+# Minikube create custom cluster
+minikube.start () {
+  minikube start                                             \
+    --driver qemu2                                           \
+    --qemu-firmware-path "/usr/share/edk2-ovmf/OVMF_CODE.fd" \
+    --nodes "$1"                                             \
+    --cpus "$2"                                              \
+    --memory "${3}g"                                         \
+    --disk-size "${4}g"                                      \
+    --network builtin                                        \
+    --kvm-gpu true                                           \
+    --bootstrapper kubeadm                                   \
+    --container-runtime cri-o                                \
+    --kubernetes-version stable                              \
+    --delete-on-failure true                                 \
+    --keep-context true
+}
 
 
 ################
@@ -394,18 +411,6 @@ export PATH=$PATH:/etc/eselect/wine/bin
 #################
 # Add GPG key to tty
 export GPG_TTY=$(tty)
-# Set Kubernetes contexts (in .kube directory)
-if [ ! "$(ls -A /home/iwas/.kube)" ]; then
-  export KUBECONFIG=
-else
-  for context in $(ls /home/iwas/.kube | grep .yaml); do
-    if [ -z "$KUBECONFIG" ]; then
-      export KUBECONFIG=/home/iwas/.kube/"$context"
-    else
-      export KUBECONFIG=$KUBECONFIG:/home/iwas/.kube/"$context"
-    fi
-  done
-fi
 
 
 ###############
