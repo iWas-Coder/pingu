@@ -283,10 +283,6 @@ ffplay.cuvid () {
 }
 # 7z list archive's content without additional information (clean format)
 7z.ls () { 7z l -ba "$1" | grep -oP '\S+$'; }
-# Podman build image from Containerfile in CWD
-podman.build () {
-  podman build -t "$1" . && podman image prune -f
-}
 # Podman save repository (image with all tags) to tar.gz with progress (tqdm)
 podman.save () {
   podman save "$1" | tqdm --bytes --total $(
@@ -353,7 +349,7 @@ podman.dev.java () {
     -v $(pwd):/root/dev                  \
     -w /root/dev                         \
     mcr.microsoft.com/devcontainers/java \
-    sh -c "apt install -y maven && /bin/bash -i"
+    sh -c "apt update && apt install -y maven && /bin/bash -i"
   podman rmi mcr.microsoft.com/devcontainers/java
 }
 # Podman create a Nim dev environment (devcontainer)
@@ -372,6 +368,7 @@ podman.dev.nim () {
 }
 # Minikube create custom cluster
 minikube.start () {
+  [ "$#" -ne 4 ] && echo "[-] Incorrect syntax :(" && return 1
   minikube start                                             \
     --driver qemu2                                           \
     --qemu-firmware-path "/usr/share/edk2-ovmf/OVMF_CODE.fd" \
