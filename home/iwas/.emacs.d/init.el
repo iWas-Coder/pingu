@@ -338,7 +338,14 @@
 ;; Show only the pretty name
 (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only)
 
+(defun games/async-shell-command-no-frame (command)
+  "Exeute a command with 'async-shell-command' without creating any output window."
+  (let ((display-buffer-alist (list (cons "\\*Async Shell Command\\*.*"
+					  (cons #'display-buffer-no-window nil)))))
+    (async-shell-command command)))
+
 (defun games/async-shell-command-new-frame (command)
+  "Exeute a command with 'async-shell-command' opening a new frame with the output window on it."
   (let ((display-buffer-alist (list (cons "\\*Async Shell Command\\*.*"
 					  (cons #'display-buffer-no-window nil)))))
     (other-frame-prefix)
@@ -353,7 +360,7 @@
   (ivy-read "Run game: "
 	    game-list
 	    :action (lambda (x)
-		      (games/async-shell-command-new-frame (format "/usr/local/games/%s" x)))))
+		      (games/async-shell-command-no-frame (format "/usr/local/games/%s" x)))))
 
 (defun games/game-launcher-menu ()
   "Create a frame with a buffer that runs the 'games/game-launcher' function."
