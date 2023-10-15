@@ -3,3 +3,4 @@
 	directory = /var/db/repos/zugaina
 	directory = /var/db/repos/src_prepare-overlay
 	directory = /var/db/repos/guru
+	directory = /var/db/repos/gentoo
