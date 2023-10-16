@@ -1,0 +1,97 @@
+#+AUTHOR: Wasym A. Alonso
+#+TITLE: Portage
+
+#+CAPTION: Portage logo
+[[logo.png]]
+
+* Table of Contents :toc:
+- [[#full-system-upgrade][Full system upgrade]]
+  - [[#sync-repositories][Sync repositories]]
+  - [[#upgrade-world-set][Upgrade ~@world~ set]]
+  - [[#continue-a-build-process][Continue a build process]]
+  - [[#cleaning-up][Cleaning up]]
+
+* Full system upgrade
+
+** Sync repositories
+
+#+begin_src sh
+sudo emerge --sync
+#+end_src
+
+** Upgrade ~@world~ set
+
+#+begin_src sh
+sudo emerge -vauDU @world
+#+end_src
+- ~-v~ :: ~--verbose~
+- ~-a~ :: ~--ask~
+- ~-u~ :: ~--upgrade~
+- ~-D~ :: ~--deep~
+- ~-U~ :: ~--changed-use~
+
+** Continue a build process
+
+After cancelling a build process within emerge (e.g. /chromium/), it can be resumed if all temporary build files are preserved (~/var/tmp/portage~). We can check the disk space taken by a program's paused build process:
+#+begin_src sh
+sudo du -sh /var/tmp/portage/www-client/chromium-*
+#+end_src
+
+The corresponding ~.ebuild~ can be queried by doing:
+#+begin_src sh
+equery w chromium
+#+end_src
+
+Wrapping all up, the build process can be resumed by doing:
+#+begin_src sh
+sudo ebuild $(equery w chromium) merge
+#+end_src
+
+** Cleaning up
+
+*** Remove unwanted packages
+
+First, check if all packages prepared for removal deserve it:
+#+begin_src sh
+sudo emerge -pc
+#+end_src
+- ~-p~ :: ~--pretend~
+- ~-c~ :: ~--depclean~
+
+If all looks good, do it with:
+#+begin_src sh
+sudo emerge -c
+#+end_src
+
+*** Cache directories
+
+By default, source files are located in the ~/var/cache/distfiles~ directory, while binary packages are located in the ~/var/cache/binpkgs~ directory.
+
+Clean the source files directory by passing the distfiles argument:
+#+begin_src sh
+sudo eclean distfiles
+#+end_src
+Or by running the short option:
+#+begin_src sh
+sudo eclean-dist
+#+end_src
+
+For the directory with the binary packages use the following command instead:
+#+begin_src sh
+sudo eclean packages
+#+end_src
+Or by running the short option:
+#+begin_src sh
+sudo eclean-pkg
+#+end_src
+
+For both actions, to save more disk space, add the ~-d~ / ~--deep~ argument: every source file or binary package that does not correspond to some currently installed package (version does matter) will be deleted. Please notice that this way users will not be protected in case they need to downgrade a package or re-install a previously removed package.
+
+Within Pingu, we have a ZSH shell alias, named ~eclean-all~, which performs both actions sequentially:
+#+begin_src sh
+alias eclean-all='sudo eclean-pkg -d && sudo eclean-dist -d'
+#+end_src
+
+*** Temporary directory
+
+Portage builds packages in the ~TMPDIR~ defined directory, which defaults to ~/var/tmp/portage~. If a package emerge's job fails or exits abruptly, Portage will keep the state of the build there, until a new emerge job is requested. Similarly as before, when we wanted to continue a build process, ...

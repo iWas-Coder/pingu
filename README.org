@@ -370,7 +370,7 @@ Pass the unit test suite (pytest) to check for config errors:
 
 Build the kernel (~vmlinux~), its selected modules (~*.ko~) and the kernel compressed image (~bzImage~).
 #+begin_src sh
-(chroot) #  KCFLAGS="$(emerge --info | grep -owP 'CFLAGS="\K[^"]+')" nice make [-j<N>]
+(chroot) #  KCFLAGS="$(grep -woP 'OPT_FLAGS="\K[^"]+' /etc/portage/make.conf)" nice make [-j<N>]
 #+end_src
 Add the ~-j<N>~ flag so that GNU Make can parallelize jobs, where ~N~ is the number of jobs to handle in parallel. The ~CFLAGS~ are passed in from Portage's info (supplied previously in ~/etc/portage/make.conf~)
 
