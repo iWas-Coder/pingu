@@ -116,6 +116,7 @@ alias pglog='pingu log --graph --format=format:"%C(bold blue)%h%C(reset) - %C(bo
 alias pgundo='pingu reset --soft HEAD@{1}'
 alias pgst='pingu status -sb 2>/dev/null'
 alias pgadd='pingu add -vu'
+alias pgbk='pingu-backup'
 # Git
 alias ggtoken='cat /home/iwas/.git/github-token.key | xclip -sel clip && echo "[+] GitHub Access Token copied successfully to the clipboard :)"'
 alias ggfetch='git fetch --all -p -P && echo; ggst'
