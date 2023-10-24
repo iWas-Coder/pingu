@@ -84,6 +84,7 @@ dev-util/cloc
 dev-util/dialog
 dev-util/gef
 dev-util/google-perftools
+dev-util/ltrace
 dev-util/nvidia-cuda-toolkit
 dev-util/strace
 dev-util/vulkan-tools
