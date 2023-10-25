@@ -167,12 +167,14 @@
 
 ;; Setting some variables
 (setq-default cursor-type '(bar . 3))
+(setq-default indent-tabs-mode nil)
 (setq display-line-numbers-type 'relative)
 (setq ring-bell-function 'ignore)
 (setq mouse-wheel-progressive-speed nil)
 (setq make-backup-files nil)
 (setq org-support-shift-select t)
 (setq completion-cycle-threshold 3)
+(setq standard-indent 2)
 (setq sh-basic-offset 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
@@ -197,6 +199,12 @@
 	  (lambda () (setq-local electric-pair-inhibit-predicate
 				 `(lambda (c)
 				    (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+
+;; Use spaces instead of tabs for 'go-mode'
+(add-hook 'go-mode-hook
+          (lambda () (setq tab-width 2
+                           standard-indent 2
+                           indent-tabs-mode nil)))
 
 (defun prepare-scratch-for-kill ()
   "Whenever the 'scratch' buffer gets killed, open it again."
@@ -484,6 +492,7 @@
 (use-package yaml-mode)
 (use-package haskell-mode)
 (use-package terraform-mode)
+(use-package go-mode)
 
 (use-package markdown-mode)
 
