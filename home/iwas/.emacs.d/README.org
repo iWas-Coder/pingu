@@ -183,10 +183,12 @@ Setting the dashboard as the default buffer.
 
 ** Rainbow delimiters
 #+begin_src emacs-lisp
+;; Add rainbow colouring to delimiters when in 'prog-mode', 'org-mode' and 'text-mode'
 (use-package rainbow-delimiters
   :hook
   ((prog-mode . rainbow-delimiters-mode)
-   (org-mode . rainbow-delimiters-mode)))
+   (org-mode . rainbow-delimiters-mode)
+   (text-mode . rainbow-delimiters-mode)))
 #+end_src
 
 * Fonts
@@ -340,8 +342,10 @@ Prettify some symbols in certain modes.
   :config
   (setq highlight-indent-guides-method 'column))
 
-;; Add indentation guides to 'prog-mode'
+;; Add indentation guides to 'prog-mode', 'org-mode' and 'text-mode'
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'org-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
 #+end_src
 
 * Dired

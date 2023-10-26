@@ -85,10 +85,12 @@
   :hook
   org-mode prog-mode)
 
+;; Add rainbow colouring to delimiters when in 'prog-mode', 'org-mode' and 'text-mode'
 (use-package rainbow-delimiters
   :hook
   ((prog-mode . rainbow-delimiters-mode)
-   (org-mode . rainbow-delimiters-mode)))
+   (org-mode . rainbow-delimiters-mode)
+   (text-mode . rainbow-delimiters-mode)))
 
 ;; Face attributes for different conditions
 (set-face-attribute 'default nil
@@ -225,8 +227,10 @@
   :config
   (setq highlight-indent-guides-method 'column))
 
-;; Add indentation guides to 'prog-mode'
+;; Add indentation guides to 'prog-mode', 'org-mode' and 'text-mode'
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'org-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
 
 (setq dired-listing-switches "-agho --group-directories-first")
 
