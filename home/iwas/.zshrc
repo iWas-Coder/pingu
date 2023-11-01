@@ -401,6 +401,8 @@ export PATH=$PATH:/opt/cuda/bin
 export PATH=$PATH:/home/iwas/.local/bin
 # Adding Wine to PATH
 export PATH=$PATH:/etc/eselect/wine/bin
+# Adding LLVM to PATH
+export PATH=$PATH:/usr/lib/llvm/16/bin
 
 
 #################
