@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#####################
+# === CONSTANTS === #
+#####################
 C_RESET='\033[0m'
 C_RED='\033[1;31m'
 C_YELLOW='\033[1;33m'
@@ -8,14 +11,6 @@ C_PURPLE='\033[0;35m'
 C_LOG_INFO=$C_YELLOW
 C_LOG_WARNING=$C_PURPLE
 C_LOG_ERROR=$C_RED
-
-printc () {
-  COLOR_SEQ="$1"
-  MSG="$2"
-  END_SEQ="$3"
-  [ -z "$END_SEQ" ] && END_SEQ='\n'
-  printf "${COLOR_SEQ}${MSG}${C_RESET}${END_SEQ}"
-}
 
 MODE="$1"
 GAME="$2"
@@ -28,6 +23,19 @@ LRZUNTAR="lrztar -vv -z -p 10 -H -d"
 RSYNC_MV="rsync -aP --remove-source-files"
 RSYNC_CP="rsync -aP"
 
+
+#####################
+# === FUNCTIONS === #
+#####################
+# Colorful message logging
+printc () {
+  COLOR_SEQ="$1"
+  MSG="$2"
+  END_SEQ="$3"
+  [ -z "$END_SEQ" ] && END_SEQ='\n'
+  printf "${COLOR_SEQ}${MSG}${C_RESET}${END_SEQ}"
+}
+
 # Print argument usage
 arg_usage () { echo -ne "  $1 \t=> $2.\n"; }
 
@@ -37,32 +45,39 @@ usage () {
   arg_usage "-h/--help" "Show this help panel and exit"
   arg_usage "-a/--archive" "Compress game with ZPAQ and store it in the vault"
   arg_usage "-i/--install" "Fetch the game archival from the vault and decompress it locally"
-  echo
 }
 
 # Check if given path is a mountpoint
 is_mounted () { mountpoint -q "$1"; }
 
-# Ctrl+C handler
+# Pretty exit when 'C-c' is pressed
 ctrl_c () {
   printc $C_LOG_ERROR "ERROR: Exited abnormally (C-c => INT)"
   exit 1
 }
+
+
+########################
+# === SCRIPT LOGIC === #
+########################
+# Handle 'C-c' event
 trap ctrl_c INT
 
-# Pre-script environment checks
+# Environment setup and check
 cd /home/iwas
-if [ $# -ne 2 ]; then
-  usage
-  exit 1
-elif [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
   usage
   exit 0
+elif [ $# -ne 2 ]; then
+  printc $C_LOG_ERROR "ERROR: Wrong number of arguments ($# != 2)"
+  usage
+  exit 1
 elif ! is_mounted "$MOUNTPOINT"; then
   printc $C_LOG_ERROR "ERROR: Vault ($MOUNTPOINT) is not mounted"
   exit 1
 fi
 
+# Main loop
 for game in $(ls "$GAMES"); do
   if [ "$game" = "$GAME" ]; then
     # === Archive mode === #
@@ -86,6 +101,7 @@ for game in $(ls "$GAMES"); do
       echo "$GAME $GAME_DIR" >> "$LOGFILE"
       popd &>/dev/null
       printc $C_LOG_INFO "INFO: Game '$GAME' archived successfully. Exiting..."
+      exit 0
     # === Extract mode === #
     elif [ "$MODE" = "-i" ] || [ "$MODE" = "--install" ]; then
       # Compute game paths (with logfile)
@@ -105,12 +121,14 @@ for game in $(ls "$GAMES"); do
       sed -i "/$GAME/d" "$LOGFILE"
       popd &>/dev/null
       printc $C_LOG_INFO "INFO: Game '$GAME' installed successfully. Exiting..."
+      exit 0
     else
+      printc $C_LOG_ERROR "ERROR: Mode requested ($MODE) not available"
       usage
       exit 1
     fi
-  else
-    usage
-    exit 1
   fi
 done
+
+printc $C_LOG_ERROR "ERROR: Game requested ($GAME) not available"
+exit 1
