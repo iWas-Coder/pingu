@@ -42,6 +42,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 - [[#neotree][Neotree]]
 - [[#minimap][Minimap]]
 - [[#magit][Magit]]
+- [[#elfeed][Elfeed]]
 - [[#additional-languages][Additional languages]]
 - [[#markup-languages][Markup languages]]
   - [[#markdown][Markdown]]
@@ -657,6 +658,21 @@ Enable rich mode for Ivy.
 * Magit
 #+begin_src emacs-lisp
 (use-package magit)
+#+end_src
+
+* Elfeed
+#+begin_src emacs-lisp
+(use-package elfeed
+  :config
+  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
+        elfeed-feeds (quote
+                      (("https://www.phoronix.com/rss.php" phoronix linux)))))
+
+(use-package elfeed-goodies
+  :init
+  (elfeed-goodies/setup)
+  :config
+  (setq elfeed-goodies/entry-pane-size 0.5))
 #+end_src
 
 * Additional languages

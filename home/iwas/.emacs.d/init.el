@@ -493,6 +493,18 @@
 
 (use-package magit)
 
+(use-package elfeed
+  :config
+  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
+        elfeed-feeds (quote
+                      (("https://www.phoronix.com/rss.php" phoronix linux)))))
+
+(use-package elfeed-goodies
+  :init
+  (elfeed-goodies/setup)
+  :config
+  (setq elfeed-goodies/entry-pane-size 0.5))
+
 (use-package yaml-mode)
 (use-package haskell-mode)
 (use-package terraform-mode)
