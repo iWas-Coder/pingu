@@ -166,6 +166,8 @@
 (global-auto-revert-mode 1)
 (pixel-scroll-precision-mode t)
 (tooltip-mode -1)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ;; Setting some variables
 (setq-default cursor-type '(bar . 3))
