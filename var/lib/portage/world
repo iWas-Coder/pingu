@@ -78,6 +78,7 @@ dev-qt/qtx11extras
 dev-qt/qtxml:5
 dev-scheme/fibers
 dev-scheme/guile
+dev-util/bear
 dev-util/blueprint-compiler
 dev-util/clinfo
 dev-util/cloc
@@ -87,6 +88,7 @@ dev-util/google-perftools
 dev-util/ltrace
 dev-util/nvidia-cuda-toolkit
 dev-util/strace
+dev-util/valgrind
 dev-util/vulkan-tools
 dev-util/xxd
 dev-vcs/git
@@ -135,6 +137,7 @@ media-libs/sdl2-image
 media-libs/sdl2-mixer
 media-libs/sdl2-net
 media-libs/sdl2-ttf
+media-libs/shaderc
 media-libs/vkBasalt
 media-libs/vulkan-loader
 media-sound/alsa-utils
