@@ -507,6 +507,13 @@
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
 
+(use-package flycheck-eglot)
+(global-flycheck-eglot-mode 1)
+
+(use-package flycheck-inline)
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
+
 (use-package yaml-mode)
 (use-package haskell-mode)
 (use-package terraform-mode)
