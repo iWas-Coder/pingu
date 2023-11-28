@@ -8,6 +8,7 @@ export __GL_VRR_ALLOWED=1
 export _JAVA_AWT_WM_NONREPARENTING=1
 export BROWSER="chromium $(cat /home/iwas/.config/chromium-flags.conf | xargs)"
 export CLUTTER_DEFAULT_FPS=144
+export CLANGD_FLAGS="--header-insertion=never --clang-tidy --completion-style=detailed"
 export EDITOR=nvim
 export XDG_CURRENT_DESKTOP=Pingu
 export XDG_DOWNLOAD_DIR="/home/iwas/downloads"
