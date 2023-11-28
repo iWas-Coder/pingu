@@ -224,6 +224,7 @@ x11-base/xorg-server
 x11-drivers/nvidia-drivers
 x11-libs/cairo
 x11-libs/libX11
+x11-libs/libXScrnSaver
 x11-libs/libXcomposite
 x11-libs/libXcursor
 x11-libs/libXext
