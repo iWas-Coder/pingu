@@ -115,7 +115,7 @@ bar {
 		            -t iceberg-rainbow                                                                  \
 		            -m kernel load cpu memory sensors2 disk:sys disk:data nvidiagpu nic uptime datetime \
 		            -p cpu.format="{:05.1f}%"                                                           \
-                   nic.exclude="lo,dummy0,sit0,veth*,br-*"                                          \
+                   nic.exclude="lo,dummy*,sit*,veth*,br*,tap*"                                      \
                    sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)"                    \
                    data.path="/home/iwas/data" data.format="DATA: {used}/{size} ({percent:.1f}%)"   \
                    datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                                     \
