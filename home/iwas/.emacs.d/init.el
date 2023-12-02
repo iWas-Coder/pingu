@@ -591,6 +591,9 @@
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
 
+;; Set the maximum depth of the ToC to the number of distinct heading bullet icons (7)
+(setq toc-org-max-depth 7)
+
 (setq org-agenda-files
       '("~/.emacs.d/agenda.org.d/todo.org")
       org-agenda-start-with-log-mode t

@@ -47,6 +47,13 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 - [[#markup-languages][Markup languages]]
   - [[#markdown][Markdown]]
   - [[#org-mode][Org Mode]]
+    - [[#definitions-1][Definitions]]
+    - [[#org-bullets][Org Bullets]]
+    - [[#org-fonts][Org Fonts]]
+    - [[#org-tempo][Org Tempo]]
+    - [[#toc][ToC]]
+    - [[#org-agenda][Org Agenda]]
+    - [[#org-to-man][Org-to-Man]]
 - [[#terminal-modes][Terminal Modes]]
   - [[#vterm][Vterm]]
   - [[#eshell][Eshell]]
@@ -786,6 +793,9 @@ Add more language support.
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
+
+;; Set the maximum depth of the ToC to the number of distinct heading bullet icons (7)
+(setq toc-org-max-depth 7)
 #+end_src
 
 *** Org Agenda
