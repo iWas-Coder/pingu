@@ -386,8 +386,8 @@
 		    (undecorated . t)
 		    (auto-raise . t)
 		    (internal-border-width . 10)
-		    (width . 28)
-		    (height . 8)))
+		    (width . 30)
+		    (height . 10)))
     (unwind-protect
 	(games/game-launcher)
       (delete-frame))))
