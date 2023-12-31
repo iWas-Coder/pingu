@@ -149,11 +149,11 @@
              render_driver : Render video driver to use, at the moment gl, vulkan or directx9 is supported.
              vulkan_fullscreen_desktop : Use SDL_WINDOW_FULLSCREEN_DESKTOP for vulkan device -->
     <Video
-        real_width="1920"
-        real_height="1080"
-        width="1920"
-        height="1080"
-        fullscreen="false"
+        real_width="2560"
+        real_height="1440"
+        width="2560"
+        height="1440"
+        fullscreen="true"
         prev_real_width="1920"
         prev_real_height="1080"
         prev_fullscreen="false"
@@ -210,15 +210,12 @@
 
     <!-- The stun servers that will be used to know the public address (ipv4 only) with port -->
     <ipv4-stun-servers>
-        <stun-server address="stunv4.7.supertuxkart.net:3478" ping="0"/>
-        <stun-server address="stunv4.8.supertuxkart.net:3478" ping="119"/>
-        <stun-server address="stunv4.linuxreviews.org:3478" ping="0"/>
+        <stun-server address="stunv4.7.supertuxkart.net:3478" ping="270"/>
+        <stun-server address="stunv4.8.supertuxkart.net:3478" ping="118"/>
     </ipv4-stun-servers>
 
     <!-- The stun servers that will be used to know the public address (including ipv6) with port -->
     <ipv6-stun-servers>
-        <stun-server address="stun.linuxreviews.org:3478" ping="0"/>
-        <stun-server address="stun.stunprotocol.org:3478" ping="0"/>
         <stun-server address="stun.supertuxkart.net:3478" ping="0"/>
     </ipv6-stun-servers>
 
@@ -397,7 +394,7 @@ moving the mouse (means acceleration).
     <item_style value="items" />
 
     <!-- Name of the last track used. -->
-    <last_track value="soccer_field" />
+    <last_track value="pumpkin_park" />
 
     <!-- Last selected track group -->
     <last_track_group value="all" />
@@ -474,12 +471,12 @@ moving the mouse (means acceleration).
              addon_last_updated : Time addon-list was updated last.
              latest_addon_time : Latest approved addon time. -->
     <AddonServer
-        news_last_updated="1693165896"
+        news_last_updated="1703959579"
         news_frequency="0"
         news_display_count=""
         last_important_message_id="-1"
-        addon_last_updated="1693163129"
-        latest_addon_time="1693140135"
+        addon_last_updated="1703959580"
+        latest_addon_time="1703118402"
     >
     </AddonServer>
 
