@@ -518,6 +518,7 @@
 (use-package haskell-mode)
 (use-package terraform-mode)
 (use-package go-mode)
+(use-package mermaid-mode)
 
 (use-package markdown-mode)
 
