@@ -85,12 +85,10 @@
   :hook
   org-mode prog-mode)
 
-;; Add rainbow colouring to delimiters when in 'prog-mode', 'org-mode' and 'text-mode'
+;; Add rainbow colouring to delimiters when in 'prog-mode' and 'text-mode'
 (use-package rainbow-delimiters
   :hook
-  ((prog-mode . rainbow-delimiters-mode)
-   (org-mode . rainbow-delimiters-mode)
-   (text-mode . rainbow-delimiters-mode)))
+  ((prog-mode . rainbow-delimiters-mode)))
 
 ;; Face attributes for different conditions
 (set-face-attribute 'default nil
