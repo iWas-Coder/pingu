@@ -82,6 +82,10 @@ for game in $(ls "$GAMES"); do
   if [ "$game" = "$GAME" ]; then
     # === Archive mode === #
     if [ "$MODE" = "-a" ] || [ "$MODE" = "--archive" ]; then
+      if [ ! -e "$GAMES/$GAME" ]; then
+        printc "$C_LOG_WARNING" "WARNING: Game '$GAME' is not installed, cannot archive. Exiting..."
+        exit 0
+      fi
       # Compute game paths
       GAME_DIR=$(dirname "$(realpath "$GAMES/$GAME")")
       PARENT_GAME_DIR=$(dirname "$GAME_DIR")
@@ -104,6 +108,10 @@ for game in $(ls "$GAMES"); do
       exit 0
     # === Extract mode === #
     elif [ "$MODE" = "-i" ] || [ "$MODE" = "--install" ]; then
+      if [ -e "$GAMES/$GAME" ]; then
+        printc "$C_LOG_WARNING" "WARNING: Game '$GAME' already installed. Exiting..."
+        exit 0
+      fi
       # Compute game paths (with logfile)
       GAME_DIR=$(cat "$LOGFILE" | grep "$GAME" | awk '{print $2}')
       PARENT_GAME_DIR=$(dirname "$GAME_DIR")
