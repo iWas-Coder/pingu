@@ -47,3 +47,4 @@ pcap:x:377:iwas
 seat:x:202:iwas
 mail:x:12:
 pipewire:x:509:
+qbittorrent:x:534:

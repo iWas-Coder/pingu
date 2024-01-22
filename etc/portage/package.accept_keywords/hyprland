@@ -6,3 +6,5 @@ dev-libs/hyprland-protocols ~amd64
 gui-apps/hyprpaper ~amd64
 gui-apps/waybar ~amd64
 dev-libs/date ~amd64
+dev-cpp/tomlplusplus ~amd64
+dev-libs/hyprlang ~amd64

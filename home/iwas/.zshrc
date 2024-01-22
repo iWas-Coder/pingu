@@ -294,17 +294,6 @@ podman.save () {
 podman.load () {
   pv "$1" | podman load
 }
-# Podman create a vanilla Debian instance
-podman.deb () {
-  podman run                             \
-    --rm                                 \
-    -it                                  \
-    --name debian-ct                     \
-    -v /etc/bash/bashrc-ct:/root/.bashrc \
-    debian                               \
-    /bin/bash
-  podman rmi debian
-}
 # Podman create a Gentoo stage3 shell environment
 podman.gentoo_shell () {
   xhost +
@@ -367,9 +356,12 @@ podman.dev.nim () {
     /bin/bash
   podman rmi nimlang/nim
 }
-# Minikube create custom cluster
-minikube.start () {
-  [ "$#" -ne 4 ] && echo "[-] Incorrect syntax :(" && return 1
+# Minikube create custom VM-based cluster
+minikube.start.vm () {
+  if [ "$#" -ne 4 ]; then
+    echo "usage: ${funcstack[1]} <NODES> <CPUS> <MEM> <DISK>"
+    return 1
+  fi
   minikube start                                             \
     --driver qemu2                                           \
     --qemu-firmware-path "/usr/share/edk2-ovmf/OVMF_CODE.fd" \
@@ -377,12 +369,29 @@ minikube.start () {
     --cpus "$2"                                              \
     --memory "${3}g"                                         \
     --disk-size "${4}g"                                      \
-    --network builtin                                        \
     --kvm-gpu true                                           \
     --bootstrapper kubeadm                                   \
     --container-runtime cri-o                                \
     --kubernetes-version stable                              \
     --delete-on-failure true                                 \
+    --keep-context true
+}
+# Minikube create custom CT-based cluster
+minikube.start.ct () {
+  if [ "$#" -ne 3 ]; then
+    echo "usage: ${funcstack[1]} <NODES> <CPUS> <MEM>"
+    return 1
+  fi
+  minikube start                \
+    --driver podman             \
+    --nodes "$1"                \
+    --cpus "$2"                 \
+    --memory "${3}g"            \
+    --kvm-gpu true              \
+    --bootstrapper kubeadm      \
+    --container-runtime cri-o   \
+    --kubernetes-version stable \
+    --delete-on-failure true    \
     --keep-context true
 }
 

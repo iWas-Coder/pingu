@@ -1,4 +1,4 @@
-=sys-kernel/gentoo-sources-6.1.46
+=sys-kernel/gentoo-sources-6.1.57
 app-admin/awscli
 app-admin/helm
 app-admin/sudo
@@ -38,7 +38,12 @@ app-text/poppler
 app-text/texlive
 app-text/tree
 app-text/wdiff
+dev-build/automake-wrapper
 dev-db/libdbi
+dev-debug/gef
+dev-debug/ltrace
+dev-debug/strace
+dev-debug/valgrind
 dev-java/openjdk
 dev-java/openjdk-bin
 dev-lang/python
@@ -84,12 +89,8 @@ dev-util/blueprint-compiler
 dev-util/clinfo
 dev-util/cloc
 dev-util/dialog
-dev-util/gef
 dev-util/google-perftools
-dev-util/ltrace
 dev-util/nvidia-cuda-toolkit
-dev-util/strace
-dev-util/valgrind
 dev-util/vulkan-tools
 dev-util/xxd
 dev-vcs/git
@@ -194,7 +195,6 @@ sys-apps/usbutils
 sys-auth/seatd
 sys-boot/grub
 sys-cluster/kubectl
-sys-devel/automake-wrapper
 sys-devel/clang
 sys-devel/clang-runtime
 sys-firmware/edk2-ovmf-bin
