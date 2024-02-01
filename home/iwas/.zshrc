@@ -97,6 +97,7 @@ alias loc='cloc'
 # Custom
 alias mount.vault='sudo mount -t cifs //penny.swa2.ml/wasym /home/iwas/vault -o vers=3.0,credentials=/home/iwas/.smb/penny.key,uid=1000,forceuid,gid=1000,forcegid,file_mode=0664,dir_mode=0775,sec=ntlmv2i,rw'
 alias umount.vault='sudo umount /home/iwas/vault'
+alias feh.bg.reload='cat /home/iwas/.xprofile | grep -i feh | bash'
 alias picom.start='cat /home/iwas/.xprofile | grep -i picom | bash'
 alias picom.restart='killall picom; picom.start'
 alias perms='stat -c "%n -> %a (%A)"'
