@@ -178,6 +178,7 @@
 (setq completion-cycle-threshold 3)
 (setq standard-indent 2)
 (setq sh-basic-offset 2)
+(setq js-indent-level 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
 (setq pixel-scroll-precision-interpolate-mice t)
