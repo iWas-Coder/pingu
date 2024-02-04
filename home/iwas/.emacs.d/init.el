@@ -179,6 +179,8 @@
 (setq standard-indent 2)
 (setq sh-basic-offset 2)
 (setq js-indent-level 2)
+(setq typescript-indent-level 2)
+(setq css-indent-offset 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
 (setq pixel-scroll-precision-interpolate-mice t)
@@ -521,6 +523,12 @@
 (use-package terraform-mode)
 (use-package go-mode)
 (use-package mermaid-mode)
+(use-package typescript-mode)
+(use-package rjsx-mode)
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
 
 (use-package markdown-mode)
 

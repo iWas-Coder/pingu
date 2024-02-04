@@ -296,6 +296,8 @@ Prettify some symbols in certain modes.
 (setq standard-indent 2)
 (setq sh-basic-offset 2)
 (setq js-indent-level 2)
+(setq typescript-indent-level 2)
+(setq css-indent-offset 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
 (setq pixel-scroll-precision-interpolate-mice t)
@@ -705,6 +707,14 @@ Add more language support.
 (use-package terraform-mode)
 (use-package go-mode)
 (use-package mermaid-mode)
+(use-package typescript-mode)
+(use-package rjsx-mode)
+#+end_src
+Set some mappings between modes and filenames.
+#+begin_src emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
 #+end_src
 
 * Markup languages
