@@ -327,6 +327,12 @@ Prettify some symbols in certain modes.
           (lambda () (setq tab-width 2
                            standard-indent 2
                            indent-tabs-mode nil)))
+
+;; Use 2 space indenting instead of 4 for 'java-mode'
+(remove-hook 'java-mode-hook (lambda ()
+                               (setq c-basic-offset 4)))
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 2)))
 #+end_src
 
 ** 'scratch' buffer: "I open at the close"

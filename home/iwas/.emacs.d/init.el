@@ -211,6 +211,12 @@
                            standard-indent 2
                            indent-tabs-mode nil)))
 
+;; Use 2 space indenting instead of 4 for 'java-mode'
+(remove-hook 'java-mode-hook (lambda ()
+                               (setq c-basic-offset 4)))
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 2)))
+
 (defun prepare-scratch-for-kill ()
   "Whenever the 'scratch' buffer gets killed, open it again."
   (save-excursion
