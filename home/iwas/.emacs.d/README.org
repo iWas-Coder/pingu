@@ -298,6 +298,8 @@ Prettify some symbols in certain modes.
 (setq js-indent-level 2)
 (setq typescript-indent-level 2)
 (setq css-indent-offset 2)
+(setq groovy-indent-offset 2)
+(setq jenkinsfile-mode-indent-offset 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
 (setq pixel-scroll-precision-interpolate-mice t)
@@ -715,6 +717,8 @@ Add more language support.
 (use-package mermaid-mode)
 (use-package typescript-mode)
 (use-package rjsx-mode)
+(use-package groovy-mode)
+(use-package jenkinsfile-mode)
 #+end_src
 Set some mappings between modes and filenames.
 #+begin_src emacs-lisp
