@@ -299,6 +299,7 @@ Prettify some symbols in certain modes.
 (setq typescript-indent-level 2)
 (setq css-indent-offset 2)
 (setq groovy-indent-offset 2)
+(setq rust-indent-offset 2)
 (setq jenkinsfile-mode-indent-offset 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
