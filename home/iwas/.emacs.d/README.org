@@ -719,6 +719,7 @@ Add more language support.
 (use-package rjsx-mode)
 (use-package groovy-mode)
 (use-package jenkinsfile-mode)
+(use-package rust-mode)
 #+end_src
 Set some mappings between modes and filenames.
 #+begin_src emacs-lisp

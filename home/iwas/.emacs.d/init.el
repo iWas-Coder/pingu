@@ -535,6 +535,7 @@
 (use-package rjsx-mode)
 (use-package groovy-mode)
 (use-package jenkinsfile-mode)
+(use-package rust-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
