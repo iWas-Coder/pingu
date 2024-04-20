@@ -184,6 +184,7 @@
 (setq groovy-indent-offset 2)
 (setq rust-indent-offset 2)
 (setq jenkinsfile-mode-indent-offset 2)
+(setq lua-indent-level 2)
 (setq global-auto-revert-non-file-buffers t)
 (setq pixel-scroll-precision-use-momentum t)
 (setq pixel-scroll-precision-interpolate-mice t)
@@ -537,10 +538,14 @@
 (use-package groovy-mode)
 (use-package jenkinsfile-mode)
 (use-package rust-mode)
+(use-package glsl-mode)
+(use-package lua-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.glslv\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.glslf\\'" . glsl-mode))
 
 (use-package markdown-mode)
 
