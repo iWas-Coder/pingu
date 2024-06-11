@@ -1,1 +1,1 @@
-/usr/bin/ethtool -s enp5s0 wol g
+/usr/bin/ethtool -s enp1s0 wol g

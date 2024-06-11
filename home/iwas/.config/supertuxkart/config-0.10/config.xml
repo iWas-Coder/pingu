@@ -149,17 +149,17 @@
              render_driver : Render video driver to use, at the moment gl, vulkan or directx9 is supported.
              vulkan_fullscreen_desktop : Use SDL_WINDOW_FULLSCREEN_DESKTOP for vulkan device -->
     <Video
-        real_width="2560"
-        real_height="1440"
-        width="2560"
-        height="1440"
-        fullscreen="true"
+        real_width="1920"
+        real_height="1080"
+        width="1920"
+        height="1080"
+        fullscreen="false"
         prev_real_width="1920"
         prev_real_height="1080"
         prev_fullscreen="false"
         remember_window_location="true"
-        window_x="1392"
-        window_y="561"
+        window_x="1390"
+        window_y="503"
         show_fps="false"
         show_story_mode_timer="true"
         show_speedrun_timer="false"
@@ -168,15 +168,15 @@
         split_screen_horizontally="true"
         enable_texture_compression="true"
         enable_high_definition_textures="3"
-        enable_glow="true"
-        enable_bloom="true"
-        enable_light_shaft="true"
+        enable_glow="false"
+        enable_bloom="false"
+        enable_light_shaft="false"
         enable_dynamic_lights="true"
-        enable_dof="true"
+        enable_dof="false"
         old_driver_popup="true"
         scale_rtts_factor="1.000000"
         max_texture_size="512"
-        hq_mipmap="true"
+        hq_mipmap="false"
         font_size="3.000000"
         render_driver="gl"
         vulkan_fullscreen_desktop="true"
@@ -202,6 +202,7 @@
 
     <!-- Wan server bookmarks -->
     <server-bookmarks>
+        <server-bookmarks server-name="Servidor&#x20;de&#x20;drivemeca241728" last-online="1708803496"/>
     </server-bookmarks>
 
     <!-- Last 5 IP addresses that user entered -->
@@ -211,7 +212,7 @@
     <!-- The stun servers that will be used to know the public address (ipv4 only) with port -->
     <ipv4-stun-servers>
         <stun-server address="stunv4.7.supertuxkart.net:3478" ping="270"/>
-        <stun-server address="stunv4.8.supertuxkart.net:3478" ping="118"/>
+        <stun-server address="stunv4.8.supertuxkart.net:3478" ping="399"/>
     </ipv4-stun-servers>
 
     <!-- The stun servers that will be used to know the public address (including ipv6) with port -->
@@ -278,14 +279,14 @@
         easter-ear-mode="0"
         animated-characters="true"
         geometry_level="0"
-        anisotropic="16"
+        anisotropic="4"
         swap-interval="0"
         motionblur_enabled="true"
-        mlaa="true"
-        ssao="true"
-        light_scatter="true"
-        shadows_resolution="1024"
-        Degraded_IBL="false"
+        mlaa="false"
+        ssao="false"
+        light_scatter="false"
+        shadows_resolution="0"
+        Degraded_IBL="true"
     >
     </GFX>
 
@@ -394,7 +395,7 @@ moving the mouse (means acceleration).
     <item_style value="items" />
 
     <!-- Name of the last track used. -->
-    <last_track value="pumpkin_park" />
+    <last_track value="stk_enterprise" />
 
     <!-- Last selected track group -->
     <last_track_group value="all" />
@@ -471,12 +472,12 @@ moving the mouse (means acceleration).
              addon_last_updated : Time addon-list was updated last.
              latest_addon_time : Latest approved addon time. -->
     <AddonServer
-        news_last_updated="1703959579"
+        news_last_updated="1708803464"
         news_frequency="0"
         news_display_count=""
         last_important_message_id="-1"
-        addon_last_updated="1703959580"
-        latest_addon_time="1703118402"
+        addon_last_updated="1708803465"
+        latest_addon_time="1707417625"
     >
     </AddonServer>
 

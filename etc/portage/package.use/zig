@@ -2,3 +2,16 @@
 >=dev-libs/libpcre2-10.42-r1 pcre32
 >=sys-devel/llvm-16.0.6 zstd
 >=sys-devel/lld-16.0.6 zstd
+# required by media-libs/mesa-23.3.1::gentoo[llvm,opencl]
+# required by mesa (argument)
+>=sys-devel/clang-17.0.6 abi_x86_32
+# required by media-libs/mesa-23.3.1::gentoo[llvm,opencl]
+# required by mesa (argument)
+>=sys-devel/clang-16.0.6:16 abi_x86_32
+# required by media-libs/x264-0.0.20231114-r1::gentoo[opencl]
+# required by x264 (argument)
+>=virtual/opencl-3-r3 abi_x86_32
+# required by virtual/opencl-3-r3::gentoo
+# required by media-libs/x264-0.0.20231114-r1::gentoo[opencl]
+# required by x264 (argument)
+>=dev-libs/opencl-icd-loader-2023.04.17 abi_x86_32

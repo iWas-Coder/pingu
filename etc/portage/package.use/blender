@@ -5,4 +5,4 @@ media-libs/opencolorio -opengl
 >=app-arch/brotli-1.0.9-r5 abi_x86_32
 >=x11-libs/libxkbcommon-1.5.0 abi_x86_32
 
-media-gfx/blender alembic collada jemalloc openal cuda optix
+media-gfx/blender alembic collada jemalloc openal

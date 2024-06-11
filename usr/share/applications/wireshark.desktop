@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=Wireshark
-Exec=/usr/bin/wireshark
-Terminal=false

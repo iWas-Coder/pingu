@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=Ryujinx
-Exec=/usr/local/bin/ryujinx/Ryujinx.sh
-Terminal=false

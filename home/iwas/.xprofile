@@ -10,7 +10,6 @@ export BROWSER="chromium $(cat /home/iwas/.config/chromium-flags.conf | xargs)"
 export CLUTTER_DEFAULT_FPS=144
 export CLANGD_FLAGS="--header-insertion=never --clang-tidy --completion-style=detailed"
 export EDITOR=nvim
-export NVCC_PREPEND_FLAGS="-ccbin /usr/bin/gcc-12"
 export XDG_CURRENT_DESKTOP=Pingu
 export XDG_DOWNLOAD_DIR="/home/iwas/downloads"
 export multithread_glsl_compiler=1
@@ -18,7 +17,6 @@ export multithread_glsl_compiler=1
 #########################
 # === Startup Tasks === #
 #########################
-nvidia-settings -a "GPUPowerMizerMode=1"
 gentoo-pipewire-launcher &
 /usr/local/bin/picom --experimental-backends &
 feh --bg-fill /home/iwas/.wallpapers/wallpaper_1.jpg --bg-fill /home/iwas/.wallpapers/wallpaper_2.jpg &

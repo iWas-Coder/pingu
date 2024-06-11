@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=OBS
-Exec=/usr/local/appimages/obs-studio
-Terminal=false

@@ -1,1 +1,5 @@
 >=x11-libs/xcb-util-keysyms-0.4.1 abi_x86_32
+>=virtual/libelf-3-r1 abi_x86_32
+>=dev-libs/elfutils-0.190 abi_x86_32
+>=x11-libs/libdrm-2.4.118 video_cards_radeon
+media-libs/mesa opencl

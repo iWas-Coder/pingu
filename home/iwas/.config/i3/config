@@ -49,17 +49,17 @@ set $ws8  "[8] GAME"
 set $ws9  "[9] VID"
 set $ws10 "[10] GFX"
 
-workspace $ws1 output DP-0
-workspace $ws3 output DP-0
-workspace $ws5 output DP-0
-workspace $ws7 output DP-0
-workspace $ws9 output DP-0
+workspace $ws1 output DisplayPort-0
+workspace $ws3 output DisplayPort-0
+workspace $ws5 output DisplayPort-0
+workspace $ws7 output DisplayPort-0
+workspace $ws9 output DisplayPort-0
 
-workspace $ws2  output HDMI-0
-workspace $ws4  output HDMI-0
-workspace $ws6  output HDMI-0
-workspace $ws8  output HDMI-0
-workspace $ws10 output HDMI-0
+workspace $ws2  output HDMI-A-0
+workspace $ws4  output HDMI-A-0
+workspace $ws6  output HDMI-A-0
+workspace $ws8  output HDMI-A-0
+workspace $ws10 output HDMI-A-0
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -107,20 +107,18 @@ mode "resize" {
 # === PRIMARY BAR === #
 #######################
 bar {
-	output DP-0
+	output DisplayPort-0
 	i3bar_command i3bar --transparency
 	position top
 	workspace_min_width 25
-        status_command /home/iwas/.config/bumblebee-status/bumblebee-status                         \
-		            -t iceberg-rainbow                                                                  \
-		            -m kernel load cpu memory sensors2 disk:sys disk:data nvidiagpu nic uptime datetime \
-		            -p cpu.format="{:05.1f}%"                                                           \
-                   nic.exclude="lo,dummy*,sit*,veth*,br*,tap*"                                      \
-                   sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)"                    \
-                   data.path="/home/iwas/data" data.format="DATA: {used}/{size} ({percent:.1f}%)"   \
-                   datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                                     \
-                   sensors2.chip_include="k10temp-pci-00c3"                                         \
-                   nvidiagpu.format="󰺷 GPU: {gpu_usage_pct}% | MEM: {mem_usage_pct}% ({mem_used}MiB) | CLK: {clock_gpu}MHz | TEMP: {temp}°C"
+        status_command /home/iwas/.config/bumblebee-status/bumblebee-status                 \
+		            -t iceberg-rainbow                                              \
+		            -m kernel load cpu memory sensors2 disk:sys nic uptime datetime \
+		            -p cpu.format="{:05.1f}%"                                       \
+                   nic.exclude="lo,dummy*,sit*,veth*,br*,tap*"                              \
+                   sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)"            \
+                   datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                             \
+                   sensors2.chip_include="k10temp-pci-00c3"
 
 	colors {
 		background #222222CC
@@ -134,7 +132,7 @@ bar {
 # === SECONDARY BAR === #
 #########################
 bar {
-  output HDMI-0
+  output HDMI-A-0
 	i3bar_command i3bar --transparency
   position top
   workspace_min_width 25
