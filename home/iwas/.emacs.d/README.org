@@ -724,6 +724,7 @@ Add more language support.
 (use-package rust-mode)
 (use-package glsl-mode)
 (use-package lua-mode)
+(use-package cmake-mode)
 #+end_src
 Set some mappings between modes and filenames.
 #+begin_src emacs-lisp

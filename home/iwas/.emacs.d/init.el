@@ -540,6 +540,7 @@
 (use-package rust-mode)
 (use-package glsl-mode)
 (use-package lua-mode)
+(use-package cmake-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
