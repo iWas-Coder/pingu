@@ -43,6 +43,7 @@ GNU Emacs is an ~Emacs-Lisp interpreter~, which comes by default with a *text ed
 - [[#minimap][Minimap]]
 - [[#magit][Magit]]
 - [[#elfeed][Elfeed]]
+- [[#vdiff][Vdiff]]
 - [[#additional-languages][Additional languages]]
 - [[#markup-languages][Markup languages]]
   - [[#markdown][Markdown]]
@@ -696,6 +697,11 @@ Enable rich mode for Ivy.
   (elfeed-goodies/setup)
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
+#+end_src
+
+* Vdiff
+#+begin_src emacs-lisp
+(use-package vdiff)
 #+end_src
 
 * Additional languages
