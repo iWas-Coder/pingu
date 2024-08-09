@@ -2,8 +2,8 @@
     "windows": [
         {
             "emotePopup": {
-                "x": 490,
-                "y": 1392
+                "x": 487,
+                "y": 1437
             },
             "height": 1274,
             "tabs": [
@@ -266,21 +266,6 @@
                     "highlightsEnabled": true,
                     "splits2": {
                         "data": {
-                            "name": "afor_digital",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    }
-                },
-                {
-                    "highlightsEnabled": true,
-                    "splits2": {
-                        "data": {
                             "name": "triz3ratops",
                             "type": "twitch"
                         },
@@ -297,21 +282,6 @@
                     "splits2": {
                         "data": {
                             "name": "theprimeagen",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    }
-                },
-                {
-                    "highlightsEnabled": true,
-                    "splits2": {
-                        "data": {
-                            "name": "masi_rodriguez",
                             "type": "twitch"
                         },
                         "filters": [
@@ -343,21 +313,6 @@
                     "splits2": {
                         "data": {
                             "name": "midudev",
-                            "type": "twitch"
-                        },
-                        "filters": [
-                        ],
-                        "flexh": 1,
-                        "flexv": 1,
-                        "moderationMode": false,
-                        "type": "split"
-                    }
-                },
-                {
-                    "highlightsEnabled": true,
-                    "splits2": {
-                        "data": {
-                            "name": "staryuuki",
                             "type": "twitch"
                         },
                         "filters": [
@@ -457,12 +412,27 @@
                         "moderationMode": false,
                         "type": "split"
                     }
+                },
+                {
+                    "highlightsEnabled": true,
+                    "splits2": {
+                        "data": {
+                            "name": "5ro4",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
                 }
             ],
             "type": "main",
             "width": 890,
-            "x": 120,
-            "y": 397
+            "x": 100,
+            "y": 411
         }
     ]
 }
