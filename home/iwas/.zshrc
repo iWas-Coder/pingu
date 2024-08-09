@@ -134,28 +134,6 @@ alias ggclean='git reset --hard && git clean -fxd'
 #####################
 # === FUNCTIONS === #
 #####################
-# Start X server from /etc/X11/xinit/xinitrc file
-startx () {
-  echo -n "Loading X"
-  for _ in $(seq 13); do
-    echo -n .
-    sleep 0.2
-  done
-  echo -e " ok\n"
-  sleep 1.25
-  /bin/startx
-}
-# Start the Hyprland Wayland Compositor (WM + Compositing capabilities)
-startw () {
-  echo -n "Loading Wayland"
-  for _ in $(seq 13); do
-    echo -n .
-    sleep 0.2
-  done
-  echo -e " ok\n"
-  sleep 1.25
-  /home/iwas/.wprofile
-}
 # Vi/Vim/Neovim start functions (ask if not better to straight open GNU Emacs and call it a day :D)
 _prefer-emacs-over-nvim_ () { dialog --clear --title 'GNU Emacs v Neovim?' --defaultno --yesno 'Are you sure you want to use Neovim? You could open GNU Emacs (M-Return) and start working right ahead! Choose wisely...' 0 0 && /usr/bin/nvim $1; }
 vi () { _prefer-emacs-over-nvim_ $1; clear; }
