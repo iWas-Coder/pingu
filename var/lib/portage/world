@@ -27,6 +27,7 @@ dev-debug/gdb
 dev-debug/gef
 dev-debug/ltrace
 dev-debug/strace
+dev-debug/valgrind
 dev-lang/python
 dev-python/cairocffi
 dev-python/cffi
@@ -104,6 +105,7 @@ sys-kernel/linux-headers
 sys-process/btop
 www-client/chromium
 x11-apps/mesa-progs
+x11-apps/setxkbmap
 x11-apps/xdpyinfo
 x11-apps/xev
 x11-apps/xhost
