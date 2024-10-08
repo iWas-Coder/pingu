@@ -7,6 +7,7 @@ app-arch/upx
 app-arch/zip
 app-containers/buildah
 app-containers/podman
+app-crypt/ccid
 app-editors/emacs
 app-editors/neovim
 app-emulation/fuse
@@ -28,7 +29,10 @@ dev-debug/gef
 dev-debug/ltrace
 dev-debug/strace
 dev-debug/valgrind
+dev-java/openjdk
+dev-lang/ghc
 dev-lang/python
+dev-libs/opensc
 dev-python/cairocffi
 dev-python/cffi
 dev-python/html2text
@@ -78,6 +82,7 @@ media-libs/shaderc
 media-libs/vulkan-loader
 media-libs/x264
 media-sound/audacity
+media-sound/cava
 media-sound/pulsemixer
 media-sound/spotify
 net-analyzer/arp-scan
@@ -94,6 +99,9 @@ sys-apps/bat
 sys-apps/ethtool
 sys-apps/lm-sensors
 sys-apps/lsd
+sys-apps/pcsc-lite
+sys-apps/pcsc-tools
+sys-apps/usbutils
 sys-boot/grub
 sys-fs/dosfstools
 sys-fs/fuse:0

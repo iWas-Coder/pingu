@@ -19,7 +19,7 @@ dialout:x:20:
 tape:x:26:root
 video:x:27:root,iwas
 cdrw:x:80:
-usb:x:85:
+usb:x:85:pcscd
 input:x:97:iwas
 users:x:100:iwas
 portage:x:250:
@@ -40,3 +40,5 @@ nullmail:x:88:
 mail:x:12:
 pipewire:x:509:
 libreoffice:x:512:
+openct:x:46:pcscd
+pcscd:x:47:
