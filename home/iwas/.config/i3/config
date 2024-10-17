@@ -2,9 +2,9 @@ set $mod Mod1
 
 font pango:JetbrainsMono Nerd Font Mono 10px
 
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
+# exec --no-startup-id dex --autostart --environment i3
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id nm-applet
 
 floating_modifier $mod
 
@@ -38,16 +38,16 @@ bindsym $mod+Shift+f floating toggle resize set 1280px 900px
 bindsym $mod+space focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
-set $ws1  "[1] DEV"
-set $ws2  "[2] WWW"
-set $ws3  "[3] SYS"
-set $ws4  "[4] DOC"
-set $ws5  "[5] VBOX"
-set $ws6  "[6] CHAT"
-set $ws7  "[7] MUS"
-set $ws8  "[8] GAME"
-set $ws9  "[9] VID"
-set $ws10 "[10] GFX"
+set $ws1  "1:[1] DEV"
+set $ws2  "2:[2] WWW"
+set $ws3  "3:[3] SYS"
+set $ws4  "4:[4] DOC"
+set $ws5  "5:[5] VBOX"
+set $ws6  "6:[6] CHAT"
+set $ws7  "7:[7] MUS"
+set $ws8  "8:[8] GAME"
+set $ws9  "9:[9] VID"
+set $ws10 "10:[10] GFX"
 
 workspace $ws1 output DisplayPort-0
 workspace $ws3 output DisplayPort-0
@@ -107,25 +107,25 @@ mode "resize" {
 # === PRIMARY BAR === #
 #######################
 bar {
-	output DisplayPort-0
-	i3bar_command i3bar --transparency
-	position top
-	workspace_min_width 25
-        status_command /home/iwas/.config/bumblebee-status/bumblebee-status                 \
-		            -t iceberg-rainbow                                              \
-		            -m kernel load cpu memory sensors2 disk:sys nic uptime datetime \
-		            -p cpu.format="{:05.1f}%"                                       \
-                   nic.exclude="lo,dummy*,sit*,veth*,br*,tap*"                              \
-                   sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)"            \
-                   datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                             \
-                   sensors2.chip_include="k10temp-pci-00c3"
-
-	colors {
-		background #222222CC
-		focused_workspace #a151d3 #a151d3 #ffffff
-		active_workspace  #a151d3 #222222 #ffffff
-		urgent_workspace  #a151d3 #cd624e #ffffff
-	}
+  output DisplayPort-0
+  i3bar_command i3bar --transparency
+  position top
+  workspace_min_width 25
+  strip_workspace_numbers yes
+  status_command /home/iwas/.config/bumblebee-status/bumblebee-status               \
+                   -t iceberg-rainbow                                               \
+                   -m kernel load cpu memory sensors2 disk:sys nic uptime datetime  \
+                   -p cpu.format="{:05.1f}%"                                        \
+                      nic.exclude="lo,dummy*,sit*,veth*,br*,tap*"                   \
+                      sys.path="/" sys.format="SYS: {used}/{size} ({percent:.1f}%)" \
+                      datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"                  \
+                      sensors2.chip_include="k10temp-pci-00c3"
+  colors {
+    background #222222CC
+    focused_workspace #a151d3 #a151d3 #ffffff
+    active_workspace  #a151d3 #222222 #ffffff
+    urgent_workspace  #a151d3 #cd624e #ffffff
+  }
 }
 
 #########################
@@ -133,15 +133,15 @@ bar {
 #########################
 bar {
   output HDMI-A-0
-	i3bar_command i3bar --transparency
+  i3bar_command i3bar --transparency
   position top
   workspace_min_width 25
+  strip_workspace_numbers yes
   status_command /home/iwas/.config/bumblebee-status/bumblebee-status \
           -t iceberg-rainbow                                          \
           -m kernel load memory sensors2 datetime                     \
           -p datetime.format="%A, %d/%m/%Y  ->  %H:%M:%S"             \
              sensors2.chip_include="k10temp-pci-00c3"
-
   colors {
     background #222222CC
     focused_workspace #a151d3 #a151d3 #ffffff
@@ -200,6 +200,8 @@ for_window [class="(?i)evince"] floating enable
 for_window [class="(?i)rdesktop"] floating enable
 # QEMU
 for_window [class="(?i)qemu"] floating enable
+# Android Emulator
+for_window [class="(?i)Emulator"] floating enable
 # FFplay
 for_window [class="(?i)ffplay"] floating enable
 # Chatterino
