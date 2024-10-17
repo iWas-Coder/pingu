@@ -2,5 +2,8 @@
 >=sys-libs/zlib-1.2.13-r1 static-libs
 >=sys-apps/attr-2.5.1-r2 static-libs
 >=dev-libs/libpcre2-10.42-r1 static-libs
+>=gui-libs/libdecor-0.2.2-r1 abi_x86_32
+>=x11-libs/gtk+-3.24.41-r1 abi_x86_32
+>=dev-libs/wayland-1.23.0-r1 abi_x86_32
 
 app-emulation/qemu static-user QEMU_SOFTMMU_TARGETS: i386 aarch64 QEMU_USER_TARGETS: i386 aarch64

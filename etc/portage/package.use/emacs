@@ -1,3 +1,6 @@
 sys-devel/gcc jit
 net-libs/gnutls tools
+>=virtual/rust-1.80.1 abi_x86_32
+>=dev-lang/rust-bin-1.80.1 profiler abi_x86_32
+
 app-editors/emacs jit dynamic-loading libxml2 tree-sitter

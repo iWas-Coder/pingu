@@ -1,3 +1,10 @@
 sys-libs/zlib minizip
 net-libs/nodejs inspector
+>=virtual/rust-1.80.1 profiler -abi_x86_32
+>=gnome-base/librsvg-2.57.3 abi_x86_32
+>=x11-libs/libXdamage-1.1.6 abi_x86_32
+>=x11-libs/gdk-pixbuf-2.42.12 abi_x86_32
+>=media-libs/libepoxy-1.5.10-r3 abi_x86_32
+>=app-accessibility/at-spi2-core-2.50.2 abi_x86_32
+
 www-client/chromium gtk4

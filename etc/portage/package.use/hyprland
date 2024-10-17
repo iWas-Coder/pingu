@@ -1,5 +1,0 @@
-sys-auth/seatd builtin server
->=media-libs/mesa-22.3.7-r1 wayland
->=gui-libs/wlroots-0.16.2 x11-backend
->=dev-libs/wayland-1.21.0-r1 abi_x86_32
->=x11-libs/gtk+-3.24.37 wayland

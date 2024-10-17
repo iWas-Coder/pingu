@@ -1,3 +1,4 @@
+=sys-kernel/gentoo-sources-6.6.13
 app-admin/awscli
 app-admin/sudo
 app-admin/sysklogd
@@ -84,7 +85,7 @@ media-libs/x264
 media-sound/audacity
 media-sound/cava
 media-sound/pulsemixer
-media-sound/spotify
+media-video/ffmpeg
 net-analyzer/arp-scan
 net-analyzer/netcat
 net-analyzer/nmap

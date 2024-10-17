@@ -1,1 +1,2 @@
+>=x11-libs/libXtst-1.2.5 abi_x86_32
 app-office/libreoffice -branding -java pdfimport googledrive vulkan

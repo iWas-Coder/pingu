@@ -1,0 +1,2 @@
+media-libs/tiff abi_x86_32
+x11-libs/gdk-pixbuf -abi_x86_32
