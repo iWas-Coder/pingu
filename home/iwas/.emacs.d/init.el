@@ -202,6 +202,8 @@
 (global-set-key (kbd "<f5>") 'compile)
 ;; '<f2>' shortcut for 'M-x man' command
 (global-set-key (kbd "<f2>") 'man)
+;; 'C-comma' shortcut for M-x duplicate-line command
+(global-set-key (kbd "C-,") 'duplicate-line)
 
 ;; Disable 'electric-pair-mode' with '<>' predicate for 'org-mode'
 (add-hook 'org-mode-hook
