@@ -1,0 +1,4 @@
+! Set Control_R (105) to AltGr keysym (ISO_Level3_Shift)
+clear control
+add control = Control_L
+keycode 105 = ISO_Level3_Shift

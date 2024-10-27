@@ -1,13 +1,9 @@
-set $mod Mod1
-
 font pango:JetbrainsMono Nerd Font Mono 10px
 
-# exec --no-startup-id dex --autostart --environment i3
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-# exec --no-startup-id nm-applet
-
+set $mod Mod1
 floating_modifier $mod
 
+# close window
 bindsym $mod+Shift+w kill
 
 # change focus
