@@ -77,6 +77,8 @@ alias l='lsd -vlh --group-dirs=first'
 alias ll='lsd -vlha --group-dirs=first'
 alias cat='bat'
 alias icat='kitty +kitten icat'
+alias vi='nvim'
+alias vim='nvim'
 alias gdb='LC_ALL=en.US.UTF-8 gdb'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ffprobe='ffprobe -hide_banner'
@@ -134,11 +136,6 @@ alias ggclean='git reset --hard && git clean -fxd'
 #####################
 # === FUNCTIONS === #
 #####################
-# Vi/Vim/Neovim start functions (ask if not better to straight open GNU Emacs and call it a day :D)
-_prefer-emacs-over-nvim_ () { dialog --clear --title 'GNU Emacs v Neovim?' --defaultno --yesno 'Are you sure you want to use Neovim? You could open GNU Emacs (M-Return) and start working right ahead! Choose wisely...' 0 0 && /usr/bin/nvim $1; }
-vi () { _prefer-emacs-over-nvim_ $1; clear; }
-vim () { _prefer-emacs-over-nvim_ $1; clear; }
-nvim () { _prefer-emacs-over-nvim_ $1; clear; }
 # Mount and umount USBs easily!
 mount.usb () { sudo mount $1 /mnt/USB --mkdir; }
 umount.usb () { sudo umount /mnt/USB && sudo rmdir /mnt/USB; }
@@ -153,19 +150,6 @@ man () {
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
     man "$@"
-}
-# Create working directories for pentesting
-mkt () { mkdir {nmap,content,exploits}; }
-# Extract and show open ports from grepeable nmap capture.
-extractPorts () {
-	ports="$(cat $1 | grep -oP '\d{1,5}/open' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')"
-	ip_address="$(cat $1 | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u | head -n 1)"
-	echo -e "\n[*] Extracting information...\n"
-	sleep 2
-	echo -e "\t[*] IP Address: $ip_address"
-	echo -e "\t[*] Open ports: $ports\n"
-	echo $ports | tr -d '\n' | xclip -sel clip
-	echo -e "[*] Ports copied to clipboard\n"
 }
 # Delete file securely, avoiding its recovery using forensic procedures.
 rmk () { scrub -p dod $1; shred -zun 10 -v $1; }
