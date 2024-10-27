@@ -2,8 +2,8 @@
     "windows": [
         {
             "emotePopup": {
-                "x": 487,
-                "y": 1437
+                "x": 453,
+                "y": 1143
             },
             "height": 1274,
             "tabs": [
@@ -249,6 +249,7 @@
                 },
                 {
                     "highlightsEnabled": true,
+                    "selected": true,
                     "splits2": {
                         "data": {
                             "name": "tsoding",
@@ -294,7 +295,6 @@
                 },
                 {
                     "highlightsEnabled": true,
-                    "selected": true,
                     "splits2": {
                         "data": {
                             "name": "drivemeca",
@@ -427,12 +427,27 @@
                         "moderationMode": false,
                         "type": "split"
                     }
+                },
+                {
+                    "highlightsEnabled": true,
+                    "splits2": {
+                        "data": {
+                            "name": "linuxencasa",
+                            "type": "twitch"
+                        },
+                        "filters": [
+                        ],
+                        "flexh": 1,
+                        "flexv": 1,
+                        "moderationMode": false,
+                        "type": "split"
+                    }
                 }
             ],
             "type": "main",
             "width": 890,
-            "x": 100,
-            "y": 411
+            "x": 104,
+            "y": 383
         }
     ]
 }
