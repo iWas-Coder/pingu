@@ -1,7 +1,7 @@
 [init]
-	defaultBranch = master
+  defaultBranch = master
 [core]
-	pager = less -FiJM~ -j3 --tabs=3
+  pager = less -FiJM~ -j3 --tabs=3
 [user]
   signingkey = EEC6769A97A7BA41
 [commit]
@@ -9,4 +9,8 @@
 [tag]
   forceSignAnnotated = true
 [advice]
-	detachedHead = false
+  detachedHead = false
+[credential "https://github.com"]
+  helper = !/usr/local/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+  helper = !/usr/local/bin/gh auth git-credential
