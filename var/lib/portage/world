@@ -118,6 +118,7 @@ x11-apps/setxkbmap
 x11-apps/xdpyinfo
 x11-apps/xev
 x11-apps/xhost
+x11-apps/xmodmap
 x11-apps/xrandr
 x11-base/xorg-server
 x11-libs/cairo
