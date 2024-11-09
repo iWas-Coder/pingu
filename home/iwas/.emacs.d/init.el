@@ -545,6 +545,7 @@
 (use-package glsl-mode)
 (use-package lua-mode)
 (use-package cmake-mode)
+(use-package elixir-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
