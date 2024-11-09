@@ -97,6 +97,7 @@ net-misc/rdesktop
 net-p2p/qbittorrent
 sci-visualization/gnuplot
 sys-apps/bat
+sys-apps/dmidecode
 sys-apps/ethtool
 sys-apps/lm-sensors
 sys-apps/lsd
