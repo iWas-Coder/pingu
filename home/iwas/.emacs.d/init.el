@@ -153,9 +153,9 @@
 (add-hook 'prog-mode-hook 'load-prettify-symbols)
 
 ;; Enabling and disabling modes
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
 (global-visual-line-mode t)
 (global-hl-line-mode 1)
 (global-display-line-numbers-mode)
@@ -163,7 +163,8 @@
 (delete-selection-mode 1)
 (global-auto-revert-mode 1)
 (pixel-scroll-precision-mode t)
-(tooltip-mode -1)
+(tooltip-mode 0)
+(column-number-mode 1)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
