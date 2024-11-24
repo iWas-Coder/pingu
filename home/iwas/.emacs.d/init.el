@@ -53,7 +53,7 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-display-icons-p t)
   (setq dashboard-banner-logo-title "GNU Emacs")
-  (setq dashboard-startup-banner "/home/iwas/.emacs.d/logo.png")
+  (setq dashboard-startup-banner "~/.emacs.d/logo.png")
   (setq dashboard-center-content t)
   (setq dashboard-items '((recents . 10)
 			  (agenda . 5)
@@ -490,7 +490,9 @@
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
 
-(use-package rfc-mode)
+(use-package rfc-mode
+  :config
+  (setq rfc-mode-directory "~/.emacs.d/rfc-mode/"))
 
 (use-package vdiff)
 
