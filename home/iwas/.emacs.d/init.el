@@ -476,40 +476,6 @@
 	(power/action-selector)
       (delete-frame))))
 
-(defcustom neo-window-width 25
-  "Set fixed width for neotree."
-  :type 'integer
-  :group 'neotree)
-
-(use-package neotree
-  :bind
-  ("C-x C-n" . neotree)
-  :config
-  (setq neo-smart-open t
-	neo-window-width 30
-	neo-theme (if (display-graphic-p) 'icons)
-	inhibit-compacting-font-caches t
-	projectile-switch-project-action 'neotree-projectile-action)
-  (add-hook 'neo-after-create-hook
-	    #'(lambda (&rest _)
-		(with-current-buffer (get-buffer neo-buffer-name)
-		  (display-line-numbers-mode -1)
-		  (setq truncate-lines t)
-		  (setq word-wrap nil)
-		  (make-local-variable 'auto-hscroll-mode)
-		  (setq auto-hscroll-mode nil)))))
-
-;; Show hidden files in neotree, and autorefresh
-(setq-default neo-show-hidden-files t
-	      neo-autorefresh t)
-
-(use-package minimap
-  :bind
-  ("C-x C-m" . minimap-mode))
-
-;; Set the minimap to the right side of the editor.
-(setq minimap-window-location 'right)
-
 (use-package magit)
 
 (use-package elfeed
@@ -523,6 +489,8 @@
   (elfeed-goodies/setup)
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
+
+(use-package rfc-mode)
 
 (use-package vdiff)
 
@@ -629,18 +597,8 @@
 ;; Set the maximum depth of the ToC to the number of distinct heading bullet icons (7)
 (setq toc-org-max-depth 7)
 
-(setq org-agenda-files
-      '("~/.emacs.d/agenda.org.d/todo.org")
-      org-agenda-start-with-log-mode t
-      org-log-done 'time
-      org-log-into-drawer t)
-
 (use-package ox-man
   :ensure nil)
-
-(use-package vterm)
-(setq shell-file-name "/bin/zsh"
-      vterm-max-scrollback 5000)
 
 (use-package eshell-syntax-highlighting
   :after esh-mode
